@@ -17,9 +17,9 @@ function Btn({children, onClick: handleClick, active = ''}: BntProps) {
                 borderRadius: '4px',
                 textTransform: 'none',
                 backgroundColor: isActive ? 'primary.main' : 'transparent',
-                color: isActive ? 'text.white' : 'text.default',
+                color: isActive ? 'text.secondary' : 'text.primary',
                 "&:hover": {
-                    color: 'text.white'
+                    color: 'text.secondary'
                 }
             }}
             onClick={handleClick}

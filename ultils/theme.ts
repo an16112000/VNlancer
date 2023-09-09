@@ -1,6 +1,5 @@
 import { PaletteMode } from '@mui/material'
 import { green, blue, red } from '@mui/material/colors'
-import { root } from 'postcss'
 
 export const getDesignTokens = (mode: PaletteMode) => ({
     typography: {
@@ -8,7 +7,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
     },
     palette: {
         mode,
-        ...(mode === 'light' ? 
+        ...(mode === "light" ? 
         {
             primary: {
                 main: "#7950F2",
@@ -17,8 +16,8 @@ export const getDesignTokens = (mode: PaletteMode) => ({
                 main: green[500]
             },
             text: {
-                default: '#7950F2',
-                white: '#fff'
+                primary: '#7950F2',
+                secondary: '#fff'
             },
             background: {
                 default: "#CECACA"
@@ -32,7 +31,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
                 main: red[500]
             }, 
             text: {
-                main: '#fff'
+                primary: '#fff'
             },
             background: {
                 default: "#CECACA"

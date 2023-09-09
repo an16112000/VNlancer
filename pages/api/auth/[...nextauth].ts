@@ -4,6 +4,11 @@ import FacebookProvider from 'next-auth/providers/facebook'
 import GoogleProvider from 'next-auth/providers/google'
 import EmailProvider from 'next-auth/providers/email'
 
+interface AppleProviderProps {
+  clientId: any,
+  clientSecret: any,
+}
+
 export default NextAuth({
   providers: [
     // OAuth authentication providers...
