@@ -13,7 +13,7 @@ function Btn({children, onClick: handleClick, active = ''}: BntProps) {
             variant="contained"
             sx={{
                 height: '40px',
-                padding: '0 10px',
+                padding: '0 20px',
                 borderRadius: '4px',
                 textTransform: 'none',
                 backgroundColor: isActive ? 'primary.main' : 'transparent',

@@ -1,8 +1,11 @@
+import Title from "@/components/title";
+import { LayOut as Section } from "@/layout";
+
 function Transactions() {
     return(
-        <>
-            This is Transactions Page
-        </>
+        <Section>
+            <Title value="Lịch sử giao dịch" />
+        </Section>
     )
 }
 

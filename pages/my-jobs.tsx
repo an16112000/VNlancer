@@ -1,28 +1,26 @@
-import { Box } from "@mui/material";
-import { useEffect } from "react";
-import useSWR from "swr";
-
+import { Box, Stack } from "@mui/material";
+import { LayOut as Section } from "@/layout";
+import Title from "@/components/title";
+import Btn from "@/components/button";
+import TextInput from "@/components/text-input";
 function MyJobs() {
-  const { data, error, isLoading } = useSWR(
-    "https://jsonplaceholder.typicode.com/posts"
-  );
-  console.log(data);
-  if (error) return <div>Error</div>;
-  if (isLoading) return <><h1>Loading...</h1></>;
-  return (
-    <Box bgcolor="background.default" color="primary.main">
-      This is My Jobs page
-      <ul>
-        {
-          data.map((item: any, index: number) => (
-            <li key={index}>
-              <label>{item.title}</label>
-              <p>{item.body}</p>
-            </li>
-          ))}
-      </ul>
-    </Box>
-  );
+  return(
+    <Section>
+      <Stack
+        flexDirection={'row'}
+        justifyContent={'space-between'}
+      >
+        <Title value="Danh sách công việc" />
+        <Stack
+          flexDirection={'row'}
+          gap={'20px'}
+        >
+          <TextInput id="name-competition" label="Tên cuộc thi" />
+          <Btn>Thêm mới</Btn>
+        </Stack>
+      </Stack>
+    </Section>
+  )
 }
 
 export default MyJobs;

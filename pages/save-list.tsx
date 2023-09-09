@@ -1,8 +1,11 @@
+import Title from "@/components/title";
+import { LayOut as Section } from "@/layout";
+
 function SaveList() {
     return(
-        <>
-            This is Save List page
-        </>
+        <Section>
+            <Title value="Danh sách đã lưu" />
+        </Section>
     )
 }
 
