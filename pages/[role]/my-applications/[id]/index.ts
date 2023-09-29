@@ -1,3 +1,3 @@
 import { ClientApplicants } from "@/features/myApplications/client/applicants";
 
-export {ClientApplicants}
+export default ClientApplicants

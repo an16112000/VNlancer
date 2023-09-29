@@ -46,24 +46,28 @@ export default NextAuth({
     // }),
     // OAuth authentication providers...
     AppleProvider({
-      clientId: process.env.APPLE_ID,
-      clientSecret: process.env.APPLE_SECRET,
+      clientId: process.env.APPLE_ID as string,
+      clientSecret: process.env.APPLE_SECRET as string,
     }),
     FacebookProvider({
-      clientId: process.env.FACEBOOK_ID,
-      clientSecret: process.env.FACEBOOK_SECRET,
+      clientId: process.env.FACEBOOK_ID as string,
+      clientSecret: process.env.FACEBOOK_SECRET as string,
     }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_SECRET,
-      authorizationUrl: GOOGLE_AUTHORIZATION_URL,
+      clientId: process.env.GOOGLE_ID as string,
+      clientSecret: process.env.GOOGLE_SECRET as string,
     }),
     // Passwordless / email sign in
   ],
   callbacks: {
     async session({ session, token }) {
-      session.user.id = token.id;
-      session.accessToken = token.accessToken;
+      console.log('session: ', session.user)
+      console.log('token', token)
+      if(session.user) {
+        session.user.id = token.id;
+        session.accessToken = token.accessToken;
+      
+      }
       return session;
     },
     async jwt({ token, user, account, profile, isNewUser }) {
