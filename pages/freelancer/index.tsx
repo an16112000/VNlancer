@@ -1,8 +1,10 @@
+import { LayOut as Section } from "@/layout"
+
 function Freelancer() {
     return(
-        <>
-            This is Freelancer Page
-        </>
+        <Section>
+            
+        </Section>
     )
 }
 

@@ -1,22 +1,26 @@
-import Image from "next/image";
+import Auth from "@/assets/common/auth";
+import ContentHome from "@/features/home/content";
+import { Stack } from "@mui/material";
+import { useSession } from "next-auth/react";
 import { Inter } from "next/font/google";
-import { Box, Button, Stack, TextField } from "@mui/material";
 import { LayOut as Section } from "../layout";
-import NumberInputIntroduction from "@/components/input-price";
-import { blue } from "@mui/material/colors";
-import TextInput from "@/components/text-input";
-import FilterBar from "@/features/all-services/filter-bar";
-import Title from "@/components/title";
+import NewsPage from "@/features/home/NewsPage";
+import LayOutWithOnlyHeader from "@/layout/layoutWithOnlyHeader";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  return (
-    <Section>
-      <Box>
-        <Title value="Tất cả dịch vụ" />
-        <FilterBar />
-      </Box>
-    </Section>
-  );
+  const { data: session, status } = useSession();
+  console.log(session, status);
+  
+    return (
+      <>
+        <LayOutWithOnlyHeader>
+          <Stack gap={'50px'}>
+            <ContentHome />
+          </Stack>
+        </LayOutWithOnlyHeader>
+      </>
+    );
 }
+
