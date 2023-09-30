@@ -1,178 +1,180 @@
-import NumberInputIntroduction from '@/components/input-price'
-import TextInput from '@/components/text-input'
-import { Filter, Logo } from '@/img'
-import { Stack, Button, Box, Checkbox } from '@mui/material'
-import { useMemo, useState } from 'react'
+import NumberInputIntroduction from "@/components/input-price";
+import TextInput from "@/components/text-input";
+import { Filter, Logo } from "@/img";
+import { Stack, Button, Box, Checkbox } from "@mui/material";
+import { useMemo, useState } from "react";
 
 const Options = [
   {
-    title: 'Type of Employment',
+    title: "Type of Employment",
     state: true,
     children: [
       {
-        title: 'Full-time'
+        title: "Full-time",
       },
       {
-        title: 'Part-time'
+        title: "Part-time",
       },
       {
-        title: 'Remote'
+        title: "Remote",
       },
       {
-        title: 'Intership'
+        title: "Intership",
       },
       {
-        title: 'Contact'
+        title: "Contact",
       },
-    ]
+    ],
   },
   {
-    title: 'Categories',
+    title: "Categories",
     state: true,
     children: [
       {
-        title: 'Design'
+        title: "Design",
       },
       {
-        title: 'Sales'
+        title: "Sales",
       },
       {
-        title: 'Marketing'
+        title: "Marketing",
       },
       {
-        title: 'Business'
+        title: "Business",
       },
       {
-        title: 'Human Resource'
+        title: "Human Resource",
       },
       {
-        title: 'Finance'
+        title: "Finance",
       },
       {
-        title: 'Engineering'
+        title: "Engineering",
       },
       {
-        title: 'Technology'
+        title: "Technology",
       },
-    ]
+    ],
   },
   {
-    title: 'Job Level',
+    title: "Job Level",
     state: true,
     children: [
       {
-        title: 'Entry Level'
+        title: "Entry Level",
       },
       {
-        title: 'Mid Level'
+        title: "Mid Level",
       },
       {
-        title: 'Senior Level'
+        title: "Senior Level",
       },
       {
-        title: 'Director'
+        title: "Director",
       },
       {
-        title: 'VP or Above'
+        title: "VP or Above",
       },
-    ]
+    ],
   },
   {
-    title: 'Salary Range',
+    title: "Salary Range",
     state: true,
     children: [
       {
-        title: '$700-$1000'
+        title: "$700-$1000",
       },
       {
-        title: '$1000-$1500'
+        title: "$1000-$1500",
       },
       {
-        title: '$1500-$2000'
+        title: "$1500-$2000",
       },
       {
-        title: '$3000 or above'
+        title: "$3000 or above",
       },
-    ]
+    ],
   },
-]
+];
 
 function FilterBar() {
-  const [array, setArray] = useState([''])
+  const [array, setArray] = useState([""]);
   function handleClick(title: string) {
     if (array.includes(title)) {
-      setArray(prev => {
-        prev.map(
-          (item, index) => {
-            if (item === title) {
-              prev.splice(index, 1)
-            }
+      setArray((prev) => {
+        prev.map((item, index) => {
+          if (item === title) {
+            prev.splice(index, 1);
           }
-        )
-        return [...prev]
-      })
+        });
+        return [...prev];
+      });
     } else {
-      setArray(prev => {
-        const newArray = [
-          ...prev,
-          title
-        ]
-        return newArray
-      })
+      setArray((prev) => {
+        const newArray = [...prev, title];
+        return newArray;
+      });
     }
   }
   return (
-    <Stack gap={'10px'}>
-
-      {
-        Options.map(
-          (item, index) => {
-            return <Box key={index} sx={{
-              border: '1px solid #000',
-              borderRadius: '8px',
-              padding: '8px 10px',
-              minWidth: '250px',
-              backgroundColor: '#fff'
-            }}>
+    <Box sx={{width: '250px'}}>
+      <Stack gap={"10px"} sx={{position: 'fixed'}}>
+        {Options.map((item, index) => {
+          return (
+            <Box
+              key={index}
+              sx={{
+                border: "1px solid #000",
+                borderRadius: "8px",
+                padding: "8px 10px",
+                minWidth: "250px",
+                backgroundColor: "#fff",
+              }}
+            >
               <Stack
                 onClick={() => handleClick(item.title)}
-                flexDirection={'row'}
-                justifyContent={'space-between'}
-                alignItems={'center'}
+                flexDirection={"row"}
+                justifyContent={"space-between"}
+                alignItems={"center"}
                 sx={{
-                  cursor: 'pointer',
-                  
+                  cursor: "pointer",
                 }}
               >
                 <h1>{item.title}</h1>
-                {
-                  array.includes(item.title) ? <i className="fa-solid fa-angle-down"></i> : <i className="fa-solid fa-chevron-right"></i>
-                }
-                
+                {array.includes(item.title) ? (
+                  <i className="fa-solid fa-angle-down"></i>
+                ) : (
+                  <i className="fa-solid fa-chevron-right"></i>
+                )}
               </Stack>
-              <Stack display={array.includes(item.title) ? 'block' : 'none'}>
-                {
-                  item.children.map(
-                    (itemChild, indexChild) => {
-                      return <Stack key={indexChild} flexDirection={'row'} alignItems={'center'} alignContent={'center'}>
-                        <Checkbox style={{ height: '30px', width: '30px', color: '#ccc'}} />
-                        <p>{itemChild.title}</p>
-                      </Stack>
-                    }
-                  )
-                }
+              <Stack display={array.includes(item.title) ? "block" : "none"}>
+                {item.children.map((itemChild, indexChild) => {
+                  return (
+                    <Stack
+                      key={indexChild}
+                      flexDirection={"row"}
+                      alignItems={"center"}
+                      alignContent={"center"}
+                    >
+                      <Checkbox
+                        style={{ height: "30px", width: "30px", color: "#ccc" }}
+                      />
+                      <p>{itemChild.title}</p>
+                    </Stack>
+                  );
+                })}
               </Stack>
             </Box>
-          }
-        )
-      }
-    </Stack>
-  )
+          );
+        })}
+      </Stack>
+    </Box>
+  );
 }
 
-export default FilterBar
+export default FilterBar;
 
 // const Abc = () => {
-//   const 
-//   return 
+//   const
+//   return
 // }

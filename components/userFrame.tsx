@@ -57,8 +57,8 @@ function UserFrame() {
     const { data: session, status } = useSession()
     if (status === 'authenticated') {
         return (
-            <>
-                <Box>
+            <Box sx={{width: '250px'}}>  
+                <Box position={'fixed'}>
                     <Stack
                         flexDirection={'column'}
                         alignItems={'center'}
@@ -105,9 +105,12 @@ function UserFrame() {
                     </Stack>
 
                 </Box>
-            </>
+            </Box>
         )
 
+    }
+    else {
+        return <></>
     }
 }
 

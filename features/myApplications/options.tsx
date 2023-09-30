@@ -2,12 +2,12 @@ import ButtonTransparent from "@/components/buttontransparent"
 import { Stack } from "@mui/material"
 import { useState } from "react"
 
-interface OptionsOfApplicationProps {
+interface OptionsProps {
     options: any[],
     onClick?: any
 }
 
-function OptionsOfApplication({options, onClick: handleChangePage}: OptionsOfApplicationProps) {
+function Options({options, onClick: handleChangePage}: OptionsProps) {
     const [active, setActive] = useState(options[0].title)
     function handleClick(e: any) {
         setActive(e.target.innerText);
@@ -26,4 +26,4 @@ function OptionsOfApplication({options, onClick: handleChangePage}: OptionsOfApp
     )
 }
 
-export default OptionsOfApplication
+export default Options

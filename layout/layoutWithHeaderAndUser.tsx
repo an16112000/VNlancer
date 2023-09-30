@@ -1,9 +1,6 @@
 import UserFrame from "@/components/userFrame";
-import Header from "./header";
 import { Box, Container, Stack } from "@mui/material";
-import Posts from "@/features/home/posts";
-import FilterBar from "@/features/all-services/filter-bar";
-import { useState } from "react";
+import Header from "./header";
 
 interface LayOutProps {
   children: any;
@@ -16,7 +13,7 @@ export function LayOutWithHeaderAndUser({ children }: LayOutProps) {
       <Container maxWidth="lg">
         <Header />
         <Box marginTop={'120px'}>
-          <Stack flexDirection={'row'} justifyContent={'space-between'}>
+          <Stack flexDirection={'row'} justifyContent={'space-between'} position={'relative'}>
             <UserFrame />
             {children}
           </Stack>

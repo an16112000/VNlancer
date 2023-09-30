@@ -1,5 +1,5 @@
 import { Box, Stack } from "@mui/material";
-import OptionsOfApplication from "../options";
+import Options from "../options";
 import Btn from "@/components/button";
 import TableOfApplication from "../table";
 
@@ -37,7 +37,7 @@ const optionsFreelancerApplications = [
 export function FreelancerApplications() {
     return (
         <>
-            <OptionsOfApplication options={optionsFreelancerApplications} />
+            <Options options={optionsFreelancerApplications} />
             <Stack sx={{ marginTop: '25px' }} flexDirection={'row'} justifyContent={'space-between'}>
                 <Box sx={{ fontSize: '16px', fontWeight: '500' }}>Applications History</Box>
                 <Box>

@@ -14,11 +14,13 @@ import ApplicationIcon from './file-lines-regular.svg'
 import PublicProfileIcon from './user-regular.svg'
 import DashboardIcon from './sliders-solid.svg'
 import SettingIcon from './gear-solid.svg'
+import TestImage from './testImage.jpeg'
 
 export {
     Avatar, Logo, Filter, FreelancerHome, ConnectFreelancer, GlobalIcon, OnBoardIcon, ShieldsIcon, BankerIcon, MessageIcon, NotificationIcon, NewIcon,
     ApplicationIcon,
     PublicProfileIcon,
     DashboardIcon,
-    SettingIcon
+    SettingIcon,
+    TestImage
 }

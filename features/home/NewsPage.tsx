@@ -5,7 +5,7 @@ import Image from "next/image"
 import UserFrame from "../../components/userFrame"
 import { useState } from "react"
 import FilterBar from "../all-services/filter-bar"
-import Posts from "./posts"
+import Posts from "../news/postListForFreelancer"
 
 
 

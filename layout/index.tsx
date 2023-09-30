@@ -1,9 +1,7 @@
 import UserFrame from "@/components/userFrame";
-import Header from "./header";
-import { Box, Container, Stack } from "@mui/material";
-import Posts from "@/features/home/posts";
 import FilterBar from "@/features/all-services/filter-bar";
-import { useState } from "react";
+import { Box, Container, Stack } from "@mui/material";
+import Header from "./header";
 
 interface LayOutProps {
   children: any;
