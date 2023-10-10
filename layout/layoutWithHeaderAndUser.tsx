@@ -7,15 +7,16 @@ interface LayOutProps {
 }
 
 export function LayOutWithHeaderAndUser({ children }: LayOutProps) {
-  
+
   return (
     <>
       <Container maxWidth="lg">
         <Header />
         <Box marginTop={'120px'}>
+          
           <Stack flexDirection={'row'} justifyContent={'space-between'} position={'relative'}>
-            <UserFrame />
-            {children}
+              <UserFrame />
+              {children}
           </Stack>
         </Box>
       </Container>

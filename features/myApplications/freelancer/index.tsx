@@ -2,6 +2,7 @@ import { Box, Stack } from "@mui/material";
 import Options from "../options";
 import Btn from "@/components/button";
 import TableOfApplication from "../table";
+import { useState } from "react";
 
 function createData(
     logo: any,
@@ -35,9 +36,13 @@ const optionsFreelancerApplications = [
 ]
 
 export function FreelancerApplications() {
+    const [page, setPage] = useState('All')
+    function callbackFunction(page: string) {
+        setPage(page)
+    }
     return (
         <>
-            <Options options={optionsFreelancerApplications} />
+            <Options options={optionsFreelancerApplications} onClick={callbackFunction} />
             <Stack sx={{ marginTop: '25px' }} flexDirection={'row'} justifyContent={'space-between'}>
                 <Box sx={{ fontSize: '16px', fontWeight: '500' }}>Applications History</Box>
                 <Box>

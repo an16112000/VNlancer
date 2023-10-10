@@ -10,7 +10,7 @@ interface PostForFreelancerProps {
 function PostForFreelancer({ list }: PostForFreelancerProps) {
   console.log(list);
   return (
-    <Stack gap={'30px'}>
+    <Stack gap={'30px'} width={'100%'}>
       {list.map((job, index) => {
         return (
           <Box key={index} sx={{ backgroundColor: "#fff", borderRadius: '12px', padding: '10px 12px'}}>

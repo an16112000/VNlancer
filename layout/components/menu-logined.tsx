@@ -15,15 +15,15 @@ const menu = [
         icon: MessageIcon,
         dropdown: MessageIconDropdown
     },
-    {
-        icon: NotificationIcon,
-        dropdown: NotificationIconDropdown
-        // [
-        //     {
-        //         title: 'NotificationIconDropdown',
-        //     }
-        // ]
-    },
+    // {
+    //     icon: NotificationIcon,
+    //     dropdown: NotificationIconDropdown
+    //     // [
+    //     //     {
+    //     //         title: 'NotificationIconDropdown',
+    //     //     }
+    //     // ]
+    // },
     {
         icon: Avatar,
         dropdown: AvatarDropdown
@@ -65,6 +65,7 @@ export function MenuLogined({role, linkSwitch}: MenuLoginedProps) {
                 <Btn styles={{ borderRadius: '10px' }}>Swap to {role}</Btn>
             </Link>
             <Stack flexDirection={'row'} gap={'10px'} alignItems={'center'} >
+
                 {
                     menu.map(
                         (item, index) => {

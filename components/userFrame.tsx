@@ -50,14 +50,14 @@ function UserFrame() {
         {
             icon: SettingIcon,
             title: 'Settings',
-            pathName: isFreelancerMode ? '/freelancer/settings' : '/client/settings',
+            pathName: isFreelancerMode ?  '/settings/freelancer-profile' : '/settings/client-profile' ,
             link: '',
         },
     ]
     const { data: session, status } = useSession()
     if (status === 'authenticated') {
         return (
-            <Box sx={{width: '250px'}}>  
+            <Box sx={{width: '260px'}}>  
                 <Box position={'fixed'}>
                     <Stack
                         flexDirection={'column'}
@@ -79,12 +79,12 @@ function UserFrame() {
                             {
                                 Navigators.map(
                                     (item: any, index: number) => {
-                                        const isAcive = router.asPath.includes(item.pathName)
+                                        const isActive = router.asPath.includes(item.pathName)
                                         console.log(item.pathName, router.asPath)
                                         return <Stack gap={'10px'} key={index} flexDirection={'row'}
                                             onClick={() => router.push(item.pathName)}
                                             sx={{
-                                                backgroundColor: isAcive ? 'primary.main' : '',
+                                                backgroundColor: isActive ? 'primary.main' : '',
                                                 padding: '5px 5px',
                                                 borderRadius: '6px',
                                                 cursor: 'pointer',

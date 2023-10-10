@@ -1,15 +1,9 @@
-import {Box} from '@mui/material'
+import { Box } from '@mui/material'
+import { useState } from 'react'
 import Options from '../myApplications/options'
 import PostForFreelancer from './postForFreeLancer'
 
-const optionsPostForFreelancer = [
-    {
-        title: 'Công việc'
-    },
-    {
-        title: 'Cuộc thi'
-    }
-]
+
 
 const jobList = [
     {
@@ -41,10 +35,25 @@ const jobList = [
     },
 ]
 
+const optionsPostForFreelancer = [
+    {
+        title: 'Công việc'
+    },
+    {
+        title: 'Cuộc thi'
+    }
+]
+
 export function PostListForFreelancer() {
-    return(
-        <Box sx={{width: '45%'}}>
-            <Options options={optionsPostForFreelancer} />
+    const [option, setOption] = useState('Công việc')
+    const callBackFunction = (item: string) => {
+        setOption(item)
+    }
+    console.log(option)
+    return (
+        <Box sx={{ width: '100%' }}>
+            <Options options={optionsPostForFreelancer} onClick={callBackFunction} />
+
             <PostForFreelancer list={jobList} />
         </Box>
     )

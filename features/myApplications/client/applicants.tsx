@@ -1,5 +1,5 @@
 import { Box, Stack } from "@mui/material";
-import OptionsOfApplication from "../options";
+import Options from "../options";
 import Btn from "@/components/button";
 import TextInput from "@/components/text-input";
 import TableOfApplication from "../table";
@@ -35,16 +35,18 @@ const headers = ['#', 'Full Name', 'Score', 'Applied Date', 'Action']
 
 export function ClientApplicants() {
     const [currentPage, setCurrentPage] = useState('Applicants')
-    function handleChangePage(page: string) {
-        setCurrentPage(page)
+    const callBackFunction = (page: string) => {
+        // setCurrentPage(page)
+        console.log(1)
     }
+    
     return (
         <>
             <Stack justifyContent={'end'} flexDirection={'row'}>
                 <Btn>+ Competition</Btn>
                 <Btn>+ Post a job</Btn>
             </Stack>
-            <OptionsOfApplication options={optionsClientApplicants} onClick={handleChangePage} />
+            <Options options={optionsClientApplicants} onClick={callBackFunction} />
             {currentPage === 'Applicants' ? <> <Stack sx={{ marginTop: '25px' }} flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'}>
                 <Box sx={{ fontSize: '16px', fontWeight: '500' }}>Total Applicants</Box>
                 <Stack gap={'10px'} flexDirection={'row'} alignItems={'center'}>

@@ -18,10 +18,11 @@ export default function Component() {
     router.push('/')
   }
   async function handleLogin() {
-    await axios.post('http://localhost:3001/accounts', {
-      account: account, 
+    const response = await axios.post('http://localhost:3000/auth/login', {
+      username: account, 
       password: password
     })
+    console.log(response)
     setAccount('')
     setPassword('')
   }

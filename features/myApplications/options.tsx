@@ -4,14 +4,15 @@ import { useState } from "react"
 
 interface OptionsProps {
     options: any[],
-    onClick?: any
+    onClick?: any,
 }
 
 function Options({options, onClick: handleChangePage}: OptionsProps) {
     const [active, setActive] = useState(options[0].title)
     function handleClick(e: any) {
+        console.log(e.target.innerText)
         setActive(e.target.innerText);
-        () => handleChangePage(e.target.innerText)
+        handleChangePage(e.target.innerText);
     }
     return (
         <Stack flexDirection={'row'} sx={{ borderBottom: '1px solid #D6DDEB', width: '100%' }}>
