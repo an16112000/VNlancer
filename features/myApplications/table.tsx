@@ -1,5 +1,6 @@
 import StatusCheck from "@/components/statusCheck";
 import { Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { useRouter } from "next/router";
 
 
 interface TableOfApplicationProps {
@@ -8,7 +9,13 @@ interface TableOfApplicationProps {
     statusCheck?: any[]
 }
 
-function TableOfApplication({rows, headers, statusCheck}: TableOfApplicationProps) {
+function TableOfApplication({ rows, headers, statusCheck }: TableOfApplicationProps) {
+    const router = useRouter()
+    function handleClick(row: any) {
+        console.log(row.id)
+        const idFreelancer = row.id
+        router.push(`/client/my-applications/${router.query.idJob}/${idFreelancer}`)
+    }
     return (
         <TableContainer component={Paper} sx={{ color: 'text.third', marginTop: '20px' }}>
             <Table sx={{ minWidth: 650, color: 'text.third' }} aria-label="simple table">
@@ -27,8 +34,10 @@ function TableOfApplication({rows, headers, statusCheck}: TableOfApplicationProp
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row, index) => (
-                        <TableRow
+                    {rows.map((row, index) => {
+                        console.log(row)
+                        return  <TableRow
+                            onClick={() => handleClick(row)}
                             key={row.name}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
@@ -49,7 +58,7 @@ function TableOfApplication({rows, headers, statusCheck}: TableOfApplicationProp
                                 </StatusCheck>
                             </TableCell>
                         </TableRow>
-                    ))}
+})}
                 </TableBody>
             </Table>
         </TableContainer>

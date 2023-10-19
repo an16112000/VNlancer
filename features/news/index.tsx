@@ -1,4 +1,4 @@
 import { PostListForCustomer } from "./postListForCustomer";
-import { PostListForFreelancer } from "./postListForFreelancer";
+import PostListForFreelancer  from "./postListForFreelancer";
 
 export {PostListForCustomer, PostListForFreelancer}

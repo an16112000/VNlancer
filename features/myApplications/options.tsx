@@ -5,10 +5,11 @@ import { useState } from "react"
 interface OptionsProps {
     options: any[],
     onClick?: any,
+    activeOption?: any
 }
 
-function Options({options, onClick: handleChangePage}: OptionsProps) {
-    const [active, setActive] = useState(options[0].title)
+function Options({options, onClick: handleChangePage = () => {}, activeOption = options[0].title}: OptionsProps) {
+    const [active, setActive] = useState(activeOption)
     function handleClick(e: any) {
         console.log(e.target.innerText)
         setActive(e.target.innerText);

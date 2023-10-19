@@ -13,26 +13,26 @@ function PostForFreelancer({ list }: PostForFreelancerProps) {
     <Stack gap={'30px'} width={'100%'}>
       {list.map((job, index) => {
         return (
-          <Box key={index} sx={{ backgroundColor: "#fff", borderRadius: '12px', padding: '10px 12px'}}>
+          <Box key={job.id} sx={{ backgroundColor: "#fff", borderRadius: '12px', padding: '10px 12px'}}>
             <Stack flexDirection={'row'} sx={{height: "30px"}} justifyContent={'space-between'} alignItems={'center'}>
                 <Box>
-                    <Button sx={{backgroundColor: ''}}>{job.type}</Button>
+                    <Button sx={{backgroundColor: ''}}>{job.name}</Button>
                 </Box>
                 <Box>
-                    {job.title}
+                    {job.name}
                 </Box>
             </Stack>
             <Stack flexDirection={"row"} sx={{ height: "50px" }} alignItems={'center'}>
               <Box sx={{ height: "100%" }} flex={1}>
-                <img style={{height: '45px', width: '45px', borderRadius: '50%'}} src={job.avatar} alt={""} />
+                <img style={{height: '45px', width: '45px', borderRadius: '50%'}} src={'https://variety.com/wp-content/uploads/2021/04/Avatar.jpg'} alt={""} />
               </Box>
               <Stack flex={8} flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'}>
                 <Box sx={{ height: "100%" }}>
-                  <p style={{fontSize: '16x', fontWeight: '500'}}>{job.nameUser}</p>
-                  <p style={{fontSize: '12px', fontWeight: '300'}}>{job.date}</p>
+                  <p style={{fontSize: '16x', fontWeight: '500'}}>{job.name}</p>
+                  <p style={{fontSize: '12px', fontWeight: '300'}}>{job.name}</p>
                 </Box>
                 <Box sx={{height: '100%'}}>
-                    <p>{job.price}</p>
+                    <p>{job.budget}</p>
                 </Box>
               </Stack>
             </Stack>
@@ -40,7 +40,7 @@ function PostForFreelancer({ list }: PostForFreelancerProps) {
                 <Image style={{height: 'auto', width: '100%'}} src={TestImage} alt="" />
             </Box>
             <Box>
-                <Box sx={{textOverflow: 'ellipsis', overflow: 'hidden', WebkitLineClamp: 4, WebkitBoxOrient: "vertical", display: '-webkit-box', padding: '6px 12px'}}>{job.details}</Box>
+                <Box sx={{textOverflow: 'ellipsis', overflow: 'hidden', WebkitLineClamp: 4, WebkitBoxOrient: "vertical", display: '-webkit-box', padding: '6px 12px'}}>{job.information}</Box>
             </Box>
           </Box>
         );

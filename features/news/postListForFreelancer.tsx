@@ -5,7 +5,7 @@ import PostForFreelancer from './postForFreeLancer'
 
 
 
-const jobList = [
+const jobListt = [
     {
         type: 'Kinh doanh',
         title: 'Pho',
@@ -44,12 +44,23 @@ const optionsPostForFreelancer = [
     }
 ]
 
-export function PostListForFreelancer() {
+interface PostListForFreelancerProps {
+    jobList: any
+}
+
+export default function PostListForFreelancer() {
     const [option, setOption] = useState('Công việc')
+    const [jobList, setJobList] = useState([])
     const callBackFunction = (item: string) => {
         setOption(item)
     }
-    console.log(option)
+    // useEffect(() => {
+    //     fetch('http://localhost:9000/jobs')
+    //       .then((res) => res.json())
+    //       .then((data) => {
+    //         setJobList(data)
+    //       })
+    //   }, [])
     return (
         <Box sx={{ width: '100%' }}>
             <Options options={optionsPostForFreelancer} onClick={callBackFunction} />
@@ -58,3 +69,5 @@ export function PostListForFreelancer() {
         </Box>
     )
 }
+
+
