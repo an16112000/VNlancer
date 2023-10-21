@@ -9,4 +9,6 @@ function Transactions() {
     )
 }
 
+Transactions.requireLogin = true
+
 export default Transactions;

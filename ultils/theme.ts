@@ -17,7 +17,8 @@ export const getDesignTokens = (mode: PaletteMode) => ({
             },
             text: {
                 primary: '#7950F2',
-                secondary: '#fff'
+                secondary: '#fff',
+                third: '#000',
             },
             background: {
                 default: "#CECACA"
@@ -39,5 +40,6 @@ export const getDesignTokens = (mode: PaletteMode) => ({
         }
         )
     },
+    
     
 })

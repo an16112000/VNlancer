@@ -5,22 +5,33 @@ import { useEffect } from "react"
 interface AuthProps {
     children: any,
     status?: any,
+    requiredLogin: boolean,
 }
 
-function Auth({children, status}: AuthProps) {
+function Auth({ children, requiredLogin }: AuthProps) {
     const router = useRouter()
+    const {status} = useSession()
+    console.log(requiredLogin)
     useEffect(
         () => {
-            if(status == 'unauthenticated') {
+            if(!requiredLogin) return
+            if(requiredLogin == true && status == 'unauthenticated') {
                 router.push('/login')
-            }
-        }, [status]
+            } 
+        }, [router, status, requiredLogin]
     )
-    return(
-        <>
-            {children}
-        </>
-    )
+    console.log(status)
+    if (requiredLogin && status == 'loading') {
+        return <>Loading</>
+    } 
+    else {
+        return (
+            <>
+                {children}
+            </>
+        )
+
+    }
 }
 
 export default Auth
