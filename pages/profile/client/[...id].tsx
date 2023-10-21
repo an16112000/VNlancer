@@ -1,5 +1,8 @@
+import useAuthentication from "@/ultils/authentication"
+
 export default function ProfileClient() {
-    return(
+    useAuthentication()
+    return (
         <>
             This is Profile Client page
         </>
