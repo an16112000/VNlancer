@@ -2,6 +2,7 @@ import Btn from "@/components/button";
 import TippyCustom from "@/components/dropdown";
 import { Button, Stack } from "@mui/material"
 import Tippy from '@tippyjs/react';
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 
 const menu = [
@@ -71,7 +72,7 @@ const menu = [
 export function MenuPublic() {
     const router = useRouter()
     function handleClick() {
-        router.push('/login')
+        signIn()
     }
     return (
         <Stack

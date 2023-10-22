@@ -1,17 +1,12 @@
-import { Box } from "@mui/material";
-import { Avatar, Logo } from "../img/index";
+import { Box, Container } from "@mui/material";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
-import Global from "./globalStyles";
-import { Container } from "@mui/material";
-import { useCallback, useEffect, useMemo } from "react";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import { useCallback, useMemo, useState } from "react";
+import { Logo } from "../img/index";
 import { MenuLogined } from "./components/menu-logined";
 import { MenuPublic } from "./components/menu_public";
-import { redirect } from "next/dist/server/api-utils";
-import Link from "next/link";
-import { useSession } from "next-auth/react";
-import Btn from "@/components/button";
-import { useState } from "react";
 
 
 function Header() {
