@@ -5,7 +5,7 @@ import { createTheme } from "@mui/material";
 import { getDesignTokens } from "@/ultils/theme";
 import { SWRConfig } from "swr";
 import axios from "axios";
-import { SessionProvider } from "next-auth/react";
+import { SessionProvider, useSession } from "next-auth/react";
 import { createEmotionCache } from "@/ultils/createEmotionCache";
 import Global from "@/layout/globalStyles";
 import Auth from "@/assets/common/auth";
@@ -19,7 +19,7 @@ export interface MyAppProps extends AppProps {
 }
 
 export default function App({ Component, pageProps: { session, ...pageProps },
-	emotionCache = clientSideEmotionCache, }: AppPropsWithLayout) {
+  emotionCache = clientSideEmotionCache, }: AppPropsWithLayout) {
   return (
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={Theme}>
