@@ -1,9 +1,14 @@
 import { axiosInstance } from "@/ultils/axiosInstance";
-import axios from "axios";
 import { useSession } from "next-auth/react";
 
-export default function GetAllJobs() {
-    const {data } = useSession()
-    console.log(data)
-    // const response = axiosInstance.post('/my-jobs')
+export function useJobApi() {
+    const { status } = useSession()
+    const getAllJob = async () => {
+        if (status === "authenticated") {
+            return await axiosInstance.get("http://localhost:9000/jobs/all")
+        }
+    }
+    return {
+        getAllJob 
+    }
 }

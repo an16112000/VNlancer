@@ -4,14 +4,14 @@ import { Box, Button, Stack } from "@mui/material";
 import Image from "next/image";
 
 interface PostForFreelancerProps {
-  list: any[];
+  list: any;
 }
 
-function PostForFreelancer({ list }: PostForFreelancerProps) {
+function PostForFreelancer({ list=[] }: PostForFreelancerProps) {
   console.log(list);
   return (
     <Stack gap={'30px'} width={'100%'}>
-      {list.map((job, index) => {
+      {list.map((job: any, index: number) => {
         return (
           <Box key={job.id} sx={{ backgroundColor: "#fff", borderRadius: '12px', padding: '10px 12px'}}>
             <Stack flexDirection={'row'} sx={{height: "30px"}} justifyContent={'space-between'} alignItems={'center'}>

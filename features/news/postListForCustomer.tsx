@@ -1,5 +1,7 @@
 import { Box } from "@mui/material";
 import PostForFreelancer from "./postForFreeLancer";
+import { useJobApi } from "@/api/get-all-jobs";
+import { useEffect, useState } from "react";
 
 const FreelancerList = [
     {
@@ -32,10 +34,22 @@ const FreelancerList = [
 ]
 
 export function PostListForCustomer() {
+    const [data, setData] = useState()
+    const response = useJobApi()
+    useEffect(
+        () => {
+            async function fetchJobApi() {
+                const res = await response.getAllJob()
+                setData(res?.data.jobs)
+            }
+            fetchJobApi()
+        }, []
+    )    
+    console.log(data)
     return (
-        <Box sx={{width: '100%'}}>
-            <PostForFreelancer list={FreelancerList} />
+        <Box sx={{ width: '100%' }}>
+            <PostForFreelancer list={data} />
         </Box>
-      );
+    );
 }
 

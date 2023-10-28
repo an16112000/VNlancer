@@ -1,16 +1,9 @@
-import { Box, Button, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { LayOut as Section } from "@/layout";
-import Title from "@/components/title";
-import Btn from "@/components/button";
-import TextInput from "@/components/text-input";
-import { LayOutWithHeaderAndUser } from "@/layout/layoutWithHeaderAndUser";
-import ButtonTransparent from "@/components/buttontransparent";
-import { useEffect, useMemo, useState } from "react";
-import OptionsOfApplication from "@/features/myApplications/options";
-import TableOfApplication from "@/features/myApplications/table";
-import { FreelancerApplications } from "@/features/myApplications/freelancer";
-import { useRouter } from "next/router";
 import { ClientApplications } from "@/features/myApplications/client";
+import { FreelancerApplications } from "@/features/myApplications/freelancer";
+import { LayOutWithHeaderAndUser } from "@/layout/layoutWithHeaderAndUser";
+import { Box } from "@mui/material";
+import { useRouter } from "next/router";
+import { useMemo } from "react";
 
 
 
