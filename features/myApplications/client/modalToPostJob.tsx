@@ -1,5 +1,5 @@
 import Btn from "@/components/button";
-import { Box, FormControl, Input, InputLabel, MenuItem, Modal, Select, SelectChangeEvent, Stack } from "@mui/material";
+import { Box, Button, FormControl, Input, InputLabel, MenuItem, Modal, Select, SelectChangeEvent, Stack } from "@mui/material";
 import { useState } from "react";
 
 interface ModalToPostJobProps {
@@ -22,10 +22,14 @@ const style = {
 };
 
 function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
-    const [age, setAge] = useState('');
+    const [type, setType] = useState('');
+    const [state, setState] = useState('');
 
-    const handleChange = (event: SelectChangeEvent) => {
-        setAge(event.target.value as string);
+    const handleChangeType = (event: SelectChangeEvent) => {
+        setType(event.target.value as string);
+    };
+    const handleChangeState = (event: SelectChangeEvent) => {
+        setState(event.target.value as string);
     };
     return (
         <>
@@ -60,9 +64,9 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={age}
+                                    value={type}
                                     label="Age"
-                                    onChange={handleChange}
+                                    onChange={handleChangeType}
                                     sx={{
                                         border: 'none'
                                     }}
@@ -89,13 +93,17 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
 
                         <Stack>
                             <label htmlFor="my-budget">Budget</label>
-                            
+
                             <Input id="my-budget" aria-describedby="my-helper-text" type="number" />
                         </Stack>
 
                         <Stack>
                             <label htmlFor="my-img">Img</label>
-                            <Input id="my-img" aria-describedby="my-helper-text" />
+                            {/* <Button variant="contained" component="label">
+                                Upload */}
+                                <input accept="image/*" multiple type="file" />
+                            {/* </Button> */}
+                            {/* <Input id="my-img" aria-describedby="my-helper-text" /> */}
                         </Stack>
 
                         <Stack>
@@ -105,7 +113,26 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
 
                         <Stack>
                             <label htmlFor="my-state">State</label>
-                            <Input id="my-state" aria-describedby="my-helper-text" />
+                            <FormControl fullWidth sx={{
+                                border: 'none'
+                            }}>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={state}
+                                    label="Age"
+                                    onChange={handleChangeState}
+                                    sx={{
+                                        border: 'none'
+                                    }}
+                                >
+                                    <MenuItem value={10}>Pending</MenuItem>
+                                    <MenuItem value={20}>During</MenuItem>
+                                    <MenuItem value={30}>Done</MenuItem>
+
+                                </Select>
+                            </FormControl>
+                            {/* <Input id="my-state" aria-describedby="my-helper-text" /> */}
                         </Stack>
                         <Btn>Submit</Btn>
                     </FormControl>
