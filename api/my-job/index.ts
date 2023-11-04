@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/utils/axios/instance"
+import { axiosInstance } from "@/ultils/axiosInstance"
 import { useSession } from "next-auth/react"
 
 export default function useMyJobApi() {

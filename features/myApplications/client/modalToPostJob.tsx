@@ -1,5 +1,6 @@
+import { useJobApi } from "@/api/get-all-jobs";
 import Btn from "@/components/button";
-import { Box, Button, FormControl, Input, InputLabel, MenuItem, Modal, Select, SelectChangeEvent, Stack } from "@mui/material";
+import { Box, Button, FormControl, Input, InputBase, InputLabel, MenuItem, Modal, Select, SelectChangeEvent, Stack } from "@mui/material";
 import { useState } from "react";
 
 interface ModalToPostJobProps {
@@ -23,7 +24,10 @@ const style = {
 
 function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
     const [type, setType] = useState('');
+    const [name, setName] = useState('');
     const [state, setState] = useState('');
+    const [budget, setBudget] = useState('');
+    const [information, setInformation] = useState('');
 
     const handleChangeType = (event: SelectChangeEvent) => {
         setType(event.target.value as string);
@@ -31,6 +35,36 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
     const handleChangeState = (event: SelectChangeEvent) => {
         setState(event.target.value as string);
     };
+
+    // handle Change Value Name Input
+    function handleChangeName(e: any) {
+        setName(e.target.value)
+    }
+
+    //handle Change Budget Input
+    function handleChangeBudget(e: any) {
+        setBudget(e.target.value)
+    }
+
+    //handle Change Information Input 
+    function handleChangeInformation(e: any) {
+        setInformation(e.target.value)
+    }
+
+    // Submit Form
+    async function handleSubmitForm() {
+        console.log(type, state, name, budget, information)
+        await useJobApi.createJob({
+            name: 'a',
+            budget: 1,
+            information: 'a',
+            categoryId: 1,
+            imageUrl: 'a',
+            typeOfEmployee: 'a',
+            jobLevel: 'a',
+        })
+    }
+
     return (
         <>
             <Modal
@@ -40,16 +74,17 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <FormControl sx={{
-                        width: '100%',
-                        gap: '15px',
-                        border: 'none',
-                        '.MuiOutlinedInput-notchedOutline': {
-                            border: '2px solid',
-                            borderColor: '#fff',
-                            borderBottomColor: '#cacaca'
-                        }
-                    }}>
+                    <FormControl
+                        sx={{
+                            width: '100%',
+                            gap: '15px',
+                            border: 'none',
+                            '.MuiOutlinedInput-notchedOutline': {
+                                border: '2px solid',
+                                borderColor: '#fff',
+                                borderBottomColor: '#cacaca'
+                            }
+                        }}>
                         <h1 style={{
                             textAlign: 'center',
                             fontSize: '18px',
@@ -71,14 +106,14 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
                                         border: 'none'
                                     }}
                                 >
-                                    <MenuItem value={10}>Design</MenuItem>
-                                    <MenuItem value={20}>Sales</MenuItem>
-                                    <MenuItem value={30}>Marketing</MenuItem>
-                                    <MenuItem value={40}>Business</MenuItem>
-                                    <MenuItem value={50}>Human Resource</MenuItem>
-                                    <MenuItem value={60}>Finance</MenuItem>
-                                    <MenuItem value={70}>Engineering</MenuItem>
-                                    <MenuItem value={80}>Technology</MenuItem>
+                                    <MenuItem value={'Design'}>Design</MenuItem>
+                                    <MenuItem value={'Sales'}>Sales</MenuItem>
+                                    <MenuItem value={'Marketing'}>Marketing</MenuItem>
+                                    <MenuItem value={'Business'}>Business</MenuItem>
+                                    <MenuItem value={'Human'}>Human Resource</MenuItem>
+                                    <MenuItem value={'Finance'}>Finance</MenuItem>
+                                    <MenuItem value={'Engineering'}>Engineering</MenuItem>
+                                    <MenuItem value={'Technology'}>Technology</MenuItem>
 
                                 </Select>
                             </FormControl>
@@ -86,29 +121,41 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
 
                         <Stack>
                             <label htmlFor="my-name">Name</label>
-                            <Input sx={{
-                                borderBottomColor: '#ccc !important'
-                            }} id="my-name" aria-describedby="my-helper-text" />
+                            <Input
+                                value={name}
+                                onChange={handleChangeName}
+                                sx={{
+                                    borderBottomColor: '#ccc !important'
+                                }} id="my-name" aria-describedby="my-helper-text" />
                         </Stack>
 
                         <Stack>
                             <label htmlFor="my-budget">Budget</label>
 
-                            <Input id="my-budget" aria-describedby="my-helper-text" type="number" />
+                            <Input
+                            value={budget}
+                            onChange={handleChangeBudget}
+                             id="my-budget" 
+                             aria-describedby="my-helper-text" 
+                             type="number" />
                         </Stack>
 
                         <Stack>
                             <label htmlFor="my-img">Img</label>
                             {/* <Button variant="contained" component="label">
                                 Upload */}
-                                <input accept="image/*" multiple type="file" />
+                            <input accept="image/*" multiple type="file" />
                             {/* </Button> */}
                             {/* <Input id="my-img" aria-describedby="my-helper-text" /> */}
                         </Stack>
 
                         <Stack>
                             <label htmlFor="my-information">Information</label>
-                            <Input id="my-information" aria-describedby="my-helper-text" />
+                            <Input 
+                            value={information}
+                            onChange={handleChangeInformation}
+                            id="my-information" 
+                            aria-describedby="my-helper-text" />
                         </Stack>
 
                         <Stack>
@@ -126,15 +173,15 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
                                         border: 'none'
                                     }}
                                 >
-                                    <MenuItem value={10}>Pending</MenuItem>
-                                    <MenuItem value={20}>During</MenuItem>
-                                    <MenuItem value={30}>Done</MenuItem>
+                                    <MenuItem value={'Pending'}>Pending</MenuItem>
+                                    <MenuItem value={'During'}>During</MenuItem>
+                                    <MenuItem value={'Done'}>Done</MenuItem>
 
                                 </Select>
                             </FormControl>
                             {/* <Input id="my-state" aria-describedby="my-helper-text" /> */}
                         </Stack>
-                        <Btn>Submit</Btn>
+                        <Btn onClick={handleSubmitForm}>Submit</Btn>
                     </FormControl>
                 </Box>
             </Modal>

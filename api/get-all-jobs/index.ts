@@ -8,7 +8,15 @@ export function useJobApi() {
             return await axiosInstance.get("http://localhost:9000/jobs/all")
         }
     }
+    const createJob = async (data: any) => {
+        if(status === 'authenticated') {
+            return await axiosInstance.post('http://localhost:9000/jobs',
+            data
+            )
+        }
+    }
     return {
-        getAllJob 
+        getAllJob,
+        createJob 
     }
 }
