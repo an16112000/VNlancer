@@ -1,10 +1,12 @@
-import useAuthentication from "@/ultils/authentication"
+import ProfileComponent from "@/components/ProfileComponent"
 
 export default function ProfileClient() {
-    useAuthentication()
+    if (process.browser) {
+        return (
+            <ProfileComponent></ProfileComponent>
+        )
+    }
     return (
-        <>
-            This is Profile Client page
-        </>
+        <div>html</div>
     )
 }

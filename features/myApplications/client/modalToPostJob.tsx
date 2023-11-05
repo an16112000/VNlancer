@@ -28,6 +28,7 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
     const [state, setState] = useState('');
     const [budget, setBudget] = useState('');
     const [information, setInformation] = useState('');
+    const { createJob } = useJobApi();
 
     const handleChangeType = (event: SelectChangeEvent) => {
         setType(event.target.value as string);
@@ -54,10 +55,10 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
     // Submit Form
     async function handleSubmitForm() {
         console.log(type, state, name, budget, information)
-        await useJobApi.createJob({
-            name: 'a',
-            budget: 1,
-            information: 'a',
+        await createJob({
+            name,
+            budget,
+            information,
             categoryId: 1,
             imageUrl: 'a',
             typeOfEmployee: 'a',
@@ -133,11 +134,11 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
                             <label htmlFor="my-budget">Budget</label>
 
                             <Input
-                            value={budget}
-                            onChange={handleChangeBudget}
-                             id="my-budget" 
-                             aria-describedby="my-helper-text" 
-                             type="number" />
+                                value={budget}
+                                onChange={handleChangeBudget}
+                                id="my-budget"
+                                aria-describedby="my-helper-text"
+                                type="number" />
                         </Stack>
 
                         <Stack>
@@ -151,11 +152,11 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
 
                         <Stack>
                             <label htmlFor="my-information">Information</label>
-                            <Input 
-                            value={information}
-                            onChange={handleChangeInformation}
-                            id="my-information" 
-                            aria-describedby="my-helper-text" />
+                            <Input
+                                value={information}
+                                onChange={handleChangeInformation}
+                                id="my-information"
+                                aria-describedby="my-helper-text" />
                         </Stack>
 
                         <Stack>
