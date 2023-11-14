@@ -10,6 +10,8 @@ import { createEmotionCache } from "@/ultils/createEmotionCache";
 import Global from "@/layout/globalStyles";
 import Auth from "@/assets/common/auth";
 import { AppPropsWithLayout } from "@/models/commons";
+import { store } from '@/state/store'
+import { Provider } from "react-redux"
 
 const Theme = createTheme(getDesignTokens("light"));
 const clientSideEmotionCache = createEmotionCache();
@@ -21,28 +23,25 @@ export interface MyAppProps extends AppProps {
 export default function App({ Component, pageProps: { session, ...pageProps },
   emotionCache = clientSideEmotionCache, }: AppPropsWithLayout) {
   return (
-    <CacheProvider value={emotionCache}>
-      <ThemeProvider theme={Theme}>
-        <Global>
-          <SessionProvider session={session}>
-
-
-            <SWRConfig
-              value={{
-                fetcher: async (url) =>
-                  await axios(url).then((data) => data.data),
-              }}
-            >
-              <Auth requiredLogin={Component.requireLogin ?? false}>
-                <Component {...pageProps} />
-
-              </Auth>
-            </SWRConfig>
-
-
-          </SessionProvider>
-        </Global>
-      </ThemeProvider>
-    </CacheProvider>
+    <Provider store={store}>
+      <CacheProvider value={emotionCache}>
+        <ThemeProvider theme={Theme}>
+          <Global>
+            <SessionProvider session={session}>
+              <SWRConfig
+                value={{
+                  fetcher: async (url) =>
+                    await axios(url).then((data) => data.data),
+                }}
+              >
+                <Auth requiredLogin={Component.requireLogin ?? false}>
+                  <Component {...pageProps} />
+                </Auth>
+              </SWRConfig>
+            </SessionProvider>
+          </Global>
+        </ThemeProvider>
+      </CacheProvider>
+    </Provider>
   );
 }

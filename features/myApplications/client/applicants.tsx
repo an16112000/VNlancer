@@ -35,25 +35,12 @@ const rows = [
 const headers = ['#', 'Full Name', 'Score', 'Applied Date', 'Action']
 
 export function ClientApplicants() {
-    const [currentPage, setCurrentPage] = useState('Applicants')
-    const callBackFunction = (page: string) => {
-        // setCurrentPage(page)
-        console.log(1)
-    }
-    
     return (
         <>
-            <AddApplication />
-            <Options options={optionsClientApplicants} onClick={callBackFunction} />
-            {currentPage === 'Applicants' ? <> <Stack sx={{ marginTop: '25px' }} flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'}>
+            <Stack flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'}>
                 <Box sx={{ fontSize: '16px', fontWeight: '500' }}>Total Applicants</Box>
-                <Stack gap={'10px'} flexDirection={'row'} alignItems={'center'}>
-                    <TextInput id={"Search Applicants"} label={"Search Applicants"} />
-                    <Btn>Filter</Btn>
-                </Stack>
             </Stack>
-                <TableOfApplication rows={rows} headers={headers} statusCheck={[2]} /> </> : <></>
-            }
+            <TableOfApplication rows={rows} headers={headers} statusCheck={[2]} />
         </>
     )
 }

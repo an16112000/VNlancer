@@ -21,11 +21,6 @@ function TableOfListJobs({ rows, headers, statusCheck }: TableOfApplicationProps
                                 (item, index) => <TableCell key={index} sx={{ color: 'text.third' }}>{item}</TableCell>
                             )
                         }
-                        {/* <TableCell sx={{ color: 'text.third' }}>#</TableCell>
-                        <TableCell sx={{ color: 'text.third' }}>Company Name</TableCell>
-                        <TableCell sx={{ color: 'text.third' }} align="left">Roles</TableCell>
-                        <TableCell sx={{ color: 'text.third' }} align="left">Date Applied</TableCell>
-                        <TableCell sx={{ color: 'text.third' }} align="left">Status</TableCell> */}
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -52,7 +47,6 @@ function TableOfListJobs({ rows, headers, statusCheck }: TableOfApplicationProps
                             <TableCell sx={{ color: 'text.third' }} align="left">{row.item5}</TableCell>
                             <TableCell sx={{ color: 'text.third' }} align="left">{row.item6}</TableCell>
                             <TableCell sx={{ color: 'text.third' }} align="left">{row.item7}</TableCell>
-
                         </TableRow>
                     ))}
                 </TableBody>

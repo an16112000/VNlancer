@@ -1,4 +1,3 @@
-import { LayOut } from "@/layout";
 import { LayOutWithHeaderAndUser } from "@/layout/layoutWithHeaderAndUser";
 
 function Dashboard() {

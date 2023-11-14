@@ -31,9 +31,7 @@ const headers = ['#', 'Full Name', 'Task', 'Status']
 function TaskStatus() {
     return (
         <>
-            <AddApplication />
-            <Options options={optionsClientApplicants} activeOption={optionsClientApplicants[1].title} />
-            <Box sx={{ fontSize: '16px', fontWeight: '500', marginTop: '25px' }}>Task Manager</Box>
+            <Box sx={{ fontSize: '16px', fontWeight: '500' }}>Task Manager</Box>
             <TableTaskForClient rows={rows} headers={headers} statusCheck={[2]} />
             <Button sx={{
                 width: '100%',

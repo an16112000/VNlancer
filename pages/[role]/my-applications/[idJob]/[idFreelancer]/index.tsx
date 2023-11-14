@@ -15,9 +15,7 @@ const optionsClientApplicants = [
 function TaskStatusPage() {
     return (
         <LayOutWithHeaderAndUser>
-            <Box sx={{ width: '70%' }}>
-                <TaskStatus />                
-            </Box>
+            <TaskStatus />
         </LayOutWithHeaderAndUser>
     )
 }

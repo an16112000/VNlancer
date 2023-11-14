@@ -117,18 +117,17 @@ function FilterBar() {
     }
   }
   return (
-    <Box sx={{width: '250px'}}>
-      <Stack gap={"10px"} sx={{position: 'fixed'}}>
+    <Box sx={{ width: '250px' }}>
+      <Stack sx={{
+        backgroundColor: '#fff',
+        borderRadius: '8px',
+      }} >
         {Options.map((item, index) => {
           return (
             <Box
               key={index}
               sx={{
-                border: "1px solid #000",
-                borderRadius: "8px",
                 padding: "8px 10px",
-                minWidth: "250px",
-                backgroundColor: "#fff",
               }}
             >
               <Stack

@@ -1,20 +1,8 @@
 import Btn from "@/components/button"
-import { Box, FormControl, FormHelperText, Input, InputLabel, Modal, Stack, Typography } from "@mui/material"
-import OptionsOfApplication from "../options"
-import TextInput from "@/components/text-input"
-import TableOfApplication from "../table"
+import { Box, Stack } from "@mui/material"
 import TableOfListJobs from "../tableListJobs"
 import { useState } from "react"
 import ModalToPostJob from "./modalToPostJob"
-
-const optionsClientApplications = [
-    {
-        title: 'Applicants'
-    },
-    {
-        title: 'Job Details'
-    }
-]
 
 function createData(
     id: number,
@@ -34,34 +22,28 @@ const rows = [
     createData(3, 'Social Media Assistant', 'Live', '20 May 2020', '24 July 2021', '19', '4/11'),
     createData(4, 'Social Media Assistant', 'Closed', '20 May 2020', '24 July 2021', '19', '4/11'),
     createData(5, 'Social Media Assistant', 'Live', '20 May 2020', '24 July 2021', '19', '4/11'),
-
-
 ];
 
 
 
-const headers = ['#', 'Roles', 'Status', 'Date Posted', 'Due Date', 'Applicants', 'Needs']
+const headers = ['#', 'Name', 'Status', 'Date Posted', 'Due Date', 'Applicants', 'Employee Type', 'Needs']
 
 export function ClientApplications() {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
     return (
         <>
-            <Stack justifyContent={'end'} flexDirection={'row'}>
-                <Btn>+ Competition</Btn>
-                <Btn onClick={handleOpen}>+ Post a job</Btn>
-
-            </Stack>
-            {/* <OptionsOfApplication options={optionsClientApplications} /> */}
-            <Stack sx={{ marginTop: '25px' }} flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'}>
+            <Stack flexDirection='row' justifyContent='space-between' alignItems='center'>
                 <Box sx={{ fontSize: '16px', fontWeight: '500' }}>My Applications</Box>
-                <Stack gap={'10px'} flexDirection={'row'} alignItems={'center'}>
+                <Stack gap={'10px'} flexDirection='row' alignItems='center'>
+                    <Btn onClick={handleOpen}>+ Post a job</Btn>
                     <Btn>Filter</Btn>
                 </Stack>
             </Stack>
             <TableOfListJobs rows={rows} headers={headers} />
-            <ModalToPostJob isOpen={open} handleClose={handleClose}/>
+            <ModalToPostJob isOpen={open} handleClose={handleClose} />
         </>
 
     )

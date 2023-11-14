@@ -1,4 +1,4 @@
-import StatusCheck from "@/components/statusCheck";
+import JobStatusLabel from "@/components/page/dashboard/JobStatusLabel";
 import { Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useRouter } from "next/router";
 
@@ -9,15 +9,14 @@ interface TableOfApplicationProps {
     statusCheck?: any[]
 }
 
-function TableOfApplication({ rows, headers, statusCheck }: TableOfApplicationProps) {
+function TableOfApplication({ rows, headers }: TableOfApplicationProps) {
     const router = useRouter()
     function handleClick(row: any) {
-        console.log(row.id)
         const idFreelancer = row.id
         router.push(`/client/my-applications/${router.query.idJob}/${idFreelancer}`)
     }
     return (
-        <TableContainer component={Paper} sx={{ color: 'text.third', marginTop: '20px' }}>
+        <TableContainer component={Paper} sx={{ color: 'text.third' }}>
             <Table sx={{ minWidth: 650, color: 'text.third' }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
@@ -26,17 +25,11 @@ function TableOfApplication({ rows, headers, statusCheck }: TableOfApplicationPr
                                 (item, index) => <TableCell key={index} sx={{ color: 'text.third' }}>{item}</TableCell>
                             )
                         }
-                        {/* <TableCell sx={{ color: 'text.third' }}>#</TableCell>
-                        <TableCell sx={{ color: 'text.third' }}>Company Name</TableCell>
-                        <TableCell sx={{ color: 'text.third' }} align="left">Roles</TableCell>
-                        <TableCell sx={{ color: 'text.third' }} align="left">Date Applied</TableCell>
-                        <TableCell sx={{ color: 'text.third' }} align="left">Status</TableCell> */}
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {rows.map((row, index) => {
-                        console.log(row)
-                        return  <TableRow
+                        return <TableRow
                             onClick={() => handleClick(row)}
                             key={row.name}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -53,12 +46,10 @@ function TableOfApplication({ rows, headers, statusCheck }: TableOfApplicationPr
                             <TableCell sx={{ color: 'text.third' }} align="left">{row.item3}</TableCell>
                             <TableCell sx={{ color: 'text.third' }} align="left">{row.item4}</TableCell>
                             <TableCell sx={{ color: 'text.third' }} align="left">
-                                <StatusCheck>
-                                    {row.item5}
-                                </StatusCheck>
+                                <JobStatusLabel jobStatus={row.item5} />
                             </TableCell>
                         </TableRow>
-})}
+                    })}
                 </TableBody>
             </Table>
         </TableContainer>

@@ -1,4 +1,4 @@
-import {Button} from '@mui/material'
+import { Button } from '@mui/material'
 
 interface BntProps {
     children: string | string[],
@@ -7,9 +7,9 @@ interface BntProps {
     styles?: any,
 }
 
-function Btn({children, onClick: handleClick, active = '', styles}: BntProps) {
+function Btn({ children, onClick: handleClick, active = '', styles }: BntProps) {
     const isActive = children === active
-    return(
+    return (
         <Button
             variant="contained"
             sx={{
@@ -25,9 +25,9 @@ function Btn({children, onClick: handleClick, active = '', styles}: BntProps) {
                 }
             }}
             onClick={handleClick}
-            >
-                {children}
-            </Button>
+        >
+            {children}
+        </Button>
     )
 }
 

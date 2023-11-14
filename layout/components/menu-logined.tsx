@@ -1,12 +1,11 @@
 import Btn from "@/components/button";
+import SwapRoleButton from "@/components/layout/button/SwapRole";
 import TextInput from "@/components/text-input";
 import AvatarDropdown from "@/features/header/AvatarDropdown";
 import MessageIconDropdown from "@/features/header/MessageIconDropdown";
-import NotificationIconDropdown from "@/features/header/NotificationIconDropdown";
 import { Avatar, MessageIcon, NotificationIcon } from "@/img";
 import { Box, Button, Stack } from "@mui/material";
 import Tippy from "@tippyjs/react";
-import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -15,57 +14,24 @@ const menu = [
         icon: MessageIcon,
         dropdown: MessageIconDropdown
     },
-    // {
-    //     icon: NotificationIcon,
-    //     dropdown: NotificationIconDropdown
-    //     // [
-    //     //     {
-    //     //         title: 'NotificationIconDropdown',
-    //     //     }
-    //     // ]
-    // },
     {
         icon: Avatar,
         dropdown: AvatarDropdown
-        //  [     
-        //     {
-        //         title: 'asaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-        //     },{
-        //         title: 'My Profile'
-        //     },
-        //     {
-        //         title: 'Sign out',
-        //         handleClick: () => signOut()
-        //     },
-        // ]
     }
 ];
 
-interface MenuLoginedProps {
-    changeRole?: any, 
-    role: string,
-    linkSwitch: string
-}
-
-export function MenuLogined({role, linkSwitch}: MenuLoginedProps) {
-    console.log(linkSwitch)
+export function MenuLogined() {
     return (
         <Stack
             flexDirection={'row'}
             flex={'0.9'}
             gap={'20px'}
-            justifyContent={'space-between'}
+            justifyContent={'flex-end'}
             alignItems={'center'}
+            width={'100%'}
         >
-            <Box flexDirection={'row'} sx={{ width: '530px', height: '40px', display: 'flex', textAlign: 'center' }}>
-                <TextInput id={"search"} label={"Search jobs"} styles={{ color: 'text.third', backgroundColor: '#F8F8FD' }} />
-                <Btn styles={{ borderRadius: '8px' }}>Search</Btn>
-            </Box>
-            <Link href={linkSwitch}>
-                <Btn styles={{ borderRadius: '10px' }}>Swap to {role}</Btn>
-            </Link>
+            <SwapRoleButton />
             <Stack flexDirection={'row'} gap={'10px'} alignItems={'center'} >
-
                 {
                     menu.map(
                         (item, index) => {
@@ -79,7 +45,6 @@ export function MenuLogined({role, linkSwitch}: MenuLoginedProps) {
                                         borderRadius: '6px'
                                     }}>
                                         <Component />
-
                                     </Stack>
                                 }>
                                     <Image src={item.icon} style={{ height: '20px', width: '20px', cursor: 'pointer' }} alt=""></Image>

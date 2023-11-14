@@ -1,22 +1,19 @@
+import { Category } from "@/model/category"
 import { axiosInstance } from "@/ultils/axiosInstance"
+import { AxiosResponse } from "axios"
 import { useSession } from "next-auth/react"
 
-export default function useMyJobApi() {
-    const { data, status } = useSession()
-    const getAllCategory = async () => {
-        if (status === "authenticated") {
-            return await axiosInstance.get("http://localhost:9000/my-jobs", {
-                headers: {
-                    Authorization: `Bearer ${data?.accessToken}`
-                }
-            })
-        }
+export default function useCategoryApi() {
+    const { data } = useSession()
+    async function getAllCategory(): Promise<AxiosResponse<{ categories: Category[] }>> {
+        return await axiosInstance.get("http://localhost:9000/categories/all", {
+            headers: {
+                Authorization: `Bearer ${data?.accessToken}`
+            }
+        })
     }
-    const searchJob = async () => {
 
-    }
     return {
         getAllCategory,
-        searchJob
     }
 }

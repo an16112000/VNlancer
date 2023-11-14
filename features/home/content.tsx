@@ -6,16 +6,15 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 
 function ContentHome() {
-    const {data: session, status} = useSession()
-    console.log(status)
+    const { status } = useSession()
     return (
         <>
             <Stack
-                flexDirection={'row'}
-                justifyContent={'space-between'}
-                alignItems={"center"}
-                height={'500px'}
-                gap={'20px'}
+                flexDirection='row'
+                justifyContent='space-between'
+                alignItems='center'
+                height='500px'
+                gap='20px'
             >
                 <Box sx={{ fontSize: '30px', fontWeight: '500' }}>
                     Hire, manage and pay vetted freelancers
@@ -32,7 +31,8 @@ function ContentHome() {
                     height: '400px'
                 }} src={ConnectFreelancer} alt={""} />
 
-            </Stack><Stack
+            </Stack>
+            <Stack
                 flexDirection={'row'}
                 justifyContent={'space-between'}
                 alignItems={"center"}
@@ -50,7 +50,8 @@ function ContentHome() {
                     <br></br>
                     Working with contractors does not need expensive systems, endless searches or messy spreadsheets. VNlancer is all-in-one platform takes the work out of sourcing, managing and paying your global freelance workforce.
                 </Box>
-            </Stack><Stack gap={'50px'}>
+            </Stack>
+            <Stack gap={'50px'}>
                 <Stack flexDirection={'row'} justifyContent={'space-between'}>
                     <Stack flexDirection={'row'} gap={'20px'}>
                         <Image src={GlobalIcon} alt="" style={{ height: '60px', width: '60px' }} />
@@ -97,15 +98,13 @@ function ContentHome() {
                     Save time and money with direct access to global talent
                     <br></br>
                     <br></br>
-                    {/* <p style={{ fontSize: '14px', fontWeight: '400' }}>- Hire in minutes with direct sourcing from your own talent pool</p>
-    <p style={{ fontSize: '14px', fontWeight: '400' }}>- Easy to find freelancer who suitable for your demand</p> */}
                     <ul>
                         <li style={{ fontSize: '14px', fontWeight: '400' }}>- Hire in minutes with direct sourcing from your own talent pool</li>
-
                         <li style={{ fontSize: '14px', fontWeight: '400' }}>- Easy to find freelancer who suitable for your demand</li>
                     </ul>
                 </Box>
-            </Stack></>
+            </Stack>
+        </>
     )
 }
 

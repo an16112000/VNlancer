@@ -1,5 +1,5 @@
 import { ApplicationIcon, DashboardIcon, Logo, NewIcon, PublicProfileIcon, SettingIcon } from "@/img"
-import { LayOut as Section } from "@/layout"
+import { Layout } from "@/layout"
 import { Box, Stack } from "@mui/material"
 import Image from "next/image"
 import UserFrame from "../../components/userFrame"
@@ -39,13 +39,13 @@ function NewsPage() {
         setData(childData)
     }
     return (
-        <Section>
+        <Layout>
             {/* <Stack flexDirection={'row'} justifyContent={'space-between'}>
                 <UserFrame parentFunction={callbackFunction} active={data} /> */}
-                <Posts />
-                {/* <FilterBar /> */}
+            <Posts />
+            {/* <FilterBar /> */}
             {/* </Stack> */}
-        </Section>
+        </Layout>
     )
 }
 

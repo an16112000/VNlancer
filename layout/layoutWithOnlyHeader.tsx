@@ -1,20 +1,18 @@
-import { Box, Container } from "@mui/material"
+import { Box, Container, SxProps } from "@mui/material"
 import Header from "./header"
 
-interface LayOutWithOnlyHeaderProps {
+interface Props {
     children: any
 }
 
-function LayOutWithOnlyHeader({children}: LayOutWithOnlyHeaderProps) {
+function LayOutWithOnlyHeader({ children }: Props) {
     return (
-        <>
-            <Container maxWidth='lg'>
-                <Header />
-                <Box marginTop={'120px'}>
-                    {children}
-                </Box>
-            </Container>
-        </>
+        <Container maxWidth='xl'>
+            <Header />
+            <Box>
+                {children}
+            </Box>
+        </Container>
     )
 }
 
