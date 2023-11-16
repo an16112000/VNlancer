@@ -1,127 +1,130 @@
+import useCategoryApi from "@/api/category";
+import { useJobApi } from "@/api/get-all-jobs";
 import Btn from "@/components/button";
-import { Modal, Box, FormControl, Stack, Select, MenuItem } from "@mui/material";
-import { Input } from "postcss";
-interface Props {
+import { Category } from "@/model/category";
+import { FormControl, MenuItem, Modal, SxProps, TextField } from "@mui/material";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+
+interface ModalToPostJobProps {
     isOpen: boolean,
-    closeModel: Function
+    handleClose: any,
 }
 
-export default function CreateJobModel(props: Props) {
+const style: SxProps = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    minWidth: '600px',
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    height: '500px',
+    overflowY: 'scroll',
+    overflowX: "hidden",
+    p: 4,
+    borderRadius: '10px',
+    gap: '10px',
+};
+
+function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
+    const { getAllCategory } = useCategoryApi()
+    const [categories, setCategories] = useState<Category[]>([])
+    const { status } = useSession()
+    useEffect(() => {
+        (async () => {
+            try {
+                const { data } = await getAllCategory()
+                setCategories(data.categories)
+            } catch (exception) {
+            }
+        })()
+    }, [status])
+    const [category, setCategory] = useState<Category>();
+    const [name, setName] = useState<string>();
+    const [budget, setBudget] = useState<number>();
+    const [information, setInformation] = useState<string>();
+    const [dueDate, setDueDate] = useState<string>();
+    const [need, setNeed] = useState<number>();
+    const [jobLevel, setJobLevel] = useState<string>()
+    const [employeeType, setEmployeeType] = useState<string>()
+    const { createJob } = useJobApi();
+
+
+    // handle Change Value Name Input
+    function changeName(e: any) {
+        setName(e.target.value)
+    }
+
+    //handle Change Budget Input
+    function changeBudget(e: any) {
+        setBudget(e.target.value)
+    }
+
+    //handle Change Information Input 
+    function changeInformation(e: any) {
+        setInformation(e.target.value)
+    }
+    function changeDueDate(e: any) {
+        setDueDate(e.target.value)
+    }
+    function changeJobLevel(e: any) {
+        setJobLevel(e.target.value)
+    }
+    function changeEmployeeType(e: any) {
+        setEmployeeType(e.target.value)
+    }
+
+    // Submit Form
+    async function handleSubmitForm() {
+        console.log(name, category, budget, information, dueDate, need)
+        // await createJob({
+        //     name,
+        //     budget,
+        //     information,
+        //     categoryId: type,
+        //     imageUrl: 'a',
+        //     typeOfEmployee: 'a',
+        //     jobLevel: 'a',
+        // })
+    }
+
     return (
-        <>
-            <Modal
-                open={props.isOpen}
-                onClose={() => props.closeModel()}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
+        <Modal
+            open={isOpen}
+            onClose={handleClose}
+            disableScrollLock
+        >
+            <FormControl
+                sx={style}
             >
-                <Box sx={style}>
-                    <FormControl
-                        sx={{
-                            width: '100%',
-                            gap: '15px',
-                            border: 'none',
-                            '.MuiOutlinedInput-notchedOutline': {
-                                border: '2px solid',
-                                borderColor: '#fff',
-                                borderBottomColor: '#cacaca'
-                            }
-                        }}>
-                        <h1 style={{
-                            textAlign: 'center',
-                            fontSize: '18px',
-                            fontWeight: '500'
-                        }}>POST A JOB</h1>
-                        <Stack width={'100%'} >
-                            <label htmlFor="my-email">Type</label>
-                            {/* <Input id="my-email" aria-describedby="my-helper-text" /> */}
-                            <FormControl fullWidth sx={{
-                                border: 'none'
-                            }}>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={type}
-                                    label="Age"
-                                    onChange={handleChangeType}
-                                    sx={{
-                                        border: 'none'
-                                    }}
-                                >
-                                    <MenuItem value={'Design'}>Design</MenuItem>
-                                    <MenuItem value={'Sales'}>Sales</MenuItem>
-                                    <MenuItem value={'Marketing'}>Marketing</MenuItem>
-                                    <MenuItem value={'Business'}>Business</MenuItem>
-                                    <MenuItem value={'Human'}>Human Resource</MenuItem>
-                                    <MenuItem value={'Finance'}>Finance</MenuItem>
-                                    <MenuItem value={'Engineering'}>Engineering</MenuItem>
-                                    <MenuItem value={'Technology'}>Technology</MenuItem>
+                <h1 style={{
+                    textAlign: 'center',
+                    fontSize: '18px',
+                    fontWeight: '500'
+                }}>POST A JOB</h1>
 
-                                </Select>
-                            </FormControl>
-                        </Stack>
+                <TextField select label="Type" focused>
+                    {categories.map(category => <MenuItem value={category.id}>{category.name}</MenuItem>)}
+                </TextField>
 
-                        <Stack>
-                            <label htmlFor="my-name">Name</label>
-                            <Input
-                                value={name}
-                                onChange={handleChangeName}
-                                sx={{
-                                    borderBottomColor: '#ccc !important'
-                                }} id="my-name" aria-describedby="my-helper-text" />
-                        </Stack>
+                <TextField label="Name" variant="outlined" focused value={name} onChange={changeName} />
 
-                        <Stack>
-                            <label htmlFor="my-budget">Budget</label>
+                <TextField type="number" label="Budget" variant='outlined' focused value={budget} onChange={changeBudget} />
 
-                            <Input
-                                value={budget}
-                                onChange={handleChangeBudget}
-                                id="my-budget"
-                                aria-describedby="my-helper-text"
-                                type="number" />
-                        </Stack>
+                <TextField type='text' label="Information" variant='outlined' focused value={information} onChange={changeInformation} />
 
-                        <Stack>
-                            <label htmlFor="my-img">Img</label>
-                            <input accept="image/*" multiple type="file" />
-                        </Stack>
+                <TextField type='date' label="Due Date" variant='outlined' focused value={dueDate} onChange={changeDueDate} />
 
-                        <Stack>
-                            <label htmlFor="my-information">Information</label>
-                            <Input
-                                value={information}
-                                onChange={handleChangeInformation}
-                                id="my-information"
-                                aria-describedby="my-helper-text" />
-                        </Stack>
+                <TextField type='text' label="Employee Type" variant='outlined' focused value={employeeType} onChange={changeEmployeeType} />
 
-                        <Stack>
-                            <label htmlFor="my-state">State</label>
-                            <FormControl fullWidth sx={{
-                                border: 'none'
-                            }}>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={state}
-                                    label="Age"
-                                    onChange={handleChangeState}
-                                    sx={{
-                                        border: 'none'
-                                    }}
-                                >
-                                    <MenuItem value={'Pending'}>Pending</MenuItem>
-                                    <MenuItem value={'During'}>During</MenuItem>
-                                    <MenuItem value={'Done'}>Done</MenuItem>
+                <TextField type='text' label="Job Level" variant='outlined' focused value={jobLevel} onChange={changeJobLevel} />
 
-                                </Select>
-                            </FormControl>
-                        </Stack>
-                        <Btn onClick={handleSubmitForm}>Submit</Btn>
-                    </FormControl>
-                </Box>
-            </Modal>
-        </>
+                <Btn onClick={handleSubmitForm}>Submit</Btn>
+            </FormControl>
+        </Modal>
     )
 }
+
+export default ModalToPostJob

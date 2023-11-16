@@ -7,32 +7,35 @@ interface Props {
     status: string
 }
 
-export function JobDetail(props: Props) {
+export default function JobDetail(props: Props) {
     const role = useSelector((state: RootState) => state.user.role)
 
-    switch (role) {
-        case UserRole.client: {
-            switch (props.status) {
-                case '':
-                    return
-                case '':
-                    return
-                default:
-                    return
-            }
-        }
-        case UserRole.freelancer: {
-            switch (props.status) {
-                case '':
-                    return
-                case '':
-                    return
-                default:
-                    return
-            }
-        }
-        default: {
-            return
-        }
-    }
+    // switch (role) {
+    //     case UserRole.client: {
+    //         switch (props.status) {
+    //             case '':
+    //                 return
+    //             case '':
+    //                 return
+    //             default:
+    //                 return
+    //         }
+    //     }
+    //     case UserRole.freelancer: {
+    //         switch (props.status) {
+    //             case '':
+    //                 return
+    //             case '':
+    //                 return
+    //             default:
+    //                 return
+    //         }
+    //     }
+    //     default: {
+    //         return
+    //     }
+    // }
+    return (
+        <div>this is job detail</div>
+    )
 }

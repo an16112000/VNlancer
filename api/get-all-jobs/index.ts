@@ -6,7 +6,7 @@ export function useJobApi() {
     setHeader(session?.accessToken);
     const getAllJob = async () => {
         if (status === "authenticated") {
-            return await axiosInstance.get("http://localhost:9000/jobs/all")
+            return await axiosInstance.get("http://localhost:9000/jobs/all?role=3")
         }
     }
     const createJob = async (data: any) => {

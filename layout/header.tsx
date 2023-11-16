@@ -1,25 +1,92 @@
-import { Box, Container } from "@mui/material";
+import { Avatar, Stack } from "@mui/material";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { Logo } from "../img/index";
+import { Logo, MessageIcon } from "../img/index";
 import { MenuLogined } from "./components/menu-logined";
 import { MenuPublic } from "./components/menu_public";
+import AvatarDropdown from "@/components/layout/header/AvatarDropdown";
+import MessageIconDropdown from "@/components/layout/header/MessageIconDropdown";
 
+const loginHeaderItems = [
+  {
+    icon: MessageIcon,
+    dropdown: MessageIconDropdown
+  },
+  {
+    icon: Avatar,
+    dropdown: AvatarDropdown
+  }
+];
+
+const publicHeaderItems = [
+  {
+    title: "Hire freelancer",
+    children: [
+      {
+        title: 'Find and post',
+        children: [
+          {
+            title: 'Post job and rececive information about freelancer',
+            children: []
+          },
+          {
+            title: "Find service packages",
+            link: '',
+          },
+          {
+            title: "VNlancer for bussiness",
+            link: '',
+          }
+        ]
+      },
+      {
+        title: 'Find and post',
+        children: [
+          {
+            title: 'Post job and rececive information about freelancer',
+            children: []
+          },
+          {
+            title: "Find service packages",
+            link: '',
+          },
+          {
+            title: "VNlancer for bussiness",
+            link: '',
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "Find jobs",
+    children: [
+      {
+        title: 'Find and post',
+        children: [
+          {
+            title: 'Post job and rececive information about freelancer',
+            children: []
+          },
+          {
+            title: "Find service packages",
+            link: '',
+          },
+          {
+            title: "VNlancer for bussiness",
+            link: '',
+          }
+        ]
+      },
+    ]
+  }
+]
 
 function Header() {
   const { status } = useSession()
   return (
-    <Container
-      sx={{
-        display: "flex",
-        flexDirection: 'row',
-        justifyContent: "space-between",
-        alignItems: 'center',
-        backgroundColor: "#fff",
-      }}
-      maxWidth='xl'
-    >
+    <Stack flexDirection='row' sx={{ backgroundColor: '#fff' }}>
       <Link href={'/'}>
         <Image
           style={{
@@ -32,7 +99,7 @@ function Header() {
       {
         status == 'authenticated' ? <MenuLogined /> : <MenuPublic />
       }
-    </Container>
+    </Stack>
   );
 }
 

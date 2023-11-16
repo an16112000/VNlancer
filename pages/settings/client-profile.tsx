@@ -1,12 +1,12 @@
 import ClientProfileContent from "@/features/settings/client-profile-content";
 import OptionsPage from "@/features/settings/optionsPage";
-import { LayOutWithHeaderAndUser } from "@/layout/layoutWithHeaderAndUser";
+import { PageLayout } from "@/layout/PageLayout";
 import { Box } from "@mui/material";
 
 export default function ClientProfile() {
 
     return (
-        <LayOutWithHeaderAndUser>
+        <PageLayout>
             <Box flex={1} padding={'0 20px'}>
                 <ClientProfileContent />
             </Box>
@@ -14,7 +14,7 @@ export default function ClientProfile() {
                 <OptionsPage />
             </Box>
 
-        </LayOutWithHeaderAndUser>
+        </PageLayout>
     )
 }
 

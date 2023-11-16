@@ -7,39 +7,37 @@ export const getDesignTokens = (mode: PaletteMode) => ({
     },
     palette: {
         mode,
-        ...(mode === "light" ? 
-        {
-            primary: {
-                main: "#7950F2",
-            },
-            secondary: {
-                main: green[500]
-            },
-            text: {
-                primary: '#7950F2',
-                secondary: '#fff',
-                third: '#000',
-            },
-            background: {
-                default: "#CECACA"
+        ...(mode === "light" ?
+            {
+                primary: {
+                    main: "#7950F2",
+                },
+                secondary: {
+                    main: green[500]
+                },
+                text: {
+                    primary: '#7950F2',
+                    secondary: '#fff',
+                    third: '#000',
+                },
+                background: {
+                    default: "#CECACA"
+                }
             }
-        }
-        : {
-            primary: {
-                main: blue[500]
-            },
-            secondary: {
-                main: red[500]
-            }, 
-            text: {
-                primary: '#fff'
-            },
-            background: {
-                default: "#CECACA"
+            : {
+                primary: {
+                    main: blue[500]
+                },
+                secondary: {
+                    main: red[500]
+                },
+                text: {
+                    primary: '#fff'
+                },
+                background: {
+                    default: "#CECACA"
+                }
             }
-        }
         )
     },
-    
-    
 })

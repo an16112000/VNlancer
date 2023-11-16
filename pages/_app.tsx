@@ -2,7 +2,6 @@ import "@/styles/globals.css";
 import { CacheProvider, EmotionCache, ThemeProvider } from "@emotion/react";
 import type { AppProps } from "next/app";
 import { createTheme } from "@mui/material";
-import { getDesignTokens } from "@/ultils/theme";
 import { SWRConfig } from "swr";
 import axios from "axios";
 import { SessionProvider, useSession } from "next-auth/react";
@@ -13,7 +12,7 @@ import { AppPropsWithLayout } from "@/models/commons";
 import { store } from '@/state/store'
 import { Provider } from "react-redux"
 
-const Theme = createTheme(getDesignTokens("light"));
+const theme = createTheme();
 const clientSideEmotionCache = createEmotionCache();
 
 export interface MyAppProps extends AppProps {
@@ -25,7 +24,7 @@ export default function App({ Component, pageProps: { session, ...pageProps },
   return (
     <Provider store={store}>
       <CacheProvider value={emotionCache}>
-        <ThemeProvider theme={Theme}>
+        <ThemeProvider theme={theme} >
           <Global>
             <SessionProvider session={session}>
               <SWRConfig

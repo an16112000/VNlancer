@@ -1,4 +1,4 @@
-import UserFrame from "@/components/userFrame";
+import LeftNavigation from "@/components/LeftNavigation";
 import { Box, Container, Grid, SxProps } from "@mui/material";
 import Header from "./header";
 import { ReactNode } from "react";
@@ -7,17 +7,16 @@ interface Props {
   children: ReactNode;
 }
 
-export function LayOutWithHeaderAndUser({ children }: Props) {
-
+export function PageLayout({ children }: Props) {
   return (
-    <Container maxWidth='xl'>
+    <Container maxWidth='lg' >
       <Header />
       <Box sx={contentStyle}>
-        <Grid container spacing={2}>
-          <Grid item>
-            <UserFrame />
+        <Grid container spacing={{ md: 1 }}>
+          <Grid item md={3} lg={2.5} display={{ xs: 'none', md: 'block' }}>
+            <LeftNavigation />
           </Grid>
-          <Grid item xl xs>
+          <Grid item xs>
             {children}
           </Grid>
         </Grid>
@@ -28,4 +27,7 @@ export function LayOutWithHeaderAndUser({ children }: Props) {
 
 const contentStyle: SxProps = {
   paddingTop: '10px',
+  width: '100%',
+  justifyContent: 'space-between',
+  display: 'flex'
 }

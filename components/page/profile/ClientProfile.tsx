@@ -1,5 +1,9 @@
+import { Grid } from "@mui/material";
+
 export default function ClientProfile() {
     return (
-        <div>client profile</div>
+        <Grid container>
+            <Grid item></Grid>
+        </Grid>
     )
 }

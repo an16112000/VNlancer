@@ -1,13 +1,10 @@
-import Btn from "@/components/button";
 import SwapRoleButton from "@/components/layout/button/SwapRole";
-import TextInput from "@/components/text-input";
-import AvatarDropdown from "@/features/header/AvatarDropdown";
-import MessageIconDropdown from "@/features/header/MessageIconDropdown";
-import { Avatar, MessageIcon, NotificationIcon } from "@/img";
-import { Box, Button, Stack } from "@mui/material";
+import AvatarDropdown from "@/components/layout/header/AvatarDropdown";
+import MessageIconDropdown from "@/components/layout/header/MessageIconDropdown";
+import { Avatar, MessageIcon } from "@/img";
+import { Stack } from "@mui/material";
 import Tippy from "@tippyjs/react";
 import Image from "next/image";
-import Link from "next/link";
 
 const menu = [
     {
@@ -20,15 +17,15 @@ const menu = [
     }
 ];
 
-export function MenuLogined() {
+export const MenuLogined = () => {
     return (
         <Stack
-            flexDirection={'row'}
-            flex={'0.9'}
-            gap={'20px'}
-            justifyContent={'flex-end'}
-            alignItems={'center'}
-            width={'100%'}
+            flexDirection='row'
+            gap='20px'
+            justifyContent='flex-end'
+            alignItems='center'
+            width='100%'
+            paddingRight='10px'
         >
             <SwapRoleButton />
             <Stack flexDirection={'row'} gap={'10px'} alignItems={'center'} >

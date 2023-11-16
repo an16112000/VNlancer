@@ -1,27 +1,20 @@
-import UserFrame from "@/components/userFrame";
-import FilterBar from "@/features/all-services/filter-bar";
-import { Box, Container, Stack, SxProps, createTheme } from "@mui/material";
-import Header from "./header";
+import { Box, Container } from "@mui/material"
+import Header from "./header"
+import React from "react"
 
-interface LayOutProps {
-  children: any;
+interface Props {
+    children: any
 }
 
-export function Layout({ children }: LayOutProps) {
-  return (
-    <Container maxWidth='xl'>
-      <Header />
-      <Box sx={contentStyle}>
-        <Stack flexDirection={'row'} justifyContent={'space-between'}>
-          <UserFrame />
-          {children}
-          <FilterBar />
-        </Stack>
-      </Box>
-    </Container>
-  );
+function DefaultLayout({ children }: Props) {
+    return (
+        <Container maxWidth='xl'>
+            <Header />
+            <Box>
+                {children}
+            </Box>
+        </Container>
+    )
 }
 
-const contentStyle: SxProps = {
-  paddingTop: '10px'
-}
+export default DefaultLayout

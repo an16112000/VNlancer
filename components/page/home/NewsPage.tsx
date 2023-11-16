@@ -1,14 +1,4 @@
-import { ApplicationIcon, DashboardIcon, Logo, NewIcon, PublicProfileIcon, SettingIcon } from "@/img"
-import { Layout } from "@/layout"
-import { Box, Stack } from "@mui/material"
-import Image from "next/image"
-import UserFrame from "../../components/userFrame"
 import { useState } from "react"
-import FilterBar from "../all-services/filter-bar"
-import Posts from "../news/postListForFreelancer"
-
-
-
 
 // const Navigators = [
 //     {
@@ -39,13 +29,14 @@ function NewsPage() {
         setData(childData)
     }
     return (
-        <Layout>
-            {/* <Stack flexDirection={'row'} justifyContent={'space-between'}>
-                <UserFrame parentFunction={callbackFunction} active={data} /> */}
-            <Posts />
-            {/* <FilterBar /> */}
-            {/* </Stack> */}
-        </Layout>
+        // <Layout>
+        //     {/* <Stack flexDirection={'row'} justifyContent={'space-between'}>
+        //         <UserFrame parentFunction={callbackFunction} active={data} /> */}
+        //     <Posts />
+        //     {/* <FilterBar /> */}
+        //     {/* </Stack> */}
+        // </Layout>
+        <></>
     )
 }
 

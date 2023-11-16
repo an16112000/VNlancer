@@ -117,7 +117,7 @@ function FilterBar() {
     }
   }
   return (
-    <Box sx={{ width: '250px' }}>
+    <Box>
       <Stack sx={{
         backgroundColor: '#fff',
         borderRadius: '8px',

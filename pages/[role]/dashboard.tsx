@@ -1,10 +1,10 @@
-import { LayOutWithHeaderAndUser } from "@/layout/layoutWithHeaderAndUser";
+import { PageLayout } from "@/layout/PageLayout";
 
 function Dashboard() {
     return(
-        <LayOutWithHeaderAndUser>
+        <PageLayout>
 
-        </LayOutWithHeaderAndUser>
+        </PageLayout>
     )
 }
 Dashboard.requireLogin = true

@@ -19,7 +19,6 @@ interface Props {
 }
 export default function ClientJob(props: Props) {
     <TableRow
-        // onClick={() => router.push(`/client/my-applications/${row.id}/my-applicants`)}
         key={props.name}
         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
     >

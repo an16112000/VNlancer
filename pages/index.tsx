@@ -1,13 +1,13 @@
-import ContentHome from "@/features/home/content";
+import ContentHome from "@/components/page/home/content";
+import DefaultLayout from "@/layout";
 import { Stack } from "@mui/material";
-import LayOutWithOnlyHeader from "@/layout/layoutWithOnlyHeader";
 
 export default function Home() {
   return (
-    <LayOutWithOnlyHeader>
+    <DefaultLayout>
       <Stack gap='50px'>
         <ContentHome />
       </Stack>
-    </LayOutWithOnlyHeader>
+    </DefaultLayout>
   );
 }
