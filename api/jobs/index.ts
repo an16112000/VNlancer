@@ -20,7 +20,7 @@ export default function useJobApi() {
         })
     }
     async function getJobDetail(jobId: number): Promise<AxiosResponse<JobDetail>> {
-        return await axiosInstance.get(`/jobs/${jobId}`, {
+        return await axiosInstance.get(`/jobs?id=${jobId}`, {
             headers: {
                 Authorization: `Bearer ${data?.accessToken}`
             }

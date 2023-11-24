@@ -8,7 +8,7 @@ interface Props {
     navigators: NavigationButtonProps[]
 }
 
-export default function LeftNavigation(props: Props) {
+export default function TabNavigation(props: Props) {
     const [value, setValue] = useState(0);
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);

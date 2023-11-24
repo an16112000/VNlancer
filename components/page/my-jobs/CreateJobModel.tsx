@@ -30,6 +30,7 @@ const style: SxProps = {
 
 function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
     const { getAllCategory } = useCategoryApi()
+    const { createJob } = useJobApi()
     const [categories, setCategories] = useState<Category[]>([])
     const { status } = useSession()
     useEffect(() => {
@@ -41,15 +42,13 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
             }
         })()
     }, [status])
-    const [category, setCategory] = useState<Category>();
+    const [categoryId, setCategoryId] = useState<number>();
     const [name, setName] = useState<string>();
     const [budget, setBudget] = useState<number>();
     const [information, setInformation] = useState<string>();
     const [dueDate, setDueDate] = useState<string>();
-    const [need, setNeed] = useState<number>();
     const [jobLevel, setJobLevel] = useState<string>()
     const [employeeType, setEmployeeType] = useState<string>()
-    const { createJob } = useJobApi();
 
 
     // handle Change Value Name Input
@@ -78,16 +77,20 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
 
     // Submit Form
     async function handleSubmitForm() {
-        console.log(name, category, budget, information, dueDate, need)
-        // await createJob({
-        //     name,
-        //     budget,
-        //     information,
-        //     categoryId: type,
-        //     imageUrl: 'a',
-        //     typeOfEmployee: 'a',
-        //     jobLevel: 'a',
-        // })
+        try {
+            await createJob({
+                name,
+                budget,
+                information,
+                categoryId,
+                typeOfEmployee: employeeType,
+                jobLevel,
+                dueDate
+            })
+            handleClose()
+        } catch (exception) {
+            console.log(exception);
+        }
     }
 
     return (
@@ -105,7 +108,9 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
                     fontWeight: '500'
                 }}>POST A JOB</h1>
 
-                <TextField select label="Type" focused>
+                <TextField select label="Type" focused onChange={e => {
+                    setCategoryId(Number(e.target.value))
+                }}>
                     {categories.map(category => <MenuItem value={category.id}>{category.name}</MenuItem>)}
                 </TextField>
 

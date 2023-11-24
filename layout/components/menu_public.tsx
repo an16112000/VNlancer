@@ -75,8 +75,11 @@ export function MenuPublic() {
     }
     return (
         <Stack
-            flexDirection={'row'}
-            gap={'20px'}
+            flexDirection='row'
+            gap='20px'
+            width='100%'
+            justifyContent='flex-end'
+            paddingRight='10px'
         >
             {
                 menu.map(

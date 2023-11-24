@@ -28,45 +28,45 @@ const freelancerNavigator = [
         pathName: '/freelancer/profile',
         link: '',
     },
-    {
-        icon: DashboardIcon,
-        title: 'Dashboard',
-        pathName: '/freelancer/dashboard',
-        link: '',
-    },
-    {
-        icon: SettingIcon,
-        title: 'Settings',
-        pathName: '/settings/client-profile',
-        link: '',
-    },
+    // {
+    //     icon: DashboardIcon,
+    //     title: 'Dashboard',
+    //     pathName: '/freelancer/dashboard',
+    //     link: '',
+    // },
+    // {
+    //     icon: SettingIcon,
+    //     title: 'Settings',
+    //     pathName: '/settings/client-profile',
+    //     link: '',
+    // },
 ]
 
 const clientNavigator = [
     {
         icon: ApplicationIcon,
-        title: 'My Job',
+        title: 'My Jobs',
         pathName: '/client/my-jobs',
         link: '/my-applications'
     },
     {
         icon: PublicProfileIcon,
-        title: 'My public profile',
+        title: 'My Profile',
         pathName: '/client/profile',
         link: '',
     },
-    {
-        icon: DashboardIcon,
-        title: 'Dashboard',
-        pathName: '/client/dashboard',
-        link: '',
-    },
-    {
-        icon: SettingIcon,
-        title: 'Settings',
-        pathName: '/settings/client-profile',
-        link: '',
-    },
+    // {
+    //     icon: DashboardIcon,
+    //     title: 'Dashboard',
+    //     pathName: '/client/dashboard',
+    //     link: '',
+    // },
+    // {
+    //     icon: SettingIcon,
+    //     title: 'Settings',
+    //     pathName: '/settings/client-profile',
+    //     link: '',
+    // },
 ]
 
 const adminNavigator: any[] = []

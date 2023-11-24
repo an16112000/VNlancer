@@ -16,7 +16,7 @@ export default function SwapRoleButton() {
             setNavigationLink("/client/my-jobs")
             dispatch(changeRole(UserRole.freelancer))
         }
-        else {
+        if (asPath.includes("client")) {
             setNavigationLink("/freelancer/news")
             dispatch(changeRole(UserRole.client))
         }

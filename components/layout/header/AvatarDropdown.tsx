@@ -11,7 +11,6 @@ function AvatarDropdown() {
     const router = useRouter()
     return (
         <Box sx={{ backgroundColor: '#fff', borderRadius: '6px' }}>
-            <Slider></Slider>
             <Stack fontSize={'14px'} justifyContent={'center'} alignItems={'start'} padding={'10px 0'}>
                 <Box sx={{ color: '#ccc', fontSize: '12px', paddingLeft: '10px' }}>Giao diện</Box>
                 <OptionDropDown icon={<i className="fa-regular fa-moon"></i>}>Giao diện tối</OptionDropDown>

@@ -1,5 +1,9 @@
+import { PageLayout } from "@/layout/PageLayout";
 import { RootState } from "@/state/store";
 import { UserRole } from "@/state/user";
+import { Button } from "@mui/material";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 interface Props {
@@ -8,34 +12,14 @@ interface Props {
 }
 
 export default function JobDetail(props: Props) {
-    const role = useSelector((state: RootState) => state.user.role)
-
-    // switch (role) {
-    //     case UserRole.client: {
-    //         switch (props.status) {
-    //             case '':
-    //                 return
-    //             case '':
-    //                 return
-    //             default:
-    //                 return
-    //         }
-    //     }
-    //     case UserRole.freelancer: {
-    //         switch (props.status) {
-    //             case '':
-    //                 return
-    //             case '':
-    //                 return
-    //             default:
-    //                 return
-    //         }
-    //     }
-    //     default: {
-    //         return
-    //     }
-    // }
+    const router = useRouter()
     return (
-        <div>this is job detail</div>
+        <PageLayout>
+            <div>
+                job {router.query.id}
+            </div>
+            <Button>apply job</Button>
+            <Button>save job</Button>
+        </PageLayout>
     )
 }

@@ -6,6 +6,7 @@ import Image from "next/image";
 interface Prop {
     list: Job[];
 }
+
 export interface Job {
     id: number,
     name: string,

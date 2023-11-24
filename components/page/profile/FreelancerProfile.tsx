@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import LeftNavigation from "./LeftNavigation";
+import TabNavigation from "./TabNavigation";
 import { Props as NavigationButtonProps } from "@/components/NavigationButton";
 import { ReactNode } from "react";
 const navigators: NavigationButtonProps[] = [
@@ -20,7 +20,7 @@ const navigators: NavigationButtonProps[] = [
 export default function FreelancerProfile({ children }: { children: ReactNode }) {
     return (
         <Grid container gap='10px'>
-            <LeftNavigation navigators={navigators} />
+            <TabNavigation navigators={navigators} />
             {children}
         </Grid>
     )
