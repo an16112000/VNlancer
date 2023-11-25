@@ -135,6 +135,7 @@ function FilterBar() {
                 flexDirection={"row"}
                 justifyContent={"space-between"}
                 alignItems={"center"}
+                gap={'30px'}
                 sx={{
                   cursor: "pointer",
                 }}
@@ -163,6 +164,7 @@ function FilterBar() {
                   );
                 })}
               </Stack>
+              {/* <Box sx={{height: '1px', width: '100%', border: '1px solid #ccc', margin: '10px 0 5px 0'}}></Box> */}
             </Box>
           );
         })}

@@ -54,7 +54,7 @@ const jobDetailData: JobDetailData = {
     name: 'web',
     budget: 21000,
     information: 'create FE web',
-    categoryName: 'FE',
+    categoryName: ['FE'],
     typeOfEmployee: 'full time',
     jobLevel: 'fresher',
     postDate: '17/11',

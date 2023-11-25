@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import JobContent from "@/components/page/jobs/[id]";
 
 interface Props {
     id: number,
@@ -16,10 +17,9 @@ export default function JobDetail(props: Props) {
     return (
         <PageLayout>
             <div>
-                job {router.query.id}
+                {/* job {router.query.id} */}
+                <JobContent />
             </div>
-            <Button>apply job</Button>
-            <Button>save job</Button>
         </PageLayout>
     )
 }

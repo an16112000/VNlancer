@@ -1,4 +1,4 @@
-import { Avatar, Stack } from "@mui/material";
+import { Avatar, Box, Stack, TextField } from "@mui/material";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,6 +7,8 @@ import { MenuLogined } from "./components/menu-logined";
 import { MenuPublic } from "./components/menu_public";
 import AvatarDropdown from "@/components/layout/header/AvatarDropdown";
 import MessageIconDropdown from "@/components/layout/header/MessageIconDropdown";
+import TextInput from "@/components/text-input";
+import Btn from "@/components/button";
 
 const loginHeaderItems = [
   {
@@ -86,7 +88,7 @@ const publicHeaderItems = [
 function Header() {
   const { status } = useSession()
   return (
-    <Stack flexDirection='row' sx={{ backgroundColor: '#fff' }}>
+    <Stack flexDirection='row' alignItems={'center'} justifyContent={'space-between'} sx={{ backgroundColor: '#fff' }}>
       <Link href={'/'}>
         <Image
           style={{
@@ -96,9 +98,15 @@ function Header() {
           alt={""}
         />
       </Link>
-      {
-        status == 'authenticated' ? <MenuLogined /> : <MenuPublic />
-      }
+      <Box flex={0.8} flexDirection={'row'} sx={{ width: '530px', height: '40px', display: 'flex', textAlign: 'center' }}>
+        <TextInput id={"search"} label={"Search"} styles={{ color: 'text.third', backgroundColor: '#F8F8FD' }} />
+        <Btn styles={{ borderRadius: '8px' }}>Search</Btn>
+      </Box>
+      <Box>
+        {
+          status == 'authenticated' ? <MenuLogined /> : <MenuPublic />
+        }
+      </Box>
     </Stack>
   );
 }

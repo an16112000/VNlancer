@@ -34,17 +34,27 @@ const rows: Task[] = [
         id: 1,
         name: 'Nomad',
         applyDate: '24 July 2021',
+        status: JobStatus.inReview
+    },
+    {
+        id: 1,
+        name: 'Nomad',
+        applyDate: '24 July 2021',
         status: JobStatus.close
     },
     {
         id: 1,
         name: 'Nomad',
         applyDate: '24 July 2021',
-        status: JobStatus.apply
+        status: JobStatus.applied
     }
 ];
 
-function FreelancerJobTable() {
+interface FreelancerJobTableProps {
+    filter: string[]
+}
+
+function FreelancerJobTable(props: FreelancerJobTableProps) {
     const router = useRouter()
     function handleClick(task: Task) {
         router.push(`/freelancer/job/${task.id}`)
@@ -63,6 +73,7 @@ function FreelancerJobTable() {
                 </TableHead>
                 <TableBody>
                     {rows.map((row, index) => {
+                        if(props.filter.includes(row.status))
                         return <TableRow
                             onClick={() => handleClick(row)}
                             key={row.name}

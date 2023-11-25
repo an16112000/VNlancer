@@ -19,7 +19,7 @@ const rows: ClientJob[] = [
     {
         id: 1,
         name: 'Social Media Assistant',
-        status: 'Live',
+        status: 'Applied',
         postDate: '20 May 2020',
         dueDate: '24 July 2021',
         applicants: 3,
@@ -28,7 +28,7 @@ const rows: ClientJob[] = [
     {
         id: 1,
         name: 'Social Media Assistant',
-        status: 'Live',
+        status: 'During',
         postDate: '20 May 2020',
         dueDate: '24 July 2021',
         applicants: 3,
@@ -37,7 +37,7 @@ const rows: ClientJob[] = [
     {
         id: 1,
         name: 'Social Media Assistant',
-        status: 'Live',
+        status: 'Accepted',
         postDate: '20 May 2020',
         dueDate: '24 July 2021',
         applicants: 3,
@@ -46,7 +46,7 @@ const rows: ClientJob[] = [
     {
         id: 1,
         name: 'Social Media Assistant',
-        status: 'Live',
+        status: 'In Review',
         postDate: '20 May 2020',
         dueDate: '24 July 2021',
         applicants: 3,
@@ -55,7 +55,7 @@ const rows: ClientJob[] = [
     {
         id: 1,
         name: 'Social Media Assistant',
-        status: 'Live',
+        status: 'Done',
         postDate: '20 May 2020',
         dueDate: '24 July 2021',
         applicants: 3,
@@ -63,7 +63,11 @@ const rows: ClientJob[] = [
     }
 ];
 
-function ClientJobTable() {
+interface ClientJobTableProps {
+    filter: any[]
+}
+
+function ClientJobTable(props: ClientJobTableProps) {
     const router = useRouter()
     return (
         <TableContainer component={Paper} sx={{ color: 'text.third', marginTop: '20px' }}>
@@ -78,31 +82,36 @@ function ClientJobTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row, index) => (
-                        <TableRow
-                            onClick={() => router.push(`/client/job/${row.id}`)}
-                            key={row.name}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                            <TableCell sx={{ color: 'text.third' }} align='center'>
-                                {index}
-                            </TableCell>
-                            <TableCell sx={{ color: 'text.third' }} align='center'>
-                                <Stack>
-                                    {row.name}
-                                </Stack>
-                            </TableCell>
-                            <TableCell sx={{ color: 'text.third' }} align='center'>
-                                <StatusCheck>
-                                    {row.status}
-                                </StatusCheck>
-                            </TableCell>
-                            <TableCell sx={{ color: 'text.third' }} align='center'>{row.postDate}</TableCell>
-                            <TableCell sx={{ color: 'text.third' }} align='center'>{row.dueDate}</TableCell>
-                            <TableCell sx={{ color: 'text.third' }} align='center'>{row.applicants}</TableCell>
-                            <TableCell sx={{ color: 'text.third' }} align='center'>{row.employeeType}</TableCell>
-                        </TableRow>
-                    ))}
+                    {rows.map((row, index) => {
+                        if (props.filter.includes(row.status)  ) {
+                            return (
+                                <TableRow
+                                    onClick={() => router.push(`/client/job/${row.id}`)}
+                                    key={row.name}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                    <TableCell sx={{ color: 'text.third' }} align='center'>
+                                        {index}
+                                    </TableCell>
+                                    <TableCell sx={{ color: 'text.third' }} align='center'>
+                                        <Stack>
+                                            {row.name}
+                                        </Stack>
+                                    </TableCell>
+                                    <TableCell sx={{ color: 'text.third' }} align='center'>
+                                        <StatusCheck>
+                                            {row.status}
+                                        </StatusCheck>
+                                    </TableCell>
+                                    <TableCell sx={{ color: 'text.third' }} align='center'>{row.postDate}</TableCell>
+                                    <TableCell sx={{ color: 'text.third' }} align='center'>{row.dueDate}</TableCell>
+                                    <TableCell sx={{ color: 'text.third' }} align='center'>{row.applicants}</TableCell>
+                                    <TableCell sx={{ color: 'text.third' }} align='center'>{row.employeeType}</TableCell>
+                                </TableRow>
+                            )
+                        }
+                    }
+                    )}
                 </TableBody>
             </Table>
         </TableContainer>

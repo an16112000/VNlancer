@@ -1,57 +1,34 @@
-import Btn from "@/components/button"
-import ClientJobTable from "@/components/page/my-jobs/ClientJobTable"
-import ModalToPostJob from "@/components/page/my-jobs/CreateJobModel"
-import FreelancerJobTable from "@/components/page/my-jobs/FreelancerJobTable"
+import DuringJobComponent from "@/components/page/my-jobs/DuringJob"
+import FinishedJobComponent from "@/components/page/my-jobs/FinishedJob"
+import PendingJobComponent from "@/components/page/my-jobs/PendingJob"
 import { PageLayout } from "@/layout/PageLayout"
 import { RootState } from "@/state/store"
-import { Box, Stack } from "@mui/material"
-import { useRouter } from "next/router"
-import { useState, useEffect } from "react"
+import { Box, Tab, Tabs } from "@mui/material"
+import { useState } from "react"
 import { useSelector } from "react-redux"
+
+enum Content {
+    Pending,
+    During,
+    Finished
+}
 
 export default function MyJobs() {
     useSelector((state: RootState) => state.user)
-    const { asPath } = useRouter()
-    const [isFreelancer, setIsFreelancer] = useState(true)
-    useEffect(() => {
-        if (asPath.includes("/freelancer")) {
-            setIsFreelancer(true)
-        }
-        else {
-            setIsFreelancer(false)
-        }
-    })
+    const [content, setContent] = useState<Content>(Content.Pending)
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     return (
         <PageLayout>
+            <Tabs value={content} onChange={(event: any, value) => setContent(value)} sx={{ borderRadius: '8px', }}>
+                <Tab label="Pending" value={Content.Pending} />
+                <Tab label="During" value={Content.During} />
+                <Tab label="Finished" value={Content.Finished} />
+            </Tabs>
             <Box>
-                {
-                    isFreelancer ? (
-                        <>
-                            <Stack paddingY='10px' flexDirection={'row'} justifyContent='space-between'>
-                                <Box sx={{ fontSize: '16px', fontWeight: '500' }}>Applications History</Box>
-                                <Stack gap={'10px'} flexDirection='row' alignItems='center'>
-                                    <Btn>Search</Btn>
-                                    <Btn>Filter</Btn>
-                                </Stack>
-                            </Stack>
-                            <FreelancerJobTable />
-                        </>
-                    ) : (
-                        <>
-                            <Stack flexDirection='row' justifyContent='space-between' alignItems='center'>
-                                <Box sx={{ fontSize: '16px', fontWeight: '500' }}>My Applications</Box>
-                                <Stack gap='10px' flexDirection='row' alignItems='center'>
-                                    <Btn onClick={handleOpen}>+ Post a job</Btn>
-                                    <Btn>Filter</Btn>
-                                </Stack>
-                            </Stack>
-                            <ClientJobTable />
-                            <ModalToPostJob isOpen={open} handleClose={handleClose} />
-                        </>
-                    )
+                {content == Content.Pending ? <PendingJobComponent /> :
+                    content == Content.During ? <DuringJobComponent /> : <FinishedJobComponent />
                 }
             </Box>
         </PageLayout>

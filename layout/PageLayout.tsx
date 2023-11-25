@@ -29,5 +29,5 @@ const contentStyle: SxProps = {
   paddingTop: '10px',
   width: '100%',
   justifyContent: 'space-between',
-  display: 'flex'
+  display: 'flex',
 }

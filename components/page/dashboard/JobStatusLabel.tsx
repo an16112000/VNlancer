@@ -1,11 +1,12 @@
 import { Box } from "@mui/material"
 
 export const enum JobStatus {
-    apply = 'apply',
-    accepted = 'accepted',
-    doing = 'doing',
-    done = 'done',
-    close = 'close'
+    applied = 'Applied',
+    accepted = 'Accepted',
+    doing = 'Doing',
+    done = 'Done',
+    inReview = 'In Review',
+    close = 'Close'
 }
 
 interface Props {
@@ -29,7 +30,7 @@ export default function JobStatusLabel(props: Props) {
 
 function getLabelColor(jobStatus: JobStatus) {
     switch (jobStatus) {
-        case JobStatus.apply:
+        case JobStatus.applied:
             return "#00ff80"
         case JobStatus.accepted:
             return "#ffff66"

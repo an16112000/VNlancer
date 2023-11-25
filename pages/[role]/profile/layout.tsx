@@ -9,10 +9,12 @@ import { useState } from "react";
 import ContactComponent from "@/components/page/profile/ContactComponent";
 import InformationComponent from "@/components/page/profile/InformationComponent";
 import { UserProfile } from "@/api/user";
+import ReviewComponent from "@/components/page/profile/ReviewComponent";
 
 enum Content {
     information,
-    contact
+    contact,
+    review
 }
 
 function ProfileLayout({
@@ -28,10 +30,11 @@ function ProfileLayout({
             <Tabs value={content} onChange={(event: any, value) => setContent(value)} sx={{ backgroundColor: '#fff', borderRadius: '8px', }}>
                 <Tab label="Information" value={Content.information} />
                 <Tab label="Contact" value={Content.contact} />
+                <Tab label="Review" value={Content.review} />
             </Tabs>
             <div style={{ backgroundColor: '#fff', marginTop: '10px', borderRadius: '8px' }}>
                 {content == Content.contact ? <ContactComponent {...userProfile} /> :
-                   <InformationComponent {...userProfile} />
+                   content == Content.information ? <InformationComponent {...userProfile}/> : <ReviewComponent {...userProfile}/>
                 }
             </div>
         </PageLayout>

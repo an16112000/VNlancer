@@ -1,7 +1,8 @@
 import { useJobApi } from "@/api/get-all-jobs";
 import NewJobs, { Job } from "@/components/page/news/NewJobs";
+import FilterBar from "@/features/all-services/filter-bar";
 import { PageLayout } from "@/layout/PageLayout";
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
@@ -70,10 +71,11 @@ function NewsPage() {
         <PageLayout>
             {
                 role === 'freelancer' ?
-                    <Box sx={{ width: '100%' }}>
+                    <Stack sx={{ width: '100%', position: 'relative' }} flexDirection={'row'} justifyContent={'space-between'}>
                         <NewJobs list={data} />
-                    </Box> :
-                    <></>
+                        <FilterBar />
+                    </Stack> :
+                    <Box></Box>
             }
         </PageLayout>
     )

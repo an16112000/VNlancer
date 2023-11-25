@@ -27,7 +27,7 @@ export interface JobOwner {
 export default function NewJobs(prop: Prop) {
     const router = useRouter()
     return (
-        <Stack gap={'30px'} width={'100%'}>
+        <Stack flex={0.8} gap={'30px'} width={'100%'}>
             {prop.list.map((job: Job, index: number) => {
                 return (
                     <Box key={job.id} sx={{ backgroundColor: "#fff", borderRadius: '12px', padding: '10px 12px' }} onClick={() => { router.push(`/jobs/${job.id}`) }}>

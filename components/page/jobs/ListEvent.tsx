@@ -8,7 +8,8 @@ export interface EventData {
         email: string
     },
     content: string,
-    createAt: string
+    createAt: string,
+    rank: number
 }
 
 interface Props {
