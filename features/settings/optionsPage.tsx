@@ -1,7 +1,9 @@
-import { Box, Stack } from "@mui/material"
+import { Box, Stack, Tab, Tabs } from "@mui/material"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useState } from "react"
+import ClientProfileContent from "./client-profile-content"
+import FreelancerProfileContent from "./freelancer-profile-content"
 
 interface OptionsPageProps {
     options: any[],
@@ -9,7 +11,7 @@ interface OptionsPageProps {
 }
 
 const options = [{
-    title:'Freelancer Profile',
+    title: 'Freelancer Profile',
     linkTo: '/settings/freelancer-profile',
 }, {
     title: 'Client Profile',
@@ -21,21 +23,37 @@ const options = [{
 }
 ]
 
+enum Content {
+    FreelancerProfile,
+    ClientProfile,
+    // review
+}
+
 const OptionsPage = () => {
-    const router = useRouter()
-    console.log(router.asPath)
-    const [page, setPage] = useState(
-        router.asPath.includes('/settings/client-profile') ?  'Client Profile' : `${router.asPath.includes('/settings/freelancer-profile') ?  'Freelancer Profile' : 'Payment Method' }`
-    )
-    const handleClick = (page: string, option: any) => {
-        setPage(page)
-        router.push(option.linkTo)
-    }
-    console.log(page)
+    const [content, setContent] = useState<Content>(Content.FreelancerProfile)
+
+    // const router = useRouter()
+    // console.log(router.asPath)
+    // const [page, setPage] = useState(
+    //     router.asPath.includes('/settings/client-profile') ? 'Client Profile' : `${router.asPath.includes('/settings/freelancer-profile') ? 'Freelancer Profile' : 'Payment Method'}`
+    // )
+    // const handleClick = (page: string, option: any) => {
+    //     setPage(page)
+    //     router.push(option.linkTo)
+    // }
+    // console.log(page)
     return (
         <>
             <Stack>
-                {
+                <Tabs value={content} onChange={(event: any, value) => setContent(value)} sx={{ backgroundColor: '#fff', borderRadius: '8px', }}>
+                    <Tab label="Freelancer Profile" value={Content.FreelancerProfile} />
+                    <Tab label="Client Profile" value={Content.ClientProfile} />
+                    {/* <Tab label="Review" value={Content.review} /> */}
+                </Tabs>
+                {content == Content.FreelancerProfile ? <FreelancerProfileContent /> :
+                   <ClientProfileContent />
+                }
+                {/* {
                     options.map(
                         (option, index) => {
                             const isActive = page === option.title
@@ -52,13 +70,11 @@ const OptionsPage = () => {
                                 padding: '0 4px',
                                 cursor: 'pointer'
                             }}>
-                                {/* <Link href={option.linkTo}> */}
-                                    {option.title}
-                                {/* </Link> */}
+                                {option.title}
                             </Box>
                         }
                     )
-                }
+                } */}
             </Stack>
         </>
     )

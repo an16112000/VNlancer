@@ -14,7 +14,7 @@ export default function NavigationButton(props: Props) {
     const [isActive, setIsActive] = useState(false)
     useEffect(() => {
         router.asPath.includes(props.pathName) ? setIsActive(true) : setIsActive(false)
-    })
+    }, [router.asPath, props.pathName])
     return <Stack gap={'10px'} flexDirection={'row'}
         onClick={() => router.push(props.pathName)}
         sx={{

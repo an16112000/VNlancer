@@ -17,7 +17,7 @@ function StatusCheck({children}: StatusCheckProps) {
     }
     else if(children == 'Paid') {
         color = 'blue'
-    } else if(children == 'See Application' || children == 'During') {
+    } else if(children == 'See Application' || children == 'During' || children == 'Doing') {
         color = '#4640DE'
     }
     else if(children == 'In Review') {

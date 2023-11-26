@@ -23,11 +23,29 @@ const freelancerNavigator = [
         link: '/my-applications'
     },
     {
+        icon: ApplicationIcon,
+        title: 'My Applicants',
+        pathName: '/freelancer/my-applicants',
+        link: '/my-applications'
+    },
+    {
+        icon: ApplicationIcon,
+        title: 'My Saved Jobs',
+        pathName: '/freelancer/my-saved-jobs',
+        link: '/my-applications'
+    },
+    {
         icon: PublicProfileIcon,
         title: 'My Profile',
         pathName: '/freelancer/profile',
         link: '',
     },
+    {
+        icon: SettingIcon,
+        title: 'Settings',
+        pathName: '/settings',
+        link: ''
+    }
     // {
     //     icon: DashboardIcon,
     //     title: 'Dashboard',
@@ -55,6 +73,12 @@ const clientNavigator = [
         pathName: '/client/profile',
         link: '',
     },
+    {
+        icon: SettingIcon,
+        title: 'Settings',
+        pathName: '/settings',
+        link: ''
+    }
     // {
     //     icon: DashboardIcon,
     //     title: 'Dashboard',
@@ -69,45 +93,41 @@ const clientNavigator = [
     // },
 ]
 
-const adminNavigator: any[] = []
+const adminNavigator = [
+    {
+        icon: ApplicationIcon,
+        title: 'Users management',
+        pathName: '/admin/users-management',
+        link: ''
+    },
+    {
+        icon: PublicProfileIcon,
+        title: 'Jobs Managements',
+        pathName: '/admin/jobs-management',
+        link: '',
+    },
+]
 
 function LeftNavigation() {
     const role = useSelector((state: RootState) => state.user.role)
+    const { asPath } = useRouter()
+    console.log(role)
     const router = useRouter()
     const { status } = useSession()
     const [navigator, setNavigator] = useState<any>([])
     useEffect(() => {
-        if (role == UserRole.client) {
-            setNavigator([...clientNavigator])
+        if (asPath.includes('admin')) {
+            setNavigator([...adminNavigator])
         }
-        if (role == UserRole.freelancer) {
-            setNavigator([...freelancerNavigator])
+        else {
+            if (role == UserRole.client) {
+                setNavigator([...clientNavigator])
+            }
+            if (role == UserRole.freelancer) {
+                setNavigator([...freelancerNavigator])
+            }
         }
-        if (role == UserRole.admin) {
-            setNavigator(adminNavigator.map(
-                (item: any) => {
-                    const isActive = router.asPath.includes(item.pathName)
-                    return <Stack gap={'10px'} key={item.pathName} flexDirection={'row'}
-                        onClick={() => router.push(item.pathName)}
-                        sx={{
-                            backgroundColor: isActive ? 'primary.main' : '',
-                            padding: '5px 5px',
-                            borderRadius: '6px',
-                            cursor: 'pointer',
-                            '&:hover': {
-                                backgroundColor: 'primary.main',
-                                opacity: 0.7,
-                            }
-                        }}>
-                        <Image src={item.icon} style={{ height: '20px', width: '20px' }} alt="" />
-                        <p>{item.title}</p>
-
-                    </Stack>
-
-                }
-            ))
-        }
-    }, [role])
+    }, [asPath, role, router])
     if (status === 'authenticated') {
         return (
             <Stack
@@ -121,7 +141,7 @@ function LeftNavigation() {
                 }}>
                 <Stack marginTop={'2px'} gap={'10px'} width={'130%'}>
                     {navigator.map(
-                        (item: any) => <NavigationButton {...item} index={item.pathName} />
+                        (item: any, index: number) => <NavigationButton key={index} {...item} index={item.pathName} />
                     )}
                 </Stack>
             </Stack>

@@ -12,7 +12,7 @@ export interface UserProfile {
 
 const useUserApi = (): UserApi => {
     function getUserProfile() {
-
+        
     }
 
     return {
