@@ -9,24 +9,26 @@ interface Props {
 
 export function PageLayout({ children }: Props) {
   return (
-    <Container maxWidth='lg' >
+    <>
       <Header />
-      <Box sx={contentStyle}>
-        <Grid container spacing={{ md: 1 }}>
-          <Grid item md={3} lg={2.5} display={{ xs: 'none', md: 'block' }}>
-            <LeftNavigation />
+      <Container maxWidth='lg'>
+        <Box sx={contentStyle}>
+          <Grid container spacing={{ md: 1 }} >
+            <Grid item md={3} lg={2.5} display={{ xs: 'none', md: 'block' }}>
+              <LeftNavigation />
+            </Grid>
+            <Grid item xs>
+              {children}
+            </Grid>
           </Grid>
-          <Grid item xs>
-            {children}
-          </Grid>
-        </Grid>
-      </Box>
-    </Container>
+        </Box>
+      </Container>
+    </>
   );
 }
 
 const contentStyle: SxProps = {
-  paddingTop: '10px',
+  paddingTop: '55px',
   width: '100%',
   justifyContent: 'space-between',
   display: 'flex',

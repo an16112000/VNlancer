@@ -88,7 +88,7 @@ const publicHeaderItems = [
 function Header() {
   const { status } = useSession()
   return (
-    <Stack flexDirection='row' alignItems={'center'} justifyContent={'space-between'} sx={{ backgroundColor: '#fff' }}>
+    <Stack flexDirection='row' alignItems={'center'} justifyContent={'space-between'} sx={{ backgroundColor: '#fff' }} width="100%" position='fixed' zIndex='100'>
       <Link href={'/'}>
         <Image
           style={{

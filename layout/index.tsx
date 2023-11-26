@@ -8,12 +8,14 @@ interface Props {
 
 function DefaultLayout({ children }: Props) {
     return (
-        <Container maxWidth='xl'>
+        <>
             <Header />
-            <Box>
-                {children}
-            </Box>
-        </Container>
+            <Container maxWidth='xl'>
+                <Box>
+                    {children}
+                </Box>
+            </Container>
+        </>
     )
 }
 
