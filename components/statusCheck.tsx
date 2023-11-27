@@ -9,7 +9,7 @@ function StatusCheck({children}: StatusCheckProps) {
     if(children == 'Applied') {
         color = '#cb4606'
     } 
-    else if(children == 'Accepted') {
+    else if(children == 'Accepted' || children == 'Opening') {
         color = '#FFB836'
     }
     else if(children == 'Schedule' || children == 'Live' || children == 'Done') {

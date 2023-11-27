@@ -40,7 +40,8 @@ export default function ClientView() {
     return (
         <Stack gap='10px'>
             <JobDetail jobDetail={jobDetailData}></JobDetail>
-            {jobStatus == 'open' ? <ListApplicant></ListApplicant> : <ListEvent listEvent={[]}></ListEvent>}
+            <ListApplicant />
+            {/* {jobStatus == 'open' ? <ListApplicant></ListApplicant> : <ListEvent listEvent={[]}></ListEvent>} */}
         </Stack>
     )
 }

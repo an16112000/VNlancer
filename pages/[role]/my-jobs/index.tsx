@@ -1,7 +1,6 @@
 import DuringJobComponent from "@/components/page/my-jobs/DuringJob"
 import FinishedJobComponent from "@/components/page/my-jobs/FinishedJob"
 import PendingJobComponent from "@/components/page/my-jobs/PendingJob"
-import SavedJob from "@/components/page/my-jobs/SavedJob"
 import { PageLayout } from "@/layout/PageLayout"
 import { RootState } from "@/state/store"
 import { Box, Tab, Tabs } from "@mui/material"
@@ -11,7 +10,6 @@ import { useSelector } from "react-redux"
 enum Content {
     During,
     Finished,
-    Saved
 }
 
 export default function MyJobs() {
@@ -23,12 +21,10 @@ export default function MyJobs() {
             <Tabs value={content} onChange={(event: any, value) => setContent(value)} sx={{ borderRadius: '8px', }}>
                 <Tab label="During" value={Content.During} />
                 <Tab label="Finished" value={Content.Finished} />
-                <Tab label="Saved" value={Content.Saved} />
             </Tabs>
             <Box>
                 {
-                    content == Content.During ? <DuringJobComponent /> : 
-                    content == Content.Finished ? <FinishedJobComponent /> : <SavedJob />
+                    content == Content.During ? <DuringJobComponent /> : <FinishedJobComponent />
                 }
             </Box>
         </PageLayout>

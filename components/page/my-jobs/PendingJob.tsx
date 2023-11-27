@@ -27,7 +27,7 @@ export default function PendingJobComponent() {
             {isFreelancer ?
                 <>
                     <Stack paddingY='10px' flexDirection={'row'} justifyContent='space-between'>
-                        <Box sx={{ fontSize: '16px', fontWeight: '500' }}>Applications History</Box>
+                        <Box sx={{ fontSize: '16px', fontWeight: '500' }}>Applied Jobs</Box>
                         <Stack gap={'10px'} flexDirection='row' alignItems='center'>
                             <Btn>Search</Btn>
                             <Btn>Filter</Btn>

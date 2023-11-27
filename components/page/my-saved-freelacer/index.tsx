@@ -1,88 +1,65 @@
-import StatusCheck from "@/components/statusCheck";
-import {
-  Button,
-  Paper,
-  Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
+import { Button, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useRouter } from "next/router";
-import { ClientJob } from "../my-jobs/ClientJobTable";
 import GoldenStar from "../profile/GoldenStar";
+import StatusCheck from "@/components/statusCheck";
 
-const headers = ["#", "Full Name", "Score", "Applied Date", "Action", "Status"];
+const headers = ["#", "Full Name", "Score", "Applied Date", "Action"];
 
-interface AppliedFreelancer {
+interface SavedFreelancer {
   id: number;
   score: number;
   fullName: string;
   appliedDate: string;
-  status: string;
 }
 
-const rows: AppliedFreelancer[] = [
+const rows: SavedFreelancer[] = [
   {
     id: 1,
     fullName: "A",
     score: 4.0,
     appliedDate: "24 July 2021",
-    status: "Applied",
   },
   {
     id: 1,
     fullName: "B",
     score: 4.0,
     appliedDate: "24 July 2021",
-    status: "During",
   },
   {
     id: 1,
     fullName: "B",
     score: 4.0,
     appliedDate: "24 July 2021",
-    status: "Accepted",
   },
   {
     id: 1,
     fullName: "C",
     score: 4.0,
     appliedDate: "24 July 2021",
-    status: "In Review",
   },
   {
     id: 1,
     fullName: "D",
     score: 4.0,
     appliedDate: "24 July 2021",
-    status: "Done",
   },
   {
     id: 1,
     fullName: "E",
     score: 4.0,
     appliedDate: "24 July 2021",
-    status: "Opening",
   },
   {
     id: 1,
     fullName: "F",
     score: 4.0,
     appliedDate: "24 July 2021",
-    status: "Opening",
   },
 ];
 
-interface ClientJobTableProps {
-  filter: any[];
-}
-
-export default function ListApplicant() {
-  const router = useRouter();
-  return (
+export default function SavedJobsComponent() {
+    const router = useRouter();
+  return ( 
     <TableContainer
       component={Paper}
       sx={{ color: "text.third", marginTop: "20px" }}
@@ -111,8 +88,8 @@ export default function ListApplicant() {
               <TableCell sx={{ color: "text.third" }} align="center">
                 <Stack>{row.fullName}</Stack>
               </TableCell>
-              <TableCell sx={{ color: "text.third" }} align="center">
-                <Stack flexDirection={'row'} alignItems={'center'} sx={{lineHeight: '16px'}} gap={'5px'}>
+              <TableCell sx={{ color: "text.third" }} align="right">
+                <Stack flexDirection={'row'} alignItems={'center'} sx={{lineHeight: '16px'}} justifyContent={'center'} gap={'5px'}>
                 {row.score}
                 <GoldenStar />
                 </Stack>
@@ -136,9 +113,6 @@ export default function ListApplicant() {
                 >
                   See Application
                 </Button>
-              </TableCell>
-              <TableCell sx={{ color: "text.third" }} align="center">
-                <StatusCheck>{row.status}</StatusCheck>
               </TableCell>
             </TableRow>
           ))}

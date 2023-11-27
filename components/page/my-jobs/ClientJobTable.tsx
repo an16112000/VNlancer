@@ -61,6 +61,24 @@ const rows: ClientJob[] = [
         dueDate: '24 July 2021',
         applicants: 3,
         employeeType: 'full-time',
+    },
+    {
+        id: 1,
+        name: 'Social Media Assistant',
+        status: 'Opening',
+        postDate: '20 May 2020',
+        dueDate: '24 July 2021',
+        applicants: 3,
+        employeeType: 'full-time',
+    },
+    {
+        id: 1,
+        name: 'Social Media Assistant',
+        status: 'Opening',
+        postDate: '20 May 2020',
+        dueDate: '24 July 2021',
+        applicants: 3,
+        employeeType: 'full-time',
     }
 ];
 

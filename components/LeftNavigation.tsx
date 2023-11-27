@@ -24,8 +24,8 @@ const freelancerNavigator = [
     },
     {
         icon: ApplicationIcon,
-        title: 'My Applicants',
-        pathName: '/freelancer/my-applicants',
+        title: 'My Applications',
+        pathName: '/freelancer/my-applications',
         link: '/my-applications'
     },
     {
@@ -71,6 +71,18 @@ const clientNavigator = [
         icon: ApplicationIcon,
         title: 'My Jobs',
         pathName: '/client/my-jobs',
+        link: '/my-applications'
+    },
+    {
+        icon: ApplicationIcon,
+        title: 'My Open Jobs',
+        pathName: '/client/my-open-jobs',
+        link: '/my-applications'
+    },
+    {
+        icon: ApplicationIcon,
+        title: 'Saved Freelancer',
+        pathName: '/client/my-saved-freelancer',
         link: '/my-applications'
     },
     {
