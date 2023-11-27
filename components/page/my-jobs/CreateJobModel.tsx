@@ -41,7 +41,7 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
             } catch (exception) {
             }
         })()
-    }, [status])
+    }, [getAllCategory, status])
     const [categoryId, setCategoryId] = useState<number>();
     const [name, setName] = useState<string>();
     const [budget, setBudget] = useState<number>();
@@ -111,7 +111,7 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
                 <TextField select label="Type" focused onChange={e => {
                     setCategoryId(Number(e.target.value))
                 }}>
-                    {categories.map(category => <MenuItem value={category.id}>{category.name}</MenuItem>)}
+                    {categories.map((category, index) => <MenuItem key={index} value={category.id}>{category.name}</MenuItem>)}
                 </TextField>
 
                 <TextField label="Name" variant="outlined" focused value={name} onChange={changeName} />

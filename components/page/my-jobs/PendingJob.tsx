@@ -33,7 +33,7 @@ export default function PendingJobComponent() {
                             <Btn>Filter</Btn>
                         </Stack>
                     </Stack>
-                    <FreelancerJobTable filter={["Applied", "Accepted"]} />
+                    <FreelancerJobTable filter={["Applied", "Accepted"]} isDuring={false} />
                 </>
                 :
                 <>

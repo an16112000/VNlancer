@@ -6,6 +6,7 @@ import SwipeableViews from 'react-swipeable-views';
 import TextInputModal from "./text-input-modal";
 import TextAreaInputModal from "./text-area-input";
 import ButtonTransparent from "@/components/buttontransparent";
+import OptionsModal from "./options-modal";
 
 interface ModalCreateNewProfileProps {
     state: boolean,
@@ -46,15 +47,23 @@ function ModalCreateNewProfile({ state, onClick: handleClose }: ModalCreateNewPr
                         <TextInputModal />
                     </Box>
                     <Box>
-                        <p>Area</p>
+                        <p>Level</p>
+                        <OptionsModal type={'Level'} />
+                    </Box>
+                    <Box>
+                        <p>Category</p>
+                        <OptionsModal type={'Category'} />
+                    </Box>
+                    <Box>
+                        <p>Working Type</p>
+                        <OptionsModal type={'Working Type'} />
+                    </Box>
+                    <Box>
+                        <p>Skill</p>
                         <TextInputModal />
                     </Box>
                     <Box>
                         <p>Description</p>
-                        <TextAreaInputModal />
-                    </Box>
-                    <Box>
-                        <p>Skill</p>
                         <TextInputModal />
                     </Box>
                     <Btn>Add</Btn>

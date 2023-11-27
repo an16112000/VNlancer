@@ -1,6 +1,7 @@
 import StatusCheck from "@/components/statusCheck";
 import { Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useRouter } from "next/router";
+import { Task } from "./FreelancerJobTable";
 
 const headers = ['#', 'Name', 'Status', 'Date Posted', 'Due Date', 'Applicants', 'Employee Type']
 
@@ -64,7 +65,7 @@ const rows: ClientJob[] = [
 ];
 
 interface ClientJobTableProps {
-    filter: any[]
+    filter: any[], 
 }
 
 function ClientJobTable(props: ClientJobTableProps) {

@@ -51,13 +51,19 @@ const rows: Task[] = [
 ];
 
 interface FreelancerJobTableProps {
-    filter: string[]
+    filter: string[],
+    isDuring: boolean
 }
 
 function FreelancerJobTable(props: FreelancerJobTableProps) {
     const router = useRouter()
     function handleClick(task: Task) {
-        router.push(`/freelancer/job/${task.id}`)
+        if(props.isDuring == true) {
+            router.push(`/freelancer/job/${task.id}`)
+        }
+        else {
+            router.push(`/jobs/${task.id}`)
+        }
     }
     return (
         <TableContainer component={Paper} sx={{ color: 'text.third' }}>

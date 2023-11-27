@@ -15,7 +15,7 @@ const listEvent: EventData[] = [
             email: 'phucnq'
         },
         content: 'hello',
-        createAt: '24/11/2023'
+        createAt: '24/11/2023',
     },
     {
         id: 1,
@@ -79,7 +79,7 @@ export default function FreelancerView() {
 
             }
         })()
-    }, [])
+    }, [getJobDetail, router.query.id])
     return (
         <Stack gap='10px'>
             <JobDetail jobDetail={jobDetailData}></JobDetail>

@@ -62,6 +62,12 @@ const freelancerNavigator = [
 
 const clientNavigator = [
     {
+        icon: NewIcon,
+        title: 'News',
+        pathName: '/client/news',
+        link: '',
+    },
+    {
         icon: ApplicationIcon,
         title: 'My Jobs',
         pathName: '/client/my-jobs',

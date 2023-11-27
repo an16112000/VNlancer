@@ -19,7 +19,7 @@ export default function ContactComponent(props: Props) {
         setEmail(props.email ? props.email : '')
         setPhoneNumber(props.phoneNumber ? props.phoneNumber : '');
         setAddress(props.address ? props.address : '')
-    }, [])
+    }, [props.address, props.email, props.phoneNumber])
     function saveContact() {
         console.log(address);
 

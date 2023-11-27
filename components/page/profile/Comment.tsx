@@ -10,9 +10,10 @@ interface CommentProps {
 }
 
 export default function Comment({children}: CommentProps) {
+    const {rank = 0} = children
     function handleGoldenStar() {
         let Component: JSX.Element[] = []
-        for (var i = 0; i < children.rank; i++) {
+        for (var i = 0; i < rank; i++) {
             Component.push(<GoldenStar />)
         }
         return Component
@@ -21,7 +22,7 @@ export default function Comment({children}: CommentProps) {
 
     function handleNormalStar() {
         let Component: JSX.Element[] = []
-        for (var i = 0; i < 5-children.rank; i++) {
+        for (var i = 0; i < 5-rank; i++) {
             Component.push(<NormalStar />)
             // return Component
         }

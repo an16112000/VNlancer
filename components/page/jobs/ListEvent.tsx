@@ -9,7 +9,7 @@ export interface EventData {
     },
     content: string,
     createAt: string,
-    rank: number
+    rank?: number
 }
 
 interface Props {

@@ -23,8 +23,8 @@ export default function ClientProfile() {
                 <OptionsPage />
             </Box> */}
             <Tabs value={content} onChange={(event: any, value) => setContent(value)} sx={{ borderRadius: '8px' }}>
-                    <Tab label="Freelancer Profile" value={Content.FreelancerProfile} />
-                    <Tab label="Client Profile" value={Content.ClientProfile} />
+                    <Tab label="Add Profile" value={Content.FreelancerProfile} />
+                    <Tab label="Introduce" value={Content.ClientProfile} />
                     {/* <Tab label="Review" value={Content.review} /> */}
                 </Tabs>
                 {content == Content.FreelancerProfile ? <FreelancerProfileContent /> :

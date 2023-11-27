@@ -1,6 +1,6 @@
 import TextInput from "@/components/text-input"
 import { Avatar, Filter, Logo } from "@/img"
-import LayOutWithOnlyHeader from "@/layout/layoutWithOnlyHeader"
+import { PageLayout } from "@/layout/PageLayout"
 import { Box, Stack } from "@mui/material"
 import Image from "next/image"
 
@@ -21,7 +21,7 @@ const messages = [
 
 function Chat() {
     return (
-        <LayOutWithOnlyHeader>
+        <PageLayout>
             <Stack flexDirection={'row'} sx={{ backgroundColor: '#fff', height: '80vh' }}>
                 <Stack sx={{ width: '300px', padding: '20px 25px 20px 25px' }} border={'1px solid #ccc'}>
                     <TextInput id={"Search-messages"} label={"Search messages"} styles={{marginBottom: '20px'}} />
@@ -59,7 +59,7 @@ function Chat() {
 
                 </Stack>
             </Stack>
-        </LayOutWithOnlyHeader>
+        </PageLayout>
     )
 }
 

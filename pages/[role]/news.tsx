@@ -1,4 +1,5 @@
 import { useJobApi } from "@/api/get-all-jobs";
+import NewFreelancer from "@/components/page/news/NewFreelancer";
 import NewJobs, { Job } from "@/components/page/news/NewJobs";
 import FilterBar from "@/features/all-services/filter-bar";
 import { PageLayout } from "@/layout/PageLayout";
@@ -75,7 +76,9 @@ function NewsPage() {
                         <NewJobs list={data} />
                         <FilterBar />
                     </Stack> :
-                    <Box></Box>
+                    <Stack sx={{ width: '100%', position: 'relative' }} flexDirection={'row'} justifyContent={'space-between'}>
+                    <NewFreelancer />
+                </Stack>
             }
         </PageLayout>
     )

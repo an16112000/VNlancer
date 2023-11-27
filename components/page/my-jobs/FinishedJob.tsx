@@ -33,7 +33,7 @@ export default function FinishedJobComponent() {
                             <Btn>Filter</Btn>
                         </Stack>
                     </Stack>
-                    <FreelancerJobTable filter={["Done"]} />
+                    <FreelancerJobTable filter={["Done"]} isDuring={true} />
                 </>
                 :
                 <>

@@ -33,7 +33,7 @@ export default function DuringJobComponent() {
                             <Btn>Filter</Btn>
                         </Stack>
                     </Stack>
-                    <FreelancerJobTable filter={["During", "In Review"]} />
+                    <FreelancerJobTable filter={["During", "In Review"]} isDuring={true} />
                 </>
                 :
                 <>

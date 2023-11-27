@@ -20,7 +20,7 @@ export default function SwapRoleButton() {
             setNavigationLink("/freelancer/news")
             dispatch(changeRole(UserRole.client))
         }
-    })
+    }, [asPath, dispatch])
     return (
         <Link href={navigationLink}>
             <Btn styles={{ borderRadius: '10px' }}>Swap to {userRole == UserRole.freelancer ? UserRole.client : UserRole.freelancer}</Btn>
