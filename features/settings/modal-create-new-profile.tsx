@@ -43,10 +43,6 @@ function ModalCreateNewProfile({ state, onClick: handleClose }: ModalCreateNewPr
                         </ButtonTransparent>
                     </Stack>
                     <Box>
-                        <p>Title</p>
-                        <TextInputModal />
-                    </Box>
-                    <Box>
                         <p>Level</p>
                         <OptionsModal type={'Level'} />
                     </Box>
@@ -59,11 +55,15 @@ function ModalCreateNewProfile({ state, onClick: handleClose }: ModalCreateNewPr
                         <OptionsModal type={'Working Type'} />
                     </Box>
                     <Box>
+                        <p>Work Experience</p>
+                        <TextInputModal />
+                    </Box>
+                    <Box>
                         <p>Skill</p>
                         <TextInputModal />
                     </Box>
                     <Box>
-                        <p>Description</p>
+                        <p>About Me</p>
                         <TextInputModal />
                     </Box>
                     <Btn>Add</Btn>

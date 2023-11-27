@@ -35,7 +35,7 @@ export default function InformationComponent(props: Props) {
             <Box flex={2} style={{ backgroundColor: '#fff', borderRadius: '8px' }}>
                 <Tabs value={content} onChange={(event: any, value) => setContent(value)} sx={{ backgroundColor: '#fff', borderRadius: '8px', }}>
                     <Tab label="Profile" value={Content.profile} />
-                    <Tab label="Review" value={Content.review} />
+                    <Tab label="Review"  />
                 </Tabs>
             
                 <Box sx={{padding: '10px 10px'}}>
