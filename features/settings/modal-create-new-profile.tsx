@@ -1,7 +1,7 @@
 import Btn from "@/components/button";
 import TextInput from "@/components/text-input";
 import { Box, Modal, Stack, SwipeableDrawer, Typography, keyframes } from "@mui/material";
-import { SyntheticEvent } from "react";
+import { SyntheticEvent, useState } from "react";
 import SwipeableViews from 'react-swipeable-views';
 import TextInputModal from "./text-input-modal";
 import TextAreaInputModal from "./text-area-input";
@@ -17,6 +17,15 @@ interface ModalCreateNewProfileProps {
 
 
 function ModalCreateNewProfile({ state, onClick: handleClose }: ModalCreateNewProfileProps) {
+    const [inputs, setInputs] = useState({});
+
+    function handleChange(e: any) {
+        const name = e.target.name;
+        const value = e.target.value;
+        setInputs(prev => ({...prev, [name]: value}))
+    }
+
+    console.log(inputs)
     return (
         <Modal
             open={state}
@@ -44,27 +53,27 @@ function ModalCreateNewProfile({ state, onClick: handleClose }: ModalCreateNewPr
                     </Stack>
                     <Box>
                         <p>Level</p>
-                        <OptionsModal type={'Level'} />
+                        <OptionsModal functionChange={handleChange} isMutiple={false} type={'Level'} />
                     </Box>
                     <Box>
                         <p>Category</p>
-                        <OptionsModal type={'Category'} />
+                        <OptionsModal functionChange={handleChange} type={'Category'} isMutiple={true} />
                     </Box>
                     <Box>
                         <p>Working Type</p>
-                        <OptionsModal type={'Working Type'} />
+                        <OptionsModal functionChange={handleChange} type={'WorkingType'} isMutiple={false} />
                     </Box>
                     <Box>
                         <p>Work Experience</p>
-                        <TextInputModal />
+                        <TextInputModal functionChange={handleChange} type="WorkExperience" />
                     </Box>
                     <Box>
                         <p>Skill</p>
-                        <TextInputModal />
+                        <TextInputModal functionChange={handleChange} type="Skill" />
                     </Box>
                     <Box>
                         <p>About Me</p>
-                        <TextInputModal />
+                        <TextInputModal functionChange={handleChange} type="AboutMe" />
                     </Box>
                     <Btn>Add</Btn>
                 </Stack>

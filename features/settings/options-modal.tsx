@@ -3,7 +3,9 @@ import { useState } from "react";
 
 interface OptionsModalProps {
     style?: any,
-    type: string
+    type: string,
+    isMutiple?: boolean
+    functionChange?: Function
 }
 
 const ITEM_HEIGHT = 48;
@@ -52,7 +54,7 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
 }
 
 
-function OptionsModal({ style, type }: OptionsModalProps) {
+function OptionsModal({ style, type, functionChange = () => {}, isMutiple = false }: OptionsModalProps) {
     const theme = useTheme();
     const [personName, setPersonName] = useState<string[]>([]);
     const options = type == 'Level' ? optionsForLevel : type == 'Category' ? optionsForCategory : optionsForTypeWorking
@@ -65,6 +67,7 @@ function OptionsModal({ style, type }: OptionsModalProps) {
             // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',') : value,
         );
+        functionChange(event)
     };
     return (
         // <TextField sx={{
@@ -77,9 +80,10 @@ function OptionsModal({ style, type }: OptionsModalProps) {
         <div>
             <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
                 <Select
-                    multiple
+                    multiple={isMutiple}
                     displayEmpty
                     value={personName}
+                    name={type}
                     onChange={handleChange}
                     input={<OutlinedInput />}
                     renderValue={(selected) => {

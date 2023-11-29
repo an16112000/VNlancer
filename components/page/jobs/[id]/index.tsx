@@ -72,7 +72,7 @@ export default function JobContent() {
                 >
                     {/* <Button sx={{ flex: 1, backgroundColor: '#4B69B6', color: '#fff', borderRadius: '6px' }}>Applly Now</Button>
                 <Button sx={{ flex: 1, backgroundColor: '#4B69B6', color: '#fff', borderRadius: '6px' }}>Save</Button> */}
-                    <ButtonApply onClick={handleOpen}>Applly Now</ButtonApply>
+                    <ButtonApply onClick={handleOpen}>Cancle Now</ButtonApply>
                     <ButtonApply>Save</ButtonApply>
                 </Stack>
 
