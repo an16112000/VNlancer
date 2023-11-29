@@ -33,9 +33,10 @@ function ProfileLayout({
                 <Tab label="Review" value={Content.review} />
             </Tabs> */}
             <div style={{ marginTop: '10px' }}>
-                {content == Content.contact ? <ContactComponent {...userProfile} /> :
+                {/* {content == Content.contact ? <ContactComponent {...userProfile} /> :
                    content == Content.information ? <InformationComponent {...userProfile}/> : <ReviewComponent {...userProfile}/>
-                }
+                } */}
+                <InformationComponent {...userProfile} />
             </div>
         </PageLayout>
     )

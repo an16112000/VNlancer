@@ -10,8 +10,7 @@ export default function DuringJobComponent() {
     const [open, setOpen] = useState(false);
     const { asPath } = useRouter()
     const [isFreelancer, setIsFreelancer] = useState(true)
-
-
+    
     useEffect(() => {
         if (asPath.includes("/freelancer")) {
             setIsFreelancer(true)
@@ -22,6 +21,7 @@ export default function DuringJobComponent() {
     }, [asPath])
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    console.log(2)
     return (
         <>
             {isFreelancer ?

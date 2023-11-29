@@ -1,63 +1,19 @@
 import { useJobApi } from "@/api/get-all-jobs";
 import NewFreelancer from "@/components/page/news/NewFreelancer";
-import NewJobs, { Job } from "@/components/page/news/NewJobs";
+import NewJobs from "@/components/page/news/NewJobs";
+import { listDataJobExample } from "@/const";
 import FilterBar from "@/features/all-services/filter-bar";
+import { JobDetailData } from "@/interface";
 import { PageLayout } from "@/layout/PageLayout";
-import { Box, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 
 function NewsPage() {
     const router = useRouter()
     const role = router.query.role
-    const [data, setData] = useState<Job[]>([
-        {
-            id: 1,
-            name: 'web developer',
-            budget: 21000,
-            information: 'create a web',
-            categoryName: "Fe",
-            typeOfEmployee: 'full time',
-            jobLevel: 'fresher',
-            postDate: '17/11',
-            owner: {
-                id: 1,
-                ownerName: 'phucnq',
-                avatar: 'zxcv'
-            }
-        },
-        {
-            id: 2,
-            name: 'web developer',
-            budget: 21000,
-            information: 'create a web',
-            categoryName: "Fe",
-            typeOfEmployee: 'full time',
-            jobLevel: 'fresher',
-            postDate: '17/11',
-            owner: {
-                id: 1,
-                ownerName: 'phucnq',
-                avatar: 'zxcv'
-            }
-        },
-        {
-            id: 3,
-            name: 'web developer',
-            budget: 21000,
-            information: 'create a web',
-            categoryName: "Fe",
-            typeOfEmployee: 'full time',
-            jobLevel: 'fresher',
-            postDate: '17/11',
-            owner: {
-                id: 1,
-                ownerName: 'phucnq',
-                avatar: 'zxcv'
-            }
-        }
-    ])
+    const [data, setData] = useState<JobDetailData[]>(listDataJobExample)
     const { getAllJob } = useJobApi()
     useEffect(
         () => {
@@ -84,6 +40,6 @@ function NewsPage() {
     )
 }
 
-NewsPage.requireLogin = true
+NewsPage.requireLogin = false
 
 export default NewsPage

@@ -21,7 +21,7 @@ function ContentHome() {
                     <br></br>
                     All in one place
                     <br></br>
-                    <Link href={status === 'authenticated' ? '/freelancer/news' : '/api/auth/signin'}>
+                    <Link href={'freelancer/news' }>
                         <Btn>Get Started</Btn>
                     </Link>
                 </Box>

@@ -7,6 +7,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  SelectChangeEvent,
   Stack,
 } from "@mui/material";
 import { useState } from "react";
@@ -49,7 +50,11 @@ const jobDetailData: JobDetailData = {
 };
 
 export default function JobDetail({ jobDetail }: Props) {
-  const [status, setStatus] = useState("Applied");
+  const [status, setStatus] = useState(jobDetail.status);
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setStatus(event.target.value as string);
+  };
   return (
     <>
       <Stack
@@ -80,7 +85,8 @@ export default function JobDetail({ jobDetail }: Props) {
             <Button>
               <FormControl>
                 <InputLabel id="status-job">Status</InputLabel>
-                <Select id="status-job" value={status} label="status" sx={{textTransform: 'none'}}>
+                <Select onChange={handleChange} id="status-job" value={status} label="status" sx={{textTransform: 'none'}}>
+                <MenuItem value={'Open'}>Open</MenuItem>
                   <MenuItem value={'Applied'}>Applied</MenuItem>
                   <MenuItem value={'During'}>During</MenuItem>
                   <MenuItem value={'Close'}>Close</MenuItem>

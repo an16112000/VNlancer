@@ -15,6 +15,8 @@ import PublicProfileIcon from './user-regular.svg'
 import DashboardIcon from './sliders-solid.svg'
 import SettingIcon from './gear-solid.svg'
 import TestImage from './testImage.jpeg'
+import TestImage2 from './Design.png'
+
 
 export {
     Avatar, Logo, Filter, FreelancerHome, ConnectFreelancer, GlobalIcon, OnBoardIcon, ShieldsIcon, BankerIcon, MessageIcon, NotificationIcon, NewIcon,
@@ -22,5 +24,6 @@ export {
     PublicProfileIcon,
     DashboardIcon,
     SettingIcon,
-    TestImage
+    TestImage,
+    TestImage2
 }

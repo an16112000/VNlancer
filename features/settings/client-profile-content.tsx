@@ -32,14 +32,28 @@ function ClientProfileContent() {
             </Stack>
             <Stack gap={'20px'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
                 <Box flex={1}>
-                    <label htmlFor="">Phone number: </label>
-                    <TextInput id={"phonenumer"} label={""} />
+                    <label htmlFor="gender">Gender: </label>
+                    <TextInput id={"gender"} label={""} />
                 </Box>
                 <Box flex={1}>
-                    <label htmlFor="">Address: </label>
+                    <label htmlFor="language">Language: </label>
+                    <TextInput id={"language"} label={""} />
+                </Box>
+            </Stack>
+            <Stack gap={'20px'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
+                <Box flex={1}>
+                    <label htmlFor="dateOfBirth">Date of Birth: </label>
+                    <TextInput id={"dateOfBirth"} label={""} />
+                </Box>
+                <Box flex={1}>
+                    <label htmlFor="">Instagram: </label>
                     <TextInput id={"address"} label={""} />
                 </Box>
             </Stack>
+            <Box flex={1}>
+                <label htmlFor="">Address: </label>
+                <TextInput id={"address"} label={""} />
+            </Box>
             <Btn>Update</Btn>
         </Stack>
     )

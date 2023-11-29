@@ -5,6 +5,7 @@ import { useState, useEffect } from "react"
 import useJobApi from "@/api/jobs"
 import JobDetail, { JobDetailData } from "@/components/page/jobs/JobDetail"
 import { Stack } from "@mui/material"
+import { dataJobExample } from "@/const"
 
 const listEvent: EventData[] = [
     {
@@ -82,8 +83,10 @@ export default function FreelancerView() {
     }, [getJobDetail, router.query.id])
     return (
         <Stack gap='10px'>
-            <JobDetail jobDetail={jobDetailData}></JobDetail>
+            <JobDetail jobDetail={dataJobExample}></JobDetail>
             <ListEvent listEvent={listEvent}></ListEvent>
         </Stack>
     )
 }
+
+FreelancerView.requireLogin = true

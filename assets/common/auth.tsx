@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 
@@ -16,7 +16,7 @@ function Auth({ children, requiredLogin }: AuthProps) {
         () => {
             if(!requiredLogin) return
             if(requiredLogin == true && status == 'unauthenticated') {
-                router.push('/login')
+                signIn()
             } 
         }, [router, status, requiredLogin]
     )

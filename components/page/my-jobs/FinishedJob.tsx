@@ -11,6 +11,7 @@ export default function FinishedJobComponent() {
     const { asPath } = useRouter()
     const [isFreelancer, setIsFreelancer] = useState(true)
 
+    console.log(2)
 
     useEffect(() => {
         if (asPath.includes("/freelancer")) {

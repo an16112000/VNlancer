@@ -23,3 +23,5 @@ export default function JobDetail(props: Props) {
         </PageLayout>
     )
 }
+
+JobDetail.requireLogin = true

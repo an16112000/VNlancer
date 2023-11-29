@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import FreelancerView from "./FreelancerView";
 import ClientView from "./ClientView";
 
-export default function JobDetail() {
+function JobDetail() {
     const { asPath } = useRouter()
     return (
         <PageLayout>
@@ -13,3 +13,7 @@ export default function JobDetail() {
         </PageLayout>
     )
 }
+
+JobDetail.requireLogin = true
+
+export default JobDetail

@@ -3,27 +3,15 @@ import { Box, Button, Stack } from "@mui/material";
 import { JobDetailData } from "../JobDetail";
 import PopUpApplly from "./pop-up-apply";
 import { useState } from "react";
+import { dataJobExample } from "@/const";
+import Image from "next/image";
 
-const jobDetailData: JobDetailData = {
-    id: 1,
-    name: 'Web',
-    budget: 21000,
-    information: 'create FE web',
-    categoryName: ['Front-end'],
-    typeOfEmployee: 'full time',
-    jobLevel: 'Fresher',
-    postDate: '17/11',
-    dueDate: '20/11',
-    status: 'open',
-    client: {
-        name: 'An Doan',
-    }
-}
+
 
 export default function JobContent() {
     const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
     return (
         <>
             <Stack
@@ -37,7 +25,7 @@ export default function JobContent() {
                 <Box sx={{
                     fontSize: '16px'
                 }}>
-                    {jobDetailData.postDate} - {jobDetailData.dueDate}
+                    {dataJobExample.postDate} - {dataJobExample.dueDate}
                 </Box>
 
                 <Stack>
@@ -46,7 +34,7 @@ export default function JobContent() {
                         alignItems={'center'}
                         justifyContent={'space-between'}
                     >
-                        <Box sx={{ fontSize: '20px', fontWeight: 500 }}>{jobDetailData.name.toUpperCase()}</Box>
+                        <Box sx={{ fontSize: '20px', fontWeight: 500 }}>{dataJobExample.name.toUpperCase()}</Box>
                         <Button>Open</Button>
                     </Stack>
 
@@ -56,14 +44,13 @@ export default function JobContent() {
                         gap={'15px'}
                     >
                         <Box sx={{
-                            backgroundColor: 'red',
                             height: '50px',
                             width: '50px',
                             borderRadius: '8px'
                         }}>
-
+                            <Image unoptimized style={{backgroundSize: 'cover', borderRadius: '8px'}} src={dataJobExample.client.avatarUrl} alt={dataJobExample.client.avatarUrl} height={100} width={100} />
                         </Box>
-                        <Box sx={{ fontSize: '16px' }}>{jobDetailData.client.name}</Box>
+                        <Box sx={{ fontSize: '16px' }}>{dataJobExample.client.name}</Box>
                     </Stack>
 
                 </Stack>
@@ -73,8 +60,8 @@ export default function JobContent() {
                     alignItems={'center'}
                     justifyContent={'space-between'}
                 >
-                    <Box sx={{ color: '#297958', fontSize: '16px' }}>{jobDetailData.budget}$</Box>
-                    <Box>{jobDetailData.typeOfEmployee}</Box>
+                    <Box sx={{ color: '#297958', fontSize: '16px' }}>{dataJobExample.budget}$</Box>
+                    <Box>{dataJobExample.typeOfEmployee}</Box>
                 </Stack>
 
                 <Stack
@@ -91,8 +78,8 @@ export default function JobContent() {
 
                 <Stack>
                     <ul>
-                        {jobDetailData.jobLevel ?? <li>{jobDetailData?.jobLevel}</li>}
-                        {jobDetailData.categoryName.map(
+                        {dataJobExample.jobLevel ?? <li>{dataJobExample?.jobLevel}</li>}
+                        {dataJobExample.categoryName.map(
                             item => <li key={item}>{item}</li>
                         )}
                     </ul>
@@ -108,7 +95,7 @@ export default function JobContent() {
                 <Box sx={{
                     minHeight: '100px'
                 }}>
-                    {jobDetailData.information}
+                    {dataJobExample.information}
                 </Box>
             </Stack>
             <PopUpApplly isOpen={open} handleClose={handleClose}></PopUpApplly>
