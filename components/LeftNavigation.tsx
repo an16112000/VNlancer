@@ -114,14 +114,14 @@ const clientNavigator = [
 const adminNavigator = [
     {
         icon: ApplicationIcon,
-        title: 'Users management',
-        pathName: '/admin/users-management',
+        title: 'Management',
+        pathName: '/admin/management-for-admin',
         link: ''
     },
     {
-        icon: PublicProfileIcon,
-        title: 'Jobs Managements',
-        pathName: '/admin/jobs-management',
+        icon: SettingIcon,
+        title: 'Settings',
+        pathName: '/admin/settings-for-admin',
         link: '',
     },
 ]

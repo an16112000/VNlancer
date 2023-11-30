@@ -14,8 +14,8 @@ export function PageLayoutForAdmin({ children }: Props) {
       <HeaderForAdmin />
       <Box sx={contentStyle}>
         <Grid container spacing={{ md: 1 }}>
-          <Grid item md={3} lg={2.5} display={{ xs: 'none', md: 'block' }}>
-            {/* <LeftNavigation /> */}
+          <Grid item display={{ xs: 'none', md: 'block' }}>
+            <LeftNavigation />
           </Grid>
           <Grid item xs>
             {children}
