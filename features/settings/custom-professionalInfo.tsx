@@ -60,7 +60,7 @@ export default function CustomProfessionalInfo({ profile }: CustomProfessionalIn
               <TextField
                 onChange={handleChange}
                 sx={{ fontSize: "14px", color: "#25324B" }}
-                defaultValue={profile.workExperience.name}
+                defaultValue={profile.workExperience}
                 name="workExperience"
               />
             </Stack>

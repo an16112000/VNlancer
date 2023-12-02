@@ -7,17 +7,26 @@ import TextInputModal from "./text-input-modal";
 import TextAreaInputModal from "./text-area-input";
 import ButtonTransparent from "@/components/buttontransparent";
 import OptionsModal from "./options-modal";
+import useProfileAPI from "@/api/profile";
 
 interface ModalCreateNewProfileProps {
     state: boolean,
     onClick: any
 }
 
-
+interface createProfileData {
+  aboutMe?: string;
+  levelId?: number;
+  workExperience?: string;
+  categoryId?: number;
+  workingTypeId?: number;
+  skill?: string;
+}
 
 
 function ModalCreateNewProfile({ state, onClick: handleClose }: ModalCreateNewProfileProps) {
-    const [inputs, setInputs] = useState({});
+    const [inputs, setInputs] = useState <createProfileData>();
+    const hookProfile = useProfileAPI();
 
     function handleChange(e: any) {
         const name = e.target.name;
@@ -25,7 +34,13 @@ function ModalCreateNewProfile({ state, onClick: handleClose }: ModalCreateNewPr
         setInputs(prev => ({...prev, [name]: value}))
     }
 
-    function handleSubmit() {
+    async function handleSubmit() {
+        try {
+            await hookProfile.createProfile(inputs)
+        }
+        catch(Error) {
+            alert("DMM")
+        }
         console.log(inputs)
 
     }
@@ -84,16 +99,16 @@ function ModalCreateNewProfile({ state, onClick: handleClose }: ModalCreateNewPr
               <p>Work Experience</p>
               <TextInputModal
                 functionChange={handleChange}
-                type="WorkExperience"
+                type="workExperience"
               />
             </Box>
             <Box>
               <p>Skill</p>
-              <TextInputModal functionChange={handleChange} type="Skill" />
+              <TextInputModal functionChange={handleChange} type="skill" />
             </Box>
             <Box>
               <p>About Me</p>
-              <TextInputModal functionChange={handleChange} type="AboutMe" />
+              <TextInputModal functionChange={handleChange} type="aboutMe" />
             </Box>
             <Btn onClick={handleSubmit}>Add</Btn>
           </Stack>

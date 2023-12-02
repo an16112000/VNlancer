@@ -18,6 +18,7 @@ interface OptionsModalProps {
   functionChange?: Function;
   defaultValue?: string[];
   onChange?: Function;
+  name?: string
 }
 
 const ITEM_HEIGHT = 48;
@@ -90,7 +91,7 @@ function OptionsModal({
       ? "categories"
       : "workingTypes";
 
-      const name = type == 'level' ? 'level' : type == 'categories' ? 'category' : 'workingType';
+      const name = type == 'level' ? 'levelId' : type == 'categories' ? 'categoryId' : 'workingTypeId';
   const hook = useAdminSettingsApi();
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
@@ -122,7 +123,7 @@ function OptionsModal({
           label={"123"}
           displayEmpty
           value={personName}
-          name={type}
+          name={name}
           onChange={handleChange}
           input={<OutlinedInput />}
           MenuProps={MenuProps}
