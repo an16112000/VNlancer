@@ -8,15 +8,15 @@ export default function CategoryManagementComponent() {
 
     useEffect(() => {
       async function fetchData() {
-        const test1 = await hooks.getAll(`/categories/all`, 'categories');
-        console.log(test1)
+        const test1 = await hooks.getAll(`/categories`, 'categories');
+        // console.log(test1)
         setList(test1);
       }
       fetchData();
-    }, [list]);
+    }, []);
     return (
       <>
-        <ListSettings type="categories" list={list} />
+        <ListSettings type="categories" path={"categories"} />
       </>
     );
 }

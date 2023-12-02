@@ -40,14 +40,20 @@ const rows = [
 export default function LevelManagementComponent() {
   const [list, setList] = useState([]);
   const listLevelHook = useAdminSettingsApi();
+  const [refresh, setRefresh] = useState(true)
+
+  function handleClick() {
+    setRefresh(prev => !prev)
+  }
 
   useEffect(() => {
     async function fetchData() {
       const test1 = await listLevelHook.getAll(`/level`, 'levels');
+      // console.log(test1)
       setList(test1);
     }
     fetchData();
-  }, [list]);
+  }, []);
 
-  return <ListSettings list={list} type={"level"} />;
+  return <ListSettings type={"level"} path={"levels"} />;
 }

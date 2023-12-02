@@ -1,3 +1,4 @@
+import useAdminSettingsApi from "@/api/admin/settings";
 import {
   FormControl,
   MenuItem,
@@ -8,13 +9,15 @@ import {
   Theme,
   useTheme,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface OptionsModalProps {
   style?: any;
   type: string;
   isMutiple?: boolean;
   functionChange?: Function;
+  defaultValue?: string[];
+  onChange?: Function;
 }
 
 const ITEM_HEIGHT = 48;
@@ -67,15 +70,28 @@ function OptionsModal({
   type,
   functionChange = () => {},
   isMutiple = false,
+  defaultValue = [],
+  onChange = () => {},
 }: OptionsModalProps) {
+  const [list, setList] = useState([]);
   const theme = useTheme();
-  const [personName, setPersonName] = useState<string[]>([]);
+  const [personName, setPersonName] = useState<string[]>(defaultValue);
+  console.log(defaultValue, personName);
   const options =
-    type == "Level"
+    type == "level"
       ? optionsForLevel
-      : type == "Category"
+      : type == "categories"
       ? optionsForCategory
       : optionsForTypeWorking;
+  const path =
+    type == "level"
+      ? "levels"
+      : type == "categories"
+      ? "categories"
+      : "workingTypes";
+
+      const name = type == 'level' ? 'level' : type == 'categories' ? 'category' : 'workingType';
+  const hook = useAdminSettingsApi();
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
     const {
@@ -86,19 +102,24 @@ function OptionsModal({
       typeof value === "string" ? value.split(",") : value
     );
     functionChange(event);
+    onChange(event);
   };
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await hook.getAll(`/${type}`, path);
+      setList(data);
+    }
+    fetchData();
+  }, []);
+
+  console.log(defaultValue);
   return (
-    // <TextField sx={{
-    //     width: '100%',
-    //     ".MuiOutlinedInput-input": {
-    //         padding: '12px 15px'
-    //     },
-    //     ...style
-    // }}  />
     <div>
-      <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
+      <FormControl sx={{ width: "100%" }}>
         <Select
           multiple={isMutiple}
+          label={"123"}
           displayEmpty
           value={personName}
           name={type}
@@ -106,15 +127,16 @@ function OptionsModal({
           input={<OutlinedInput />}
           MenuProps={MenuProps}
           inputProps={{ "aria-label": "Without label" }}
+          defaultValue={defaultValue}
         >
-          <MenuItem disabled value="">
-            <em>Placeholder</em>
+          <MenuItem disabled value={personName}>
+            <em>{personName}</em>
           </MenuItem>
-          {options.map(({ name, id }) => (
+          {list.map(({ name, id }) => (
             <MenuItem
               key={id}
               value={id}
-              style={getStyles(name, personName, theme)}
+              // style={getStyles(name, personName, theme)}
             >
               {name}
             </MenuItem>

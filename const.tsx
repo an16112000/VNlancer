@@ -89,58 +89,61 @@ export const listCategoryExample: Category[] = [
 ]
 
 export const listProfile: ProfessionalInfo[] = [
-    {
-        id: 1,
-        aboutMe: 'I’m a product designer + filmmaker currently working remotely at Twitter from beautiful Manchester, United Kingdom. I’m passionate about designing digital products that have a positive impact on the world. <br></br> For 10 years, I’ve specialised in interface, experience & interaction design as well as working in user research and product strategy for product agencies, big tech companies & start-ups. ',
-        skill: 'English, Project Management',
-        workExperience: '4 years',
-        category: {
-            id: 1,
-            name: 'Information Technology'
-        },
-        level: {
-            id: 1,
-            name: 'Fresher'
-        },
-        workingType: {
-            id: 1,
-            name: 'IT'
-        },
+  {
+    id: 1,
+    aboutMe:
+      "I’m a product designer + filmmaker currently working remotely at Twitter from beautiful Manchester, United Kingdom. I’m passionate about designing digital products that have a positive impact on the world. <br></br> For 10 years, I’ve specialised in interface, experience & interaction design as well as working in user research and product strategy for product agencies, big tech companies & start-ups. ",
+    skill: "English, Project Management",
+    workExperience: "4 years",
+    categories: {
+      id: 1,
+      name: "Information Technology",
     },
-    {
-        id: 2,
-        aboutMe: 'I’m a product designer + filmmaker currently working remotely at Twitter from beautiful Manchester, United Kingdom. I’m passionate about designing digital products that have a positive impact on the world. <br></br> For 10 years, I’ve specialised in interface, experience & interaction design as well as working in user research and product strategy for product agencies, big tech companies & start-ups. ',
-        skill: 'Frech, System Management',
-        workExperience: '5 years',
-        category: {
-            id: 1,
-            name: 'Operation Systems'
-        },
-        level: {
-            id: 2,
-            name: 'Senior'
-        },
-        workingType: {
-            id: 1,
-            name: 'IT'
-        },
+    level: {
+      id: 1,
+      name: "Fresher",
     },
-    {
-        id: 3,
-        aboutMe: 'I’m a product designer + filmmaker currently working remotely at Twitter from beautiful Manchester, United Kingdom. I’m passionate about designing digital products that have a positive impact on the world. <br></br> For 10 years, I’ve specialised in interface, experience & interaction design as well as working in user research and product strategy for product agencies, big tech companies & start-ups. ',
-        skill: 'English, Design',
-        workExperience: '2 years',
-        category: {
-            id: 1,
-            name: 'Designer'
-        },
-        level: {
-            id: 1,
-            name: 'Fresher'
-        },
-        workingType: {
-            id: 1,
-            name: 'Fashion'
-        },
+    "working-type": {
+      id: 1,
+      name: "IT",
     },
-]
+  },
+  {
+    id: 2,
+    aboutMe:
+      "I’m a product designer + filmmaker currently working remotely at Twitter from beautiful Manchester, United Kingdom. I’m passionate about designing digital products that have a positive impact on the world. <br></br> For 10 years, I’ve specialised in interface, experience & interaction design as well as working in user research and product strategy for product agencies, big tech companies & start-ups. ",
+    skill: "Frech, System Management",
+    workExperience: "5 years",
+    categories: {
+      id: 1,
+      name: "Operation Systems",
+    },
+    level: {
+      id: 2,
+      name: "Senior",
+    },
+    "working-type": {
+      id: 1,
+      name: "IT",
+    },
+  },
+  {
+    id: 3,
+    aboutMe:
+      "I’m a product designer + filmmaker currently working remotely at Twitter from beautiful Manchester, United Kingdom. I’m passionate about designing digital products that have a positive impact on the world. <br></br> For 10 years, I’ve specialised in interface, experience & interaction design as well as working in user research and product strategy for product agencies, big tech companies & start-ups. ",
+    skill: "English, Design",
+    workExperience: "2 years",
+    categories: {
+      id: 1,
+      name: "Designer",
+    },
+    level: {
+      id: 1,
+      name: "Fresher",
+    },
+    "working-type": {
+      id: 1,
+      name: "Fashion",
+    },
+  },
+];

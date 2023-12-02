@@ -39,13 +39,13 @@ export interface Gender {
 }
 
 export interface ProfessionalInfo {
-    id: number,
-    aboutMe: string,
-    level: Level,
-    workExperience: string,
-    category: Category,
-    workingType: WorkingType,
-    skill: string
+  id: number;
+  aboutMe: string;
+  level: Level;
+  workExperience: string;
+  categories: Category;
+  "working-type": WorkingType;
+  skill: string;
 }
 
 export interface Introduction {

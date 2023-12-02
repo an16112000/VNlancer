@@ -5,7 +5,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@/components/button";
 import TextField from "@mui/material/TextField";
 import { Stack } from "@mui/material";
@@ -53,12 +53,13 @@ const workingType = [
 ];
 
 interface ListSettingsProps {
-  list: any[];
   type: string;
+  path: string
 }
 
-export default function ListSettings({ list, type }: ListSettingsProps) {
+export default function ListSettings({ type, path }: ListSettingsProps) {
   const [value, setValue] = useState("");
+  const [list, setList] = useState([]);
 
   const hooks = useAdminSettingsApi();
 
@@ -69,10 +70,20 @@ export default function ListSettings({ list, type }: ListSettingsProps) {
   async function handleSubmit() {
     await hooks.create(`/${type}`, {
       name: value,
-      
     });
+    await fetchData()
   }
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  async function fetchData() {
+    const test1 = await hooks.getAll(`/${type}`, path);
+    console.log(test1)
+    setList(test1 || []);
+  }
+  
   return (
     <>
       <TableContainer component={Paper}>
@@ -88,7 +99,7 @@ export default function ListSettings({ list, type }: ListSettingsProps) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {list.map((row) => (
+            {list.map((row: any) => (
               <TableRow
                 key={row.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

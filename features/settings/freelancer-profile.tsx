@@ -1,13 +1,24 @@
-import { listProfile } from "@/const"
 import { Box, Stack, Tab, Tabs, TextField } from "@mui/material"
 import { profile } from "console"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import CustomProfessionalInfo from "./custom-professionalInfo"
+import { ProfessionalInfo } from "@/interface"
+import useProfileAPI from "@/api/profile"
 
 export default function CustomProfessionalInfoComponent() {
     const [content, setContent] = useState(1)
+    const [listProfile, setListProfile] = useState < ProfessionalInfo[]>([])
 
+    const profileHooks = useProfileAPI();
 
+useEffect(() => {
+  async function fetchData() {
+    const data = await profileHooks.getAll();
+    console.log(data)
+    setListProfile(data);
+  }
+  fetchData();
+}, []);
     
     return (
         <Stack gap={'15px'}>
