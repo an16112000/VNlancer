@@ -9,6 +9,7 @@ import { useState } from "react";
 import Button from "@/components/button";
 import TextField from "@mui/material/TextField";
 import { Stack } from "@mui/material";
+import useAdminSettingsApi from "@/api/admin/settings";
 
 const level = [
   {
@@ -52,22 +53,26 @@ const workingType = [
 ];
 
 interface ListSettingsProps {
+  list: any[];
   type: string;
 }
 
-export default function ListSettings({ type }: ListSettingsProps) {
-  const [list, setList] = useState(
-    type == "level" ? level : type == "category" ? category : workingType
-  );
-  const [value, setValue] = useState("")
+export default function ListSettings({ list, type }: ListSettingsProps) {
+  const [value, setValue] = useState("");
+
+  const hooks = useAdminSettingsApi();
 
   function handleChange(e: any) {
-    setValue(e.target.value)
+    setValue(e.target.value);
   }
 
-  function handleSubmit() {
-    alert(value)
+  async function handleSubmit() {
+    await hooks.create(`/${type}`, {
+      name: value,
+      
+    });
   }
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -97,8 +102,22 @@ export default function ListSettings({ type }: ListSettingsProps) {
           </TableBody>
         </Table>
       </TableContainer>
-      <Stack gap={'10px'} marginTop={'20px'} flexDirection={'row'} alignItems={'center'}>
-        <input style={{height: '40px', border: '1px solid #ccc', borderRadius: '8px', boxShadow: '0px 0px 1px 0px', padding: '4px'}} onChange={handleChange} />
+      <Stack
+        gap={"10px"}
+        marginTop={"20px"}
+        flexDirection={"row"}
+        alignItems={"center"}
+      >
+        <input
+          style={{
+            height: "40px",
+            border: "1px solid #ccc",
+            borderRadius: "8px",
+            boxShadow: "0px 0px 1px 0px",
+            padding: "4px",
+          }}
+          onChange={handleChange}
+        />
         <Button onClick={handleSubmit}>Add</Button>
       </Stack>
     </>

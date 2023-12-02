@@ -19,6 +19,10 @@ import { User } from "next-auth";
 import { useSession } from "next-auth/react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
+import { PageLayout } from "@/layout/PageLayout";
+import { PageLayoutWithOutLeftNavi } from "@/layout/PageLayoutWithOutLeftNavi";
+import { Box, Stack, TextField } from "@mui/material";
+import Image from "next/image";
 
 const Inbox = () => {
   const { data: session } = useSession();
@@ -82,28 +86,66 @@ const Inbox = () => {
     []
   );
 
+  console.log(selectedConversation);
+
   return (
-    <div>
-      <h1>Nhan tin</h1>
+    <PageLayoutWithOutLeftNavi>
+      <Stack
+        flexDirection={"row"}
+        sx={{ borderRadius: "8px", backgroundColor: "#fff" }}
+      >
+        <Stack
+          flex={1}
+          alignItems={"center"}
+          padding={"10px 10px"}
+          gap={"20px"}
+        >
+          <input
+            placeholder="Search messages"
+            style={{
+              border: "1px solid #ccc",
+              padding: "8px 4px",
+              borderRadius: "6px",
+              width: "100%",
+            }}
+          />
+          <Stack alignItems={"flex-start"} width={"100%"}>
+            <ListConversation
+              dataSource={dataSource}
+              onSelect={handleSelectConversation}
+            />
+          </Stack>
+        </Stack>
+        <Box flex={3}>
+          <ChatWindow
+            selectedConversation={selectedConversation}
+            dataSource={dataSource}
+          />
+          <InputMessage doc={selectedConversation?.conversation.doc} />
+        </Box>
+      </Stack>
+    </PageLayoutWithOutLeftNavi>
+    // <div>
+    //   <h1>Nhan tin</h1>
 
-      <br />
+    //   <br />
 
-      <h2>Danh sach tin nhan</h2>
+    //   <h2>Danh sach tin nhan</h2>
 
-      <ListConversation
-        dataSource={dataSource}
-        onSelect={handleSelectConversation}
-      />
+    //   <ListConversation
+    //     dataSource={dataSource}
+    //     onSelect={handleSelectConversation}
+    //   />
 
-      <br />
-      <h3>Cua so chat</h3>
+    //   <br />
+    //   <h3>Cua so chat</h3>
 
-      <InputMessage doc={selectedConversation?.conversation.doc} />
+    //   <InputMessage doc={selectedConversation?.conversation.doc} />
 
-      <br />
+    //   <br />
 
-      <ChatWindow selectedConversation={selectedConversation} />
-    </div>
+    //   <ChatWindow selectedConversation={selectedConversation} />
+    // </div>
   );
 };
 
@@ -116,18 +158,24 @@ const ListConversation = ({
   dataSource: IConversation[];
   onSelect: (otherPerson: User, conversationId: IConversation) => void;
 }) => {
+  console.log(dataSource);
   return (
-    <>
+    <Stack gap={"15px"} width={"100%"}>
       {dataSource.map((conversation) => {
         return (
-          <ConversationCard
-            conversation={conversation}
-            key={conversation.id}
-            onSelect={(otherPerson) => onSelect(otherPerson, conversation)}
-          />
+          <>
+            <ConversationCard
+              conversation={conversation}
+              key={conversation.id}
+              onSelect={(otherPerson) => onSelect(otherPerson, conversation)}
+            />
+            <Box
+              sx={{ width: "100%", height: "1px", border: "0.5px solid #ccc" }}
+            ></Box>
+          </>
         );
       })}
-    </>
+    </Stack>
   );
 };
 
@@ -176,21 +224,47 @@ const ConversationCard = ({
           color: isActive ? "red" : "black",
         }}
       >
-        {otherPersonEmail}
+        <Stack
+          flexDirection={"row"}
+          gap={"10px"}
+          onClick={handleClick}
+          sx={{ cursor: "pointer" }}
+        >
+          <Image
+            unoptimized
+            src={session?.user.image || ""}
+            alt={""}
+            height={100}
+            width={100}
+            style={{
+              height: "50px",
+              width: "50px",
+              borderRadius: "50%",
+            }}
+          />
+          <Stack>
+            {loaiBoPhanDuoiEmail(otherPersonEmail)}
+            <p>Abc</p>
+          </Stack>
+        </Stack>
       </div>
 
-      <button onClick={handleClick}>Select</button>
+      {/* <button onClick={handleClick}>Select</button> */}
     </div>
   );
 };
 
 const ChatWindow = ({
   selectedConversation,
+  dataSource,
 }: {
   selectedConversation?: ISelectedConversation;
+  dataSource: IConversation[];
 }) => {
   const { data: session } = useSession();
   const [messageList, setMessageList] = useState<IMessage[]>([]);
+  const otherPersonEmail = selectedConversation?.otherPerson.email;
+  console.log(otherPersonEmail);
 
   useEffect(() => {
     let unsubMessage: Unsubscribe;
@@ -229,13 +303,104 @@ const ChatWindow = ({
   }, [selectedConversation]);
 
   return (
-    <>
-      {messageList.map(({ sender, message, id }) => (
-        <div key={id}>
-          {sender} send: "{message}"
-        </div>
-      ))}
-    </>
+    <Box sx={{ height: "80vh", borderLeft: "1px solid #ccc" }}>
+      <Box padding={"15px 15px"} sx={{ borderBottom: "1px solid #ccc" }}>
+        <Stack flexDirection={"row"} gap={"10px"} sx={{ cursor: "pointer" }}>
+          <Image
+            unoptimized
+            src={session?.user.image || ""}
+            alt={""}
+            height={100}
+            width={100}
+            style={{
+              height: "50px",
+              width: "50px",
+              borderRadius: "50%",
+            }}
+          />
+          <Stack>{loaiBoPhanDuoiEmail(otherPersonEmail || "")}</Stack>
+        </Stack>
+      </Box>
+      <Stack>
+        <Stack gap={"8px"} alignItems={"center"} padding={"10px 10px"}>
+          <Image
+            unoptimized
+            src={session?.user.image || ""}
+            alt={""}
+            height={100}
+            width={100}
+            style={{
+              height: "50px",
+              width: "50px",
+              borderRadius: "50%",
+            }}
+          />
+          <Box sx={{ fontWeight: "500" }}>
+            {loaiBoPhanDuoiEmail(otherPersonEmail || "")}
+          </Box>
+          <Box>
+            This is very biginning of your direct message with{" "}
+            {loaiBoPhanDuoiEmail(otherPersonEmail || "")}
+          </Box>
+          <Box
+            sx={{
+              height: "1px",
+              width: "90%",
+              borderBottom: "1px solid #ccc",
+              margin: "25px 0",
+            }}
+          ></Box>
+        </Stack>
+        <Stack gap={'8px'}>
+          {messageList.map(({ sender, message, id }) => (
+            <Stack
+              gap={"8px"}
+              flexDirection={"row"}
+              sx={
+                sender == otherPersonEmail
+                  ? { justifyContent: "flex-start" }
+                  : { justifyContent: "flex-end" }
+              }
+              key={id}
+            >
+              {sender == otherPersonEmail ? (
+                <>
+                  <Image
+                    unoptimized
+                    src={session?.user.image || ""}
+                    alt={""}
+                    height={100}
+                    width={100}
+                    style={{
+                      height: "20px",
+                      width: "20px",
+                      borderRadius: "50%",
+                    }}
+                  />
+                  {message}
+                </>
+              ) : (
+                <>
+                  {message}
+                  <Image
+                    unoptimized
+                    src={session?.user.image || ""}
+                    alt={""}
+                    height={100}
+                    width={100}
+                    style={{
+                      height: "20px",
+                      width: "20px",
+                      borderRadius: "50%",
+                    }}
+                  />
+                </>
+              )}
+            </Stack>
+          ))}
+        </Stack>
+      </Stack>
+    </Box>
   );
 };
 
@@ -287,7 +452,11 @@ const InputMessage = ({
   );
 };
 
-const ButtonContact = ({ otherPersonEmail }: { otherPersonEmail: string }) => {
+export const ButtonContact = ({
+  otherPersonEmail,
+}: {
+  otherPersonEmail: string;
+}) => {
   const { status, data: session } = useSession();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -346,4 +515,14 @@ const ButtonContact = ({ otherPersonEmail }: { otherPersonEmail: string }) => {
   };
 
   return <button onClick={() => void handleClick()}>Lien he</button>;
+  5;
 };
+
+function loaiBoPhanDuoiEmail(email: string) {
+  var viTriCong = email.indexOf("@");
+  if (viTriCong !== -1) {
+    var emailMoi = email.substring(0, viTriCong);
+    return emailMoi;
+  }
+  return email;
+}

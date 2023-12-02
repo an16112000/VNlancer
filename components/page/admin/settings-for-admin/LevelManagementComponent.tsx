@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,6 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import ListSettings from "./ListSettings";
+import useAdminSettingsApi from "@/api/admin/settings";
 
 const level = [
   {
@@ -37,7 +38,16 @@ const rows = [
 ];
 
 export default function LevelManagementComponent() {
-  return (
-    <ListSettings type={"level"} />
-  );
+  const [list, setList] = useState([]);
+  const listLevelHook = useAdminSettingsApi();
+
+  useEffect(() => {
+    async function fetchData() {
+      const test1 = await listLevelHook.getAll(`/level`, 'levels');
+      setList(test1);
+    }
+    fetchData();
+  }, [list]);
+
+  return <ListSettings list={list} type={"level"} />;
 }
