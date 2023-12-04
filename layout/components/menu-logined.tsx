@@ -4,13 +4,10 @@ import MessageIconDropdown from "@/components/layout/header/MessageIconDropdown"
 import { Avatar, MessageIcon } from "@/img";
 import { Stack } from "@mui/material";
 import Tippy from "@tippyjs/react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 
 const menu = [
-    {
-        icon: MessageIcon,
-        dropdown: MessageIconDropdown
-    },
     {
         icon: Avatar,
         dropdown: AvatarDropdown
@@ -18,6 +15,7 @@ const menu = [
 ];
 
 export const MenuLogined = () => {
+    const { data } = useSession()
     return (
         <Stack
             flexDirection='row'
@@ -44,7 +42,12 @@ export const MenuLogined = () => {
                                         <Component />
                                     </Stack>
                                 }>
-                                    <Image src={item.icon} style={{ height: '20px', width: '20px', cursor: 'pointer' }} alt=""></Image>
+                                    <img style={{
+                                        height: '40px',
+                                        width: '40px',
+                                        borderRadius: '50%',
+                                    }} src={data?.user.image as string} alt="image" />
+                                    {/* <img src={data?.user.image as string} style={{ height: '20px', width: '20px', cursor: 'pointer' }} alt="" /> */}
                                 </Tippy>
                             </Stack>
                         }
