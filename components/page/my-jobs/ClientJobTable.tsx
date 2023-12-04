@@ -10,7 +10,6 @@ import {
   TableRow,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import { Task } from "./FreelancerJobTable";
 import JobStatusLabel, { JobStatus } from "../dashboard/JobStatusLabel";
 import MyOpenJobTable from "./MyOpenJobTable";
 

@@ -130,6 +130,7 @@ function ListApplicationFreelancer(props: FreelancerJobTableProps) {
         </TableHead>
         <TableBody>
           {listApplication.map((job, index) => {
+            console.log(job)
             return (
               <TableRow key={index} sx={{ cursor: "pointer" }}>
                 <TableCell align="center" sx={{ color: "text.third" }}>

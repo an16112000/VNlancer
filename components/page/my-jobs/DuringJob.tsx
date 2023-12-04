@@ -6,7 +6,11 @@ import ClientJobTable from "./ClientJobTable"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/router"
 
-export default function DuringJobComponent() {
+interface DuringJobComponentProps {
+    toStatus: string
+}
+
+export default function DuringJobComponent({toStatus}: DuringJobComponentProps) {
     const [open, setOpen] = useState(false);
     const { asPath } = useRouter()
     const [isFreelancer, setIsFreelancer] = useState(true)
@@ -33,7 +37,7 @@ export default function DuringJobComponent() {
                             <Btn>Filter</Btn>
                         </Stack>
                     </Stack>
-                    <FreelancerJobTable filter={["During", "In Review"]} isDuring={true} />
+                    <FreelancerJobTable filter={["DOING"]} isDuring={true} toStatus={"IN REVIEW"} />
                 </>
                 :
                 <>

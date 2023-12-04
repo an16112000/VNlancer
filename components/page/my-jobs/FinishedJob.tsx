@@ -34,7 +34,7 @@ export default function FinishedJobComponent() {
                             <Btn>Filter</Btn>
                         </Stack>
                     </Stack>
-                    <FreelancerJobTable filter={["Done"]} isDuring={true} />
+                    <FreelancerJobTable filter={["Done"]} isDuring={true} toStatus={''} />
                 </>
                 :
                 <>
