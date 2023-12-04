@@ -9,31 +9,30 @@ import JobContent from "@/components/page/jobs/[id]";
 import useJobApi from "@/api/jobs";
 import { JobDetailData } from "@/interface";
 import { dataJobExample } from "@/const";
+import useUserApi from "@/api/user";
 
 interface Props {
   id: number;
   status: string;
 }
 
-
-
 export default function JobDetail(props: Props) {
   const router = useRouter();
   const hookJobs = useJobApi();
-  const [dataJob, setDataJob] = useState<JobDetailData | undefined | any>()
+  const hookUSer = useUserApi();
+  const [dataJob, setDataJob] = useState<JobDetailData | undefined | any>();
   const { id } = router.query;
-  console.log(id)
-  useEffect(
-    () => {
-        async function fetchData() {
-            const data = await hookJobs.getJobDetail(id)
-            console.log(data)
-            setDataJob(data)
-        }
-        fetchData()
-    }, [id]
-  )
-  console.log(dataJob)
+  console.log(id);
+  useEffect(() => {
+    async function fetchData() {
+      const userId = (await hookUSer.getUserInformation()).id;
+      const data = await hookJobs.getJobDetail(id as string);
+      console.log(data);
+      setDataJob(data);
+    }
+    fetchData();
+  }, [id]);
+  console.log(dataJob);
   return (
     <PageLayout>
       <div>

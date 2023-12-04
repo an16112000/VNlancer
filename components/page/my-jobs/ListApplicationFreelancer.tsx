@@ -5,6 +5,7 @@ import JobStatusLabel, {
   JobStatus,
 } from "@/components/page/dashboard/JobStatusLabel";
 import {
+  Button,
   Paper,
   Stack,
   Table,
@@ -17,8 +18,9 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import ModalChangeJobStatus from "../jobs/[id]/modal-change-job-status";
 
-const headers = ["#", "Job Name", "Working Type", "Status"];
+const headers = ["#", "Job Name", "Working Type","Action", "Status"];
 
 export interface Task {
   id: number;
@@ -67,8 +69,6 @@ const rows: Task[] = [
 ];
 
 interface FreelancerJobTableProps {
-  filter: string[];
-  isDuring: boolean;
   listApplication: {
     id: number;
     user: {
@@ -94,13 +94,24 @@ function ListApplicationFreelancer(props: FreelancerJobTableProps) {
   const { listApplication } = props;
   const router = useRouter();
   const hookJob = useJobApi();
-console.log(listApplication)
+  const [selectId, setSelectId] = useState<number>(0);
+
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  console.log(listApplication);
   useEffect(() => {}, []);
 
   console.log(listJob);
 
   function handleClick(jobId: number) {
-      router.push(`/jobs/${jobId}`);
+    router.push(`/jobs/${jobId}`);
+  }
+
+  function handleChangeStatus(item: any) {
+    setSelectId(item.id);
+    handleOpen();
   }
   return (
     <TableContainer component={Paper} sx={{ color: "text.third" }}>
@@ -120,7 +131,7 @@ console.log(listApplication)
         <TableBody>
           {listApplication.map((job, index) => {
             return (
-              <TableRow onClick={() => handleClick(job.job.id)} key={index} sx={{cursor: 'pointer'}}>
+              <TableRow key={index} sx={{ cursor: "pointer" }}>
                 <TableCell align="center" sx={{ color: "text.third" }}>
                   {job.id}
                 </TableCell>
@@ -138,13 +149,51 @@ console.log(listApplication)
                   {job.job.workingType.name}
                 </TableCell>
                 <TableCell sx={{ color: "text.third" }} align="center">
-                  <JobStatusLabel jobStatus={job.status} />
+                  <Button
+                    onClick={() => handleClick(job.job.id)}
+                    sx={{
+                      backgroundColor: "#1876d3",
+                      color: "#fff",
+                      textTransform: "none",
+                      borderRadius: "8px",
+                      fontWeight: "300",
+                      "&:hover": {
+                        backgroundColor: "#1876d3",
+                        opacity: 0.7,
+                      },
+                    }}
+                  >
+                    See Detail
+                  </Button>
+                </TableCell>
+                <TableCell
+                  onClick={() =>
+                    job.status == "ACCEPTED" && handleChangeStatus(job)
+                  }
+                  sx={{ color: "text.third" }}
+                  align="center"
+                >
+                  <Button
+                    sx={{
+                      ".MuiBox-root": {
+                        padding: "4px 8px",
+                      },
+                    }}
+                  >
+                    <JobStatusLabel jobStatus={job.status} />
+                  </Button>
                 </TableCell>
               </TableRow>
             );
           })}
         </TableBody>
       </Table>
+      <ModalChangeJobStatus
+        open={open}
+        handleClose={handleClose}
+        jobId={selectId}
+        status={"START DOING"}
+      />
     </TableContainer>
   );
 }

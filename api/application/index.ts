@@ -29,7 +29,7 @@ export default function useApplicationApi() {
         return data
     }
 
-    async function getAllJobApplication(jobId: number) {
+    async function getAllJobApplication(jobId: string) {
         const response = await axiosInstance.get('/applications', {
             params: {
                 jobId: jobId
@@ -42,9 +42,17 @@ export default function useApplicationApi() {
         return data
     }
 
+    async function changeApplication(applicationId: number, status: string) {
+        await axiosInstance.put(`/applications/${applicationId}`, {
+            profileId: 1,
+            status: status
+        })
+    }
+
     return {
         createApllication,
         getAllApplicationFreelancer,
-        getAllJobApplication
+        getAllJobApplication,
+        changeApplication
     }
 }

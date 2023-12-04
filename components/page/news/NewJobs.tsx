@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { JobDetailData } from "@/interface";
 import { VND } from "@/components/VNDformat";
+import JobStatusLabel from "../dashboard/JobStatusLabel";
 
 interface Prop {
     list: JobDetailData[];
@@ -15,6 +16,7 @@ export interface JobOwner {
     avatar: string
 }
 export default function NewJobs(prop: Prop) {
+    console.log(prop)
     const router = useRouter()
     return (
         <Stack flex={0.8} gap={'30px'} width={'100%'}>
@@ -22,9 +24,10 @@ export default function NewJobs(prop: Prop) {
                 return (
                     <Box key={job.id} sx={{ backgroundColor: "#fff", borderRadius: '12px', padding: '10px 12px' }} onClick={() => { router.push(`/jobs/${job.id}`) }}>
                         <Stack flexDirection={'row'} sx={{ height: "30px" }} justifyContent={'space-between'} alignItems={'center'} marginBottom={'10px'}>
-                            <Box>
+                            <Stack width={'100%'} flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'}>
                                 <Box sx={{ fontSize: '20px', fontWeight: 500, textTransform: 'capitalize' }}>{job.name}</Box>
-                            </Box>
+                                <JobStatusLabel jobStatus={job.status} />
+                            </Stack>
                             <Box>
                                 {job.owner.fullName}
                             </Box>

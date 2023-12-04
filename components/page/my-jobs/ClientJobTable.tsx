@@ -131,7 +131,7 @@ interface ClientJobTableProps {
 
 function ClientJobTable(props: any) {
   const router = useRouter();
-  const { listJobs } = props;
+  const { listJobs = [] } = props;
   console.log(listJobs)
   return (
     <TableContainer

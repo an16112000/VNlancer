@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { JobStatus } from "./components/page/dashboard/JobStatusLabel";
 
 interface JobContentProps {
   dataJob: {
@@ -46,9 +47,9 @@ export interface JobDetailData {
     id: number;
     name: string;
   };
-//   postDate: string;
-//   dueDate: string;
-  status: string;
+  //   postDate: string;
+  //   dueDate: string;
+  status: JobStatus;
   imageUrl?: string;
   owner: {
     id: number;

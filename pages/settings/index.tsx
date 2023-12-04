@@ -6,33 +6,38 @@ import { Box, Tab, Tabs } from "@mui/material";
 import { useState } from "react";
 
 enum Content {
-    FreelancerProfile,
-    ClientProfile,
-    // review
+  FreelancerProfile,
+  ClientProfile,
+  // review
 }
 
 export default function ClientProfile() {
-    const [content, setContent] = useState<Content>(Content.FreelancerProfile)
+  const [content, setContent] = useState<Content>(Content.FreelancerProfile);
 
-    return (
-        <PageLayout>
-            {/* <Box flex={1} padding={'0 20px'}>
+  return (
+    <PageLayout>
+      {/* <Box flex={1} padding={'0 20px'}>
                 <ClientProfileContent />
             </Box>
             <Box width={'200px'}>
                 <OptionsPage />
             </Box> */}
-            <Tabs value={content} onChange={(event: any, value) => setContent(value)} sx={{ borderRadius: '8px' }}>
-                    <Tab label="Add Profile" value={Content.FreelancerProfile} />
-                    <Tab label="Introduce" value={Content.ClientProfile} />
-                    {/* <Tab label="Review" value={Content.review} /> */}
-                </Tabs>
-                {content == Content.FreelancerProfile ? <FreelancerProfileContent /> :
-                   <ClientProfileContent />
-                }
-
-        </PageLayout>
-    )
+      <Tabs
+        value={content}
+        onChange={(event: any, value) => setContent(value)}
+        sx={{ borderRadius: "8px" }}
+      >
+        <Tab label="Add Profile" value={Content.FreelancerProfile} />
+        <Tab label="Introduce" value={Content.ClientProfile} />
+        {/* <Tab label="Review" value={Content.review} /> */}
+      </Tabs>
+      {content == Content.FreelancerProfile ? (
+        <FreelancerProfileContent />
+      ) : (
+        <ClientProfileContent />
+      )}
+    </PageLayout>
+  );
 }
 
-ClientProfile.requireLogin = true
+ClientProfile.requireLogin = true;

@@ -66,8 +66,6 @@ export default function PendingJobComponent() {
             </Stack>
             <ListApplicationFreelancer
               listApplication={listApplication}
-              filter={["Applied", "Accepted"]}
-              isDuring={false}
             />
           </>
         ) : (

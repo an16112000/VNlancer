@@ -34,7 +34,7 @@ enum Content {
 interface ModalToPostJobProps {
   isOpen: boolean;
   handleClose: any;
-  refreshList: Function;
+  refreshList?: Function;
 }
 
 const style: SxProps = {
@@ -57,7 +57,7 @@ const style: SxProps = {
 function ModalToPostJob({
   isOpen,
   handleClose,
-  refreshList,
+  refreshList = () => {},
 }: ModalToPostJobProps) {
   const [selectedNames, setSelectedNames] = useState([]);
 
