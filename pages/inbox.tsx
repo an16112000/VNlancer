@@ -116,7 +116,9 @@ const Inbox = () => {
             />
           </Stack>
         </Stack>
-        <Box flex={3}>
+        <Box flex={3} sx={{
+          borderLeft: '1px solid #ccc'
+        }}>
           <ChatWindow
             selectedConversation={selectedConversation}
             dataSource={dataSource}
@@ -303,7 +305,7 @@ const ChatWindow = ({
   }, [selectedConversation]);
 
   return (
-    <Box sx={{ height: "80vh", borderLeft: "1px solid #ccc" }} flex={5}>
+    <Box sx={{ height: "80vh" }} flex={5}>
       <Box
         padding={"15px 15px"}
         sx={{ borderBottom: "1px solid #ccc" }}
