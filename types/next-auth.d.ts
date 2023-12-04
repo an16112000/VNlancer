@@ -10,8 +10,9 @@ declare module "next-auth" {
       /** The user's postal address. */
       name: string,
       email: string,
-      image: string, 
+      image: string,
       id: any,
     }
+    isAdmin: boolean
   }
 }

@@ -8,6 +8,7 @@ interface AuthenticateRequestBody {
 
 export interface AuthenticateResponseBody {
     accessToken: string
+    role: string
 }
 export async function authenticate(requestBody: AuthenticateRequestBody) {
     return await axiosInstance.post("/auth", requestBody);
