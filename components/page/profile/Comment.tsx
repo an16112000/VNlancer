@@ -48,12 +48,11 @@ export default function Comment(props: Props) {
                     alignItems={'center'}
                     gap={'20px'}
                 >
-                    <Box sx={{
+                    <img style={{
                         height: '40px',
                         width: '40px',
                         borderRadius: '50%',
-                        backgroundColor: 'red'
-                    }}></Box>
+                    }} src={props.writer?.imageUrl} alt="image" />
                     <Stack>
                         <Box sx={{ fontSize: '14px', fontWeight: 500 }}>{props.writer?.fullName}</Box>
                         <Box sx={{ fontSize: '8px', fontWeight: 500 }}>{props.createAt}</Box>

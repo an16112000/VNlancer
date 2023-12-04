@@ -58,7 +58,7 @@ export default function InformationComponent(props: Props) {
 
     async function updateInformation() {
         const data: UserInformation = await getIntroduction()
-        setUserInformation(data)
+        setUserInformation({ ...data })
     }
 
     return (
@@ -72,7 +72,7 @@ export default function InformationComponent(props: Props) {
 
                 <Box sx={{ padding: '10px 10px' }}>
                     {
-                        content == Content.profile ? <ProfileComponent /> : <ReviewComponent {...userInformation} resetListReview={() => updateInformation()} />
+                        content == Content.profile ? <ProfileComponent /> : <ReviewComponent {...userInformation} resetListReview={async () => await updateInformation()} />
                     }
                 </Box>
             </Box>

@@ -3,7 +3,7 @@ import { axiosInstance } from "@/ultils/axiosInstance";
 interface AuthenticateRequestBody {
     tokenId?: string,
     username?: string,
-    imageUrl?: string
+    imageUrl?: string | null
 }
 
 export interface AuthenticateResponseBody {

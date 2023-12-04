@@ -1,12 +1,11 @@
 import { Box, Button, Grid, Stack, TextField } from "@mui/material"
 import Comment from "./Comment"
-import { Logo } from "@/img"
-import { EventData } from "../jobs/ListEvent"
 import { useState } from "react"
 import { useReviewApi } from "@/api/review"
 
 interface Props {
     id?: number
+    imageUrl?: string
     listReview?: Review[]
     resetListReview: Function
 }
@@ -25,49 +24,8 @@ interface Writer {
     imageUrl?: string
 }
 
-// const comment_1 = {
-//     user
-// }
-
-
-// const listCommentExample: EventData[] = [
-//     {
-//         id: 1,
-//         user: {
-//             id: 1,
-//             avatar: './43ea182674ce427ca19fcbe3b36fa924.jpeg',
-//             email: 'doanan16112000@gmail.com'
-//         },
-//         content: 'Tot lam cac anh',
-//         createAt: '10:30 18/11/2023',
-//         rank: 3
-//     },
-//     {
-//         id: 2,
-//         user: {
-//             id: 2,
-//             avatar: './43ea182674ce427ca19fcbe3b36fa924.jpeg',
-//             email: 'phunq@gmail.com'
-//         },
-//         content: '10 diem, xuat sac',
-//         createAt: '10:35 18/11/2023',
-//         rank: 5
-//     },
-//     {
-//         id: 3,
-//         user: {
-//             id: 3,
-//             avatar: './43ea182674ce427ca19fcbe3b36fa924.jpeg',
-//             email: 'mictosieunhan@gmail.com'
-//         },
-//         content: 'Tuyet doi trong chat luong',
-//         createAt: '11:46 18/11/2023',
-//         rank: 4
-//     }
-// ]
-
 export default function ReviewComponent(props: Props) {
-    const [comment, setComment] = useState()
+    const [comment, setComment] = useState<string>()
     const { createReView } = useReviewApi()
     return (
         <>
@@ -81,13 +39,12 @@ export default function ReviewComponent(props: Props) {
                         gap={'20px'}
                         alignItems={'center'}
                     >
-                        <Box sx={{
+                        <img style={{
                             height: '40px',
                             width: '40px',
                             borderRadius: '50%',
-                            backgroundColor: 'red'
-                        }}></Box>
-                        <TextField variant="standard" label="Comment" sx={{ flex: 1, fontSize: '12px', height: '65px' }} onChange={event => {
+                        }} src={props.imageUrl} alt="image" />
+                        <TextField value={comment} variant="standard" label="Comment" sx={{ flex: 1, fontSize: '12px', height: '65px' }} onChange={event => {
                             setComment(event.target.value as any)
                         }}></TextField>
                     </Stack>
@@ -102,9 +59,10 @@ export default function ReviewComponent(props: Props) {
                                 backgroundColor: '#D9D9D9'
                             }
                         }}
-                            onClick={() => {
-                                createReView({ content: comment, userId: props.id })
-                                props.resetListReview()
+                            onClick={async () => {
+                                await createReView({ content: comment, userId: props.id })
+                                await props.resetListReview()
+                                setComment("")
                             }}
                         >Comment</Button>
                     </Box>

@@ -22,7 +22,8 @@ export default NextAuth({
     },
     async jwt(params) {
       if (params.trigger == "signIn") {
-        const response: AxiosResponse<AuthenticateResponseBody> = await authenticate({ tokenId: params.account?.id_token, username: params.token.email as string, imageUrl: params.profile?.image });
+        console.log(params.user.image);
+        const response: AxiosResponse<AuthenticateResponseBody> = await authenticate({ tokenId: params.account?.id_token, username: params.token.email as string, imageUrl: params.user.image });
         params.token.accessToken = response.data.accessToken;
       }
       return params.token;
