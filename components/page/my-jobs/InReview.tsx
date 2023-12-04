@@ -5,12 +5,15 @@ import ModalToPostJob from "./CreateJobModel";
 import ClientJobTable from "./ClientJobTable";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import useJobApi from "@/api/jobs";
+import ClientTaskTable from "./ClientTaskTable";
 
 export default function InReviewJobComponent() {
   const [open, setOpen] = useState(false);
   const { asPath } = useRouter();
   const [isFreelancer, setIsFreelancer] = useState(true);
-
+  const [listData, setListData] = useState([]);
+  const { getAllJob } = useJobApi();
   useEffect(() => {
     if (asPath.includes("/freelancer")) {
       setIsFreelancer(true);
@@ -18,6 +21,15 @@ export default function InReviewJobComponent() {
       setIsFreelancer(false);
     }
   }, [asPath]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getAllJob();
+      setListData(data);
+    }
+    fetchData();
+  }, []);
+  console.log(listData);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   console.log(2);
@@ -41,7 +53,7 @@ export default function InReviewJobComponent() {
           <FreelancerJobTable
             filter={["IN REVIEW"]}
             isDuring={true}
-            toStatus={"DONE"}
+            toStatus={""}
           />
         </>
       ) : (
@@ -59,7 +71,11 @@ export default function InReviewJobComponent() {
               <Btn>Filter</Btn>
             </Stack>
           </Stack>
-          <ClientJobTable filter={["Doing", "In Review"]} />
+          <ClientTaskTable
+            filter={"IN REVIEW"}
+            listJobs={listData}
+            toStatus="DONE"
+          />
           <ModalToPostJob isOpen={open} handleClose={handleClose} />
         </>
       )}

@@ -116,7 +116,9 @@ const Inbox = () => {
             />
           </Stack>
         </Stack>
-        <Box flex={3}>
+        <Box flex={3} sx={{
+          borderLeft: '1px solid #ccc'
+        }}>
           <ChatWindow
             selectedConversation={selectedConversation}
             dataSource={dataSource}
@@ -303,7 +305,7 @@ const ChatWindow = ({
   }, [selectedConversation]);
 
   return (
-    <Box sx={{ height: "80vh", borderLeft: "1px solid #ccc" }} flex={5}>
+    <Box sx={{ height: "80vh" }} flex={5}>
       <Box
         padding={"15px 15px"}
         sx={{ borderBottom: "1px solid #ccc" }}
@@ -355,7 +357,7 @@ const ChatWindow = ({
             }}
           ></Box>
         </Stack>
-        <Stack gap={"8px"}>
+        <Stack gap={"15px"} padding={'5px 15px'}>
           {messageList.map(({ sender, message, id }) => (
             <Stack
               gap={"8px"}
@@ -376,8 +378,8 @@ const ChatWindow = ({
                     height={100}
                     width={100}
                     style={{
-                      height: "30px",
-                      width: "30px",
+                      height: "40px",
+                      width: "40px",
                       borderRadius: "50%",
                     }}
                   />
@@ -393,8 +395,8 @@ const ChatWindow = ({
                     height={100}
                     width={100}
                     style={{
-                      height: "30px",
-                      width: "30px",
+                      height: "40px",
+                      width: "40px",
                       borderRadius: "50%",
                     }}
                   />
@@ -444,14 +446,30 @@ const InputMessage = ({
   };
 
   return (
-    <Box sx={{ display: "flex", gap: 20 }} flex={1}>
+    <Box
+      sx={{
+        display: "flex",
+        gap: 2,
+        width: "100%",
+        height: "45px",
+        padding: "0 20px",
+      }}
+      flex={1}
+    >
       <input
+        style={{
+          width: "100%",
+          border: "1px solid #ccc",
+          borderRadius: "8px",
+        }}
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={(e) => e.keyCode === 13 && void handleSend()}
       />
 
-      <button onClick={() => void handleSend()}>Send</button>
+      <button onClick={() => void handleSend()}>
+        <i className="fa-regular fa-paper-plane"></i>
+      </button>
     </Box>
   );
 };
@@ -518,7 +536,20 @@ export const ButtonContact = ({
     }
   };
 
-  return <button onClick={() => void handleClick()}>Lien he</button>;
+  return (
+    <button
+      style={{
+        backgroundColor: "#3563c3",
+        color: '#fff',
+        padding: '6px 10px',
+        borderRadius: '6px',
+        cursor: 'pointer',
+      }}
+      onClick={() => void handleClick()}
+    >
+      Contact
+    </button>
+  );
   5;
 };
 

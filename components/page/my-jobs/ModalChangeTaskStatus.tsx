@@ -19,7 +19,7 @@ interface ModalChangeTaskStatusProps {
   open: boolean;
   handleClose: Function;
   taskId: number;
-  status: string;
+  status?: string;
 }
 
 export default function ModalChangeTaskStatus({
@@ -73,7 +73,7 @@ export default function ModalChangeTaskStatus({
               justifyContent={"space-between"}
             >
               <Button
-                onClick={changeStatus}
+                onClick={() => {status && changeStatus()}}
                 sx={{
                   backgroundColor: "#1876d3",
                   color: "#fff",

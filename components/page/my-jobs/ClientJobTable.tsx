@@ -100,6 +100,7 @@ const rows: ClientJob[] = [
 ];
 
 interface ClientJobTableProps {
+  filter?: string;
   listJobs: {
     id: number;
     name: string;
@@ -128,10 +129,10 @@ interface ClientJobTableProps {
   }[];
 }
 
-function ClientJobTable(props: any) {
+function ClientJobTable(props: ClientJobTableProps) {
   const router = useRouter();
   const { listJobs = [] } = props;
-  console.log(listJobs)
+  console.log(listJobs);
   return (
     <TableContainer
       component={Paper}
@@ -152,9 +153,7 @@ function ClientJobTable(props: any) {
         </TableHead>
         <TableBody>
           {listJobs.map((job: any, index: number) => {
-            return (
-              <MyOpenJobTable job={job} index={index} />
-            );
+            return <MyOpenJobTable job={job} index={index} />;
           })}
         </TableBody>
       </Table>
