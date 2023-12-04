@@ -77,7 +77,7 @@ function OptionsModal({
   const [list, setList] = useState([]);
   const theme = useTheme();
   const [personName, setPersonName] = useState<string[]>(defaultValue);
-  console.log(defaultValue, personName);
+  // console.log(defaultValue, personName);
   const options =
     type == "level"
       ? optionsForLevel
@@ -114,7 +114,7 @@ function OptionsModal({
     fetchData();
   }, []);
 
-  console.log(defaultValue);
+  // console.log(defaultValue);
   return (
     <div>
       <FormControl sx={{ width: "100%" }}>

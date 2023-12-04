@@ -22,6 +22,7 @@ interface defaultDataProps {
   address: string,
   dateOfBirth: string,
   phoneNumber: string,
+  fullName: string,
 }
 
 function ClientProfileContent() {
@@ -31,8 +32,9 @@ function ClientProfileContent() {
   const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
   const { data: session } = useSession();
+  const [fullName, setFullName] = useState(session?.user.name)
   const [inputs, setInputs] = useState({
-    fullName: session?.user.name,
+    
   });
   const [defaultData, setDefaultData] = useState<defaultDataProps>();
 
@@ -45,6 +47,7 @@ useEffect(
       const data = await hookProfile.getIntroduction()
       setSex(data.gender)
       setDefaultData(data)
+      
       setInputs(prev => ({...prev, ...data}))
     }
     fetchData()
@@ -63,7 +66,9 @@ useEffect(
       ? setAddress(value as string)
       : name == "phoneNumber"
       ? setPhoneNumber(value as string)
-      : setPassword(value as string);
+      : name == 'password' 
+      ? setPassword(value as string) 
+      : setFullName(value as string)
     setInputs((prev) => ({ ...prev, [name]: value }));
 };
 
@@ -112,7 +117,18 @@ async function handleSubmit() {
       >
         <Box flex={1}>
           <label htmlFor="">Full name: </label>
-          <TextInput id={"fullname"} label={""} value={session?.user.name} />
+          <input
+            style={{
+              width: "100%",
+              height: "40px",
+              backgroundColor: "transparent",
+              borderBottom: "1px solid #777575",
+            }}
+            name="fullName"
+            id={"fullname"}
+            defaultValue={defaultData?.fullName}
+            onChange={handleChange}
+          />
         </Box>
         <Box flex={1}>
           <label htmlFor="">Email: </label>

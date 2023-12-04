@@ -22,20 +22,15 @@ export default function PendingJobComponent() {
 
     useEffect(() => {
       async function fetchData() {
-        const userId = (await hookUser.getUserInformation()).data.id;
+        const userId = (await hookUser.getUserInformation()).id;
+        console.log(userId)
         const data = await hookApllication.getAllApplicationFreelancer(userId);
         data.map((item: any) => {
-          setListApllication((prev: any[]) => {
-            if (prev.includes(item.job.id)) {
-              return prev;
-            } else {
-              return [...prev, item.job.id];
-            }
-          });
+          setListApllication(data);
         });
         // const jobInfo = await hookJob.getJobDetail(data.job.id)
         console.log(data);
-        // setListApllication(data)
+        setListApllication(data)
       }
       fetchData();
     }, []);

@@ -20,19 +20,19 @@ interface Props {
 export default function JobDetail(props: Props) {
   const router = useRouter();
   const hookJobs = useJobApi();
-  const [dataJob, setDataJob] = useState<JobDetailData | undefined | any>(dataJobExample)
+  const [dataJob, setDataJob] = useState<JobDetailData | undefined | any>()
   const { id } = router.query;
   console.log(id)
-  // useEffect(
-  //   () => {
-  //       async function fetchData() {
-  //           const data = await hookJobs.getJobDetail(id)
-  //           console.log(data)
-  //           setDataJob(data)
-  //       }
-  //       fetchData()
-  //   }, [id]
-  // )
+  useEffect(
+    () => {
+        async function fetchData() {
+            const data = await hookJobs.getJobDetail(id)
+            console.log(data)
+            setDataJob(data)
+        }
+        fetchData()
+    }, [id]
+  )
   console.log(dataJob)
   return (
     <PageLayout>

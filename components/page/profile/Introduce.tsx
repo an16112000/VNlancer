@@ -56,7 +56,7 @@ export default function Introduce(props: IntroduceProps) {
           />
           <Box sx={{ height: "40px" }}>
             <Box sx={{ fontSize: "16px", fontWeight: "500" }}>
-              {session?.user.name}
+              {introduction?.fullName}
             </Box>
             <Box sx={{ fontSize: "12px", fontWeight: "300" }}>
               {introduction?.email}

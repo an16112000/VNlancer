@@ -24,7 +24,7 @@ export default function MyJobs() {
             </Tabs>
             <Box>
                 {
-                    content == Content.During ? <DuringJobComponent /> : <FinishedJobComponent />
+                    // content == Content.During ? <DuringJobComponent /> : <FinishedJobComponent />
                 }
             </Box>
         </PageLayout>

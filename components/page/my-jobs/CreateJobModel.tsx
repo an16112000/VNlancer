@@ -3,6 +3,7 @@ import useJobApi from "@/api/jobs";
 import Btn from "@/components/button";
 import { listCategoryExample } from "@/const";
 import OptionsModal from "@/features/settings/options-modal";
+import { Avatar } from "@/img";
 import { Category } from "@/model/category";
 import {
   Box,
@@ -15,6 +16,8 @@ import {
   Select,
   Stack,
   SxProps,
+  Tab,
+  Tabs,
   TextField,
 } from "@mui/material";
 import { useSession } from "next-auth/react";
@@ -22,9 +25,15 @@ import { SetStateAction, useEffect, useState } from "react";
 
 const names = listCategoryExample.map((item) => item);
 
+enum Content {
+  Information,
+  Image,
+}
+
 interface ModalToPostJobProps {
   isOpen: boolean;
   handleClose: any;
+  refreshList: Function;
 }
 
 const style: SxProps = {
@@ -44,11 +53,15 @@ const style: SxProps = {
   gap: "10px",
 };
 
-function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
+function ModalToPostJob({
+  isOpen,
+  handleClose,
+  refreshList,
+}: ModalToPostJobProps) {
   const [selectedNames, setSelectedNames] = useState([]);
 
   const { getAllCategory } = useCategoryApi();
-  const { createJob } = useJobApi();
+  const { createJob, uploadImage } = useJobApi();
   const [categories, setCategories] = useState<Category[]>([]);
   const { status } = useSession();
   // useEffect(() => {
@@ -61,16 +74,29 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
   //     })()
   // }, [getAllCategory, status])
   const [categoryId, setCategoryId] = useState<number>(0);
-  const [name, setName] = useState<string>('');
+  const [name, setName] = useState<string>("");
   const [budget, setBudget] = useState<number>(0);
-  const [information, setInformation] = useState<string>('');
-  const [dueDate, setDueDate] = useState<string>('');
-  const [jobLevel, setJobLevel] = useState<string>('');
-  const [employeeType, setEmployeeType] = useState<string>('');
+  const [information, setInformation] = useState<string>("");
+  const [dueDate, setDueDate] = useState<string>("");
+  const [levelId, setLevelId] = useState<number>(0);
+  const [workingTypeId, setWorkingTypeId] = useState<number>(0);
+  const [image, setImage] = useState(Avatar);
+  const [jobId, setJobId] = useState<number>(0);
 
+  const [content, setContent] = useState<Content>(Content.Information);
+
+  // function handleCreateJob() {
+
+  // }
+  console.log(categoryId, name, budget, information, levelId, workingTypeId);
   // handle Change Value Name Input
   function changeName(e: any) {
     setName(e.target.value);
+  }
+
+  function changeCategoryId(e: any) {
+    const id = e.target.value;
+    setCategoryId(id);
   }
 
   //handle Change Budget Input
@@ -85,148 +111,173 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
   function changeDueDate(e: any) {
     setDueDate(e.target.value);
   }
-  function changeJobLevel(e: any) {
-    setJobLevel(e.target.value);
+  function changeLevelId(e: any) {
+    setLevelId(e.target.value);
   }
-  function changeEmployeeType(e: any) {
-    setEmployeeType(e.target.value);
+  function changeWorkingTypeId(e: any) {
+    setWorkingTypeId(e.target.value);
+  }
+
+  function changeImage(e: any) {
+    setImage(e.target.value);
   }
 
   // Submit Form
   async function handleSubmitForm() {
-    try {
-      await createJob({
-        name,
-        budget,
-        information,
-        categoryId,
-        typeOfEmployee: employeeType,
-        jobLevel,
-        
-      });
+    if (content == Content.Information) {
+      try {
+        const data = await createJob({
+          name,
+          budget,
+          information,
+          categoryId,
+          workingTypeId,
+          levelId,
+        });
+        setJobId(data.id);
+        setContent(Content.Image);
+      } catch (exception) {
+        console.log(exception);
+      }
+    } else if (content == Content.Image) {
+      // await uploadImage(jobId, {
+      //   image: image
+      // })
+      refreshList();
       handleClose();
-    } catch (exception) {
-      console.log(exception);
     }
   }
-  console.log(selectedNames);
+  // console.log(selectedNames);
   return (
     <Modal open={isOpen} onClose={handleClose} disableScrollLock>
       <FormControl sx={style}>
-        <h1
-          style={{
-            textAlign: "center",
-            fontSize: "18px",
-            fontWeight: "500",
-          }}
+        <Tabs
+          value={content}
+          onChange={(event: any, value) => setContent(value)}
+          sx={{ borderRadius: "8px" }}
         >
-          POST A JOB
-        </h1>
+          <Tab label="Information" value={Content.Information} />
+          <Tab disabled label="Image" value={Content.Image} />
+        </Tabs>
+        {content == Content.Information ? (
+          <>
+            <h1
+              style={{
+                textAlign: "center",
+                fontSize: "18px",
+                fontWeight: "500",
+              }}
+            >
+              POST A JOB
+            </h1>
 
-        {/* <TextField select label="Type" focused onChange={e => {
-                    setCategoryId(Number(e.target.value))
-                }}>
-                    {categories.map((category, index) => <MenuItem key={index} value={category.id}>{category.name}</MenuItem>)}
-                </TextField>  */}
+            <Box>
+              <p>Categories: </p>
+              <OptionsModal type={"categories"} onChange={changeCategoryId} />
+            </Box>
 
-        <Box>
-          <p>Categories: </p>
-          <OptionsModal type={"categories"} isMutiple={true} />
-        </Box>
+            <Box>
+              <p>Name:</p>
+              <TextField
+                label="Name"
+                variant="outlined"
+                focused
+                value={name}
+                onChange={changeName}
+                sx={{
+                  width: "100%",
+                  label: {
+                    color: "#ccc !important",
+                  },
+                  fieldset: {
+                    border: "1px solid #ccc",
+                  },
+                }}
+              />
+            </Box>
 
-        <Box>
-          <p>Name:</p>
-          <TextField
-            label="Name"
-            variant="outlined"
-            focused
-            value={name}
-            onChange={changeName}
-            sx={{
-              width: "100%",
-              label: {
-                color: "#ccc !important",
-              },
-              fieldset: {
-                border: "1px solid #ccc",
-              },
-            }}
-          />
-        </Box>
+            <Box>
+              <p>Budget:</p>
+              <TextField
+                type="number"
+                label="Budget"
+                variant="outlined"
+                focused
+                value={budget}
+                onChange={changeBudget}
+                sx={{
+                  width: "100%",
+                  label: {
+                    color: "#ccc !important",
+                  },
+                  fieldset: {
+                    border: "1px solid #ccc",
+                  },
+                }}
+              />
+            </Box>
 
-        <Box>
-          <p>Budget:</p>
-          <TextField
-            type="number"
-            label="Budget"
-            variant="outlined"
-            focused
-            value={budget}
-            onChange={changeBudget}
-            sx={{
-              width: "100%",
-              label: {
-                color: "#ccc !important",
-              },
-              fieldset: {
-                border: "1px solid #ccc",
-              },
-            }}
-          />
-        </Box>
+            <Box>
+              <p>Due Date:</p>
+              <TextField
+                type="date"
+                label="Due Date"
+                variant="outlined"
+                focused
+                value={dueDate}
+                onChange={changeDueDate}
+                sx={{
+                  width: "100%",
+                  label: {
+                    color: "#ccc !important",
+                  },
+                  fieldset: {
+                    border: "1px solid #ccc",
+                  },
+                }}
+              />
+            </Box>
 
-        <Box>
-          <p>Due Date:</p>
-          <TextField
-            type="date"
-            label="Due Date"
-            variant="outlined"
-            focused
-            value={dueDate}
-            onChange={changeDueDate}
-            sx={{
-              width: "100%",
-              label: {
-                color: "#ccc !important",
-              },
-              fieldset: {
-                border: "1px solid #ccc",
-              },
-            }}
-          />
-        </Box>
+            <Box>
+              <p>Working Types:</p>
+              <OptionsModal
+                type={"working-type"}
+                onChange={changeWorkingTypeId}
+              />
+            </Box>
 
-        <Box>
-          <p>Working Types:</p>
-          <OptionsModal type={"working-type"} isMutiple={true} />
-        </Box>
+            <Box>
+              <p>Levels:</p>
+              <OptionsModal type={"level"} onChange={changeLevelId} />
+            </Box>
 
-        <Box>
-          <p>Levels:</p>
-          <OptionsModal type={"level"} isMutiple={true} />
-        </Box>
-
-        <Box>
-          <p>Informations: </p>
-          <TextField
-            type="text"
-            label="Information"
-            variant="outlined"
-            focused
-            value={information}
-            onChange={changeInformation}
-            sx={{
-              width: "100%",
-              label: {
-                color: "#ccc !important",
-              },
-              fieldset: {
-                border: "1px solid #ccc",
-              },
-            }}
-          />
-        </Box>
-
+            <Box>
+              <p>Informations: </p>
+              <TextField
+                type="text"
+                label="Information"
+                variant="outlined"
+                focused
+                value={information}
+                onChange={changeInformation}
+                sx={{
+                  width: "100%",
+                  label: {
+                    color: "#ccc !important",
+                  },
+                  fieldset: {
+                    border: "1px solid #ccc",
+                  },
+                }}
+              />
+            </Box>
+          </>
+        ) : (
+          <>
+            <Box sx={{ fontSize: "18px", fontWeight: 500 }}>Upload Image</Box>
+            <input type="file" onChange={changeImage} />
+          </>
+        )}
         <Btn onClick={handleSubmitForm}>Submit</Btn>
       </FormControl>
     </Modal>

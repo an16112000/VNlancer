@@ -4,13 +4,16 @@ import { AxiosResponse } from "axios"
 import { useSession } from "next-auth/react"
 
 export default function useJobApi() {
-    const { data } = useSession()
-    async function createJob(requestBody: CreateJobRequestBody): Promise<AxiosResponse<CreateJobResponseBody>> {
-        return await axiosInstance.post("jobs", requestBody, {
+    const { data: session } = useSession()
+    async function createJob(requestBody: CreateJobRequestBody): Promise<CreateJobResponseBody> {
+        const response = await axiosInstance.post("jobs", requestBody, {
             headers: {
-                Authorization: `Bearer ${data?.accessToken}`
+                Authorization: `Bearer ${session?.accessToken}`
             }
         })
+        const data = response.data
+        console.log(data)
+        return data
     }
 
     async function getAllJob() {
@@ -19,18 +22,25 @@ export default function useJobApi() {
         const data = response.data.jobs
         return data;
     }
-    async function getJobDetail(jobId: any): Promise<AxiosResponse<JobDetailData | undefined>> {
+
+    async function getJobDetail(jobId: string) {
+        console.log(jobId)
         const response = await axiosInstance.get(`/jobs/${jobId}`)
         const data = response.data
         console.log(data)
         return data
     }
 
+    async function uploadImage(jobId: number, data: any) {
+        await axiosInstance.post(`/jobs/${jobId}/upload-image`, data)
+    }
+
 
     return {
         createJob,
         getAllJob,
-        getJobDetail
+        getJobDetail,
+        uploadImage
     }
 }
 
@@ -39,8 +49,8 @@ export interface CreateJobRequestBody {
     budget: number,
     information: string,
     categoryId: number,
-    typeOfEmployee: string,
-    jobLevel: string
+    workingTypeId: number,
+    levelId: number
 }
 
 export interface CreateJobResponseBody {

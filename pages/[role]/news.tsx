@@ -13,17 +13,17 @@ import { useEffect, useState } from "react";
 function NewsPage() {
     const router = useRouter()
     const role = router.query.role
-    const [data, setData] = useState<JobDetailData[]>(listDataJobExample);
+    const [data, setData] = useState<JobDetailData[]>([]);
     const { getAllJob } = useJobApi();
-    // useEffect(
-    //     () => {
-    //         async function fetchJobApi() {
-    //           const dataJobs = await getAllJob();
-    //           setData(dataJobs)
-    //         }
-    //         fetchJobApi()
-    //     }, []
-    // )
+    useEffect(
+        () => {
+            async function fetchJobApi() {
+              const dataJobs = await getAllJob();
+              setData(dataJobs)
+            }
+            fetchJobApi()
+        }, []
+    )
     
     return (
         <PageLayout>

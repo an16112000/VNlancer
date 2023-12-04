@@ -48,42 +48,101 @@ export default function ProfileComponent() {
         }, []
     )
     return (
-        <Box>
-            <Stack gap={'15px'}>
-                <Box sx={{ fontSize: '16px', fontWeight: '500' }}>Personal Info</Box>
-                <Stack gap={'10px'}>
-                    <Stack flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'}>
-                        <Box flex={1}>
-                            <Box sx={{ fontSize: '14px', fontWeight: 300, color: '#7C8493' }}>Full Name</Box>
-                            <Box sx={{ fontSize: '14px', fontWeight: 500, color: '#25324B' }}>{session?.user.name}</Box>
-                        </Box>
-                        <Box flex={1}>
-                            <Box sx={{ fontSize: '14px', fontWeight: 300, color: '#7C8493' }}>Gender</Box>
-                            <Box sx={{ fontSize: '14px', fontWeight: 500, color: '#25324B' }}>{introduction?.gender}</Box>
-                        </Box>
-                    </Stack>
-
-                    <Stack flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'}>
-                        <Box flex={1}>
-                            <Box sx={{ fontSize: '14px', fontWeight: 300, color: '#7C8493' }}>Date of Birth</Box>
-                            <Box sx={{ fontSize: '14px', fontWeight: 500, color: '#25324B' }}>{introduction?.dateOfBirth}</Box>
-                        </Box>
-                        <Box flex={1}>
-                            <Box sx={{ fontSize: '14px', fontWeight: 300, color: '#7C8493' }}>Phone Number</Box>
-                            <Box sx={{ fontSize: '14px', fontWeight: 500, color: '#25324B' }}>{introduction?.phoneNumber}</Box>
-                        </Box>
-                    </Stack>
-
-                    <Stack flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'}>
-                        <Box flex={1}>
-                            <Box sx={{ fontSize: '14px', fontWeight: 300, color: '#7C8493' }}>Address</Box>
-                            <Box sx={{ fontSize: '14px', fontWeight: 500, color: '#25324B' }}>{introduction?.address}</Box>
-                        </Box>
-                    </Stack>
-                </Stack>
-                <Box sx={{ height: '1px', width: '100%', border: '0.5px solid #D6DDEB', margin: '15px 0' }}></Box>
-                <ProfessionalInfoComponent />
+      <Box>
+        <Stack gap={"15px"}>
+          <Box sx={{ fontSize: "16px", fontWeight: "500" }}>Personal Info</Box>
+          <Stack gap={"10px"}>
+            <Stack
+              flexDirection={"row"}
+              justifyContent={"space-between"}
+              alignItems={"center"}
+            >
+              <Box flex={1}>
+                <Box
+                  sx={{ fontSize: "14px", fontWeight: 300, color: "#7C8493" }}
+                >
+                  Full Name
+                </Box>
+                <Box
+                  sx={{ fontSize: "14px", fontWeight: 500, color: "#25324B" }}
+                >
+                  {introduction?.fullName}
+                </Box>
+              </Box>
+              <Box flex={1}>
+                <Box
+                  sx={{ fontSize: "14px", fontWeight: 300, color: "#7C8493" }}
+                >
+                  Gender
+                </Box>
+                <Box
+                  sx={{ fontSize: "14px", fontWeight: 500, color: "#25324B" }}
+                >
+                  {introduction?.gender}
+                </Box>
+              </Box>
             </Stack>
-        </Box>
-    )
+
+            <Stack
+              flexDirection={"row"}
+              justifyContent={"space-between"}
+              alignItems={"center"}
+            >
+              <Box flex={1}>
+                <Box
+                  sx={{ fontSize: "14px", fontWeight: 300, color: "#7C8493" }}
+                >
+                  Date of Birth
+                </Box>
+                <Box
+                  sx={{ fontSize: "14px", fontWeight: 500, color: "#25324B" }}
+                >
+                  {introduction?.dateOfBirth}
+                </Box>
+              </Box>
+              <Box flex={1}>
+                <Box
+                  sx={{ fontSize: "14px", fontWeight: 300, color: "#7C8493" }}
+                >
+                  Phone Number
+                </Box>
+                <Box
+                  sx={{ fontSize: "14px", fontWeight: 500, color: "#25324B" }}
+                >
+                  {introduction?.phoneNumber}
+                </Box>
+              </Box>
+            </Stack>
+
+            <Stack
+              flexDirection={"row"}
+              justifyContent={"space-between"}
+              alignItems={"center"}
+            >
+              <Box flex={1}>
+                <Box
+                  sx={{ fontSize: "14px", fontWeight: 300, color: "#7C8493" }}
+                >
+                  Address
+                </Box>
+                <Box
+                  sx={{ fontSize: "14px", fontWeight: 500, color: "#25324B" }}
+                >
+                  {introduction?.address}
+                </Box>
+              </Box>
+            </Stack>
+          </Stack>
+          <Box
+            sx={{
+              height: "1px",
+              width: "100%",
+              border: "0.5px solid #D6DDEB",
+              margin: "15px 0",
+            }}
+          ></Box>
+          <ProfessionalInfoComponent />
+        </Stack>
+      </Box>
+    );
 }

@@ -30,13 +30,7 @@ export default function ProfessionalInfoComponent() {
         sx={{ borderRadius: "8px" }}
       >
         {listProfessional.map((profile: any, index: number) => {
-          return (
-            <Tab
-              key={profile.id}
-              label={`CV ${profile.id}`}
-              value={profile.id}
-            />
-          );
+          return <Tab key={index} label={`CV ${index+1}`} value={profile.id} />;
         })}
         {/* <Tab label="Review" value={Content.review} /> */}
       </Tabs>

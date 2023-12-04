@@ -69,33 +69,38 @@ const rows: Task[] = [
 interface FreelancerJobTableProps {
   filter: string[];
   isDuring: boolean;
-  listApplication: number[];
+  listApplication: {
+    id: number;
+    user: {
+      id: number;
+    };
+    profile: {
+      id: number;
+    };
+    job: {
+      id: number;
+      name: string;
+      workingType: {
+        id: number;
+        name: string;
+      };
+    };
+    status: JobStatus;
+  }[];
 }
 
 function ListApplicationFreelancer(props: FreelancerJobTableProps) {
   const [listJob, setListJob] = useState<any[]>([]);
+  const { listApplication } = props;
   const router = useRouter();
   const hookJob = useJobApi();
-
-  useEffect(() => {
-    function fetchData() {
-      props.listApplication.map(async (item: number) => {
-        const data = await hookJob.getJobDetail(item);
-        console.log(data);
-        setListJob((prev) => [...prev, data]);
-      });
-    }
-    fetchData();
-  }, []);
+console.log(listApplication)
+  useEffect(() => {}, []);
 
   console.log(listJob);
-  
-  function handleClick(task: Task) {
-    if (props.isDuring == true) {
-      router.push(`/freelancer/job/${task.id}`);
-    } else {
-      router.push(`/jobs/${task.id}`);
-    }
+
+  function handleClick(jobId: number) {
+      router.push(`/jobs/${jobId}`);
   }
   return (
     <TableContainer component={Paper} sx={{ color: "text.third" }}>
@@ -113,31 +118,30 @@ function ListApplicationFreelancer(props: FreelancerJobTableProps) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {listJob.map((job, index) => {
-            if (props.filter.includes(job.status))
-              return (
-                <TableRow onClick={() => handleClick(job)} key={job.name}>
-                  <TableCell align="center" sx={{ color: "text.third" }}>
-                    {job.id}
-                  </TableCell>
-                  <TableCell sx={{ color: "text.third" }} align="center">
-                    <Stack
-                      flexDirection="row"
-                      justifyContent="center"
-                      gap={"10px"}
-                    >
-                      <i className="fa-solid fa-building"></i>
-                      {job.name}
-                    </Stack>
-                  </TableCell>
-                  <TableCell sx={{ color: "text.third" }} align="center">
-                    {job.applyDate}
-                  </TableCell>
-                  <TableCell sx={{ color: "text.third" }} align="center">
-                    <JobStatusLabel jobStatus={job.status} />
-                  </TableCell>
-                </TableRow>
-              );
+          {listApplication.map((job, index) => {
+            return (
+              <TableRow onClick={() => handleClick(job.job.id)} key={index} sx={{cursor: 'pointer'}}>
+                <TableCell align="center" sx={{ color: "text.third" }}>
+                  {job.id}
+                </TableCell>
+                <TableCell sx={{ color: "text.third" }} align="center">
+                  <Stack
+                    flexDirection="row"
+                    justifyContent="center"
+                    gap={"10px"}
+                  >
+                    <i className="fa-solid fa-building"></i>
+                    {job.job.name}
+                  </Stack>
+                </TableCell>
+                <TableCell sx={{ color: "text.third" }} align="center">
+                  {job.job.workingType.name}
+                </TableCell>
+                <TableCell sx={{ color: "text.third" }} align="center">
+                  <JobStatusLabel jobStatus={job.status} />
+                </TableCell>
+              </TableRow>
+            );
           })}
         </TableBody>
       </Table>

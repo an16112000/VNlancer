@@ -2,6 +2,7 @@ import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import { AxiosResponse } from 'axios'
 import { AuthenticateResponseBody, authenticate } from '@/api/auth'
+import { getToken } from 'next-auth/jwt'
 
 
 
@@ -21,6 +22,7 @@ export default NextAuth({
     },
     async jwt(params) {
       if (params.trigger == "signIn") {
+        // console.log(params.account?.id_token)
         const response: AxiosResponse<AuthenticateResponseBody> = await authenticate({ tokenId: params.account?.id_token, username: params.token.email as string });
         params.token.accessToken = response.data.accessToken;
       }

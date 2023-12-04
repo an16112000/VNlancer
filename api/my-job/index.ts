@@ -3,13 +3,15 @@ import { useSession } from "next-auth/react"
 
 export default function useMyJobApi() {
     const { data, status } = useSession()
-    const getMyJob = async () => {
+    const getMyJob = async (userId: number) => {
         if (status === "authenticated") {
-            return await axiosInstance.get("http://localhost:9000/my-jobs", {
-                headers: {
-                    Authorization: `Bearer ${data?.accessToken}`
+            const respose = await axiosInstance.get(`/jobs`, {
+                params: {
+                    userId: userId
                 }
             })
+            const data = respose.data.jobs
+            return data
         }
     }
     const searchJob = async () => {

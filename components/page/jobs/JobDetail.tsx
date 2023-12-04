@@ -43,7 +43,7 @@ interface Props {
 
 export default function JobDetail({ jobDetail }: Props) {
   const [status, setStatus] = useState(jobDetail.status);
-
+  console.log(jobDetail);
   const handleChange = (event: SelectChangeEvent) => {
     setStatus(event.target.value as string);
   };
@@ -72,7 +72,7 @@ export default function JobDetail({ jobDetail }: Props) {
             justifyContent={"space-between"}
           >
             <Box sx={{ fontSize: "20px", fontWeight: 500 }}>
-              {jobDetail.name.toUpperCase()}
+              {/* {jobDetail.name.toUpperCase()} */}
             </Box>
             <Button>
               <FormControl>
@@ -102,7 +102,7 @@ export default function JobDetail({ jobDetail }: Props) {
                 borderRadius: "8px",
               }}
             ></Box>
-            <Box sx={{ fontSize: "16px" }}>{jobDetail.owner.fullName}</Box>
+            {/* <Box sx={{ fontSize: "16px" }}>{jobDetail.owner.fullName}</Box> */}
           </Stack>
         </Stack>
 
@@ -114,7 +114,7 @@ export default function JobDetail({ jobDetail }: Props) {
           <Box sx={{ color: "#297958", fontSize: "16px" }}>
             {jobDetail.budget}$
           </Box>
-          <Box>{jobDetail.workingType.name}</Box>
+          <Box>{jobDetail.workingType && jobDetail.workingType.name}</Box>
         </Stack>
 
         {/* <Stack
@@ -129,8 +129,8 @@ export default function JobDetail({ jobDetail }: Props) {
 
         <Stack>
           <ul>
-            {jobDetail.level.name ?? <li>{jobDetail.level.name}</li>}
-            {jobDetail.category.name}
+            {jobDetail.level?.name && <li>{jobDetail.level.name}</li>}
+            {jobDetail.category?.name}
           </ul>
         </Stack>
 

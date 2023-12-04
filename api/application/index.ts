@@ -29,8 +29,22 @@ export default function useApplicationApi() {
         return data
     }
 
+    async function getAllJobApplication(jobId: number) {
+        const response = await axiosInstance.get('/applications', {
+            params: {
+                jobId: jobId
+            },
+            headers: {
+                Authorization: `Bearer ${session?.accessToken}`
+            }
+        })
+        const data = response.data
+        return data
+    }
+
     return {
         createApllication,
-        getAllApplicationFreelancer
+        getAllApplicationFreelancer,
+        getAllJobApplication
     }
 }
