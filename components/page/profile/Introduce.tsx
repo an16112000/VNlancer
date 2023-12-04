@@ -6,35 +6,16 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 interface IntroduceProps {
-  name?: string;
-  level?: string;
-  workExperience?: string;
-  imageUrl?: string;
-}
-
-interface introductionProps {
-  fullName: string;
-  address: string;
-  dateOfBirth: string;
-  email: string;
-  gender: string;
-  phoneNumber: string;
+  fullName?: string;
+  address?: string;
+  dateOfBirth?: string;
+  email?: string;
+  gender?: string;
+  phoneNumber?: string;
+  imageUrl?: string
 }
 
 export default function Introduce(props: IntroduceProps) {
-  const [introduction, setIntroduction] = useState<introductionProps>();
-  const { data: session } = useSession();
-  const hookProfile = useProfileAPI();
-
-  useEffect(() => {
-    async function fetchData() {
-      const data = await hookProfile.getIntroduction();
-      console.log(data);
-      setIntroduction(data);
-    }
-    fetchData();
-  }, [hookProfile]);
-  console.log(session);
   return (
     <Box
       sx={{
@@ -49,17 +30,17 @@ export default function Introduce(props: IntroduceProps) {
           <Image
             unoptimized
             alt=""
-            src={session?.user.image || Avatar}
+            src={props.imageUrl || Avatar}
             width={1}
             height={1}
             style={{ height: "60px", width: "60px", borderRadius: "50%" }}
           />
           <Box sx={{ height: "40px" }}>
             <Box sx={{ fontSize: "16px", fontWeight: "500" }}>
-              {introduction?.fullName}
+              {props?.fullName}
             </Box>
             <Box sx={{ fontSize: "12px", fontWeight: "300" }}>
-              {introduction?.email}
+              {props?.email}
             </Box>
           </Box>
         </Stack>
@@ -80,7 +61,7 @@ export default function Introduce(props: IntroduceProps) {
                 Email
               </Box>
               <Box sx={{ fontSize: "14px", color: "#25324B" }}>
-                {session?.user.email}
+                {props.email}
               </Box>
             </Box>
           </Stack>
@@ -96,7 +77,7 @@ export default function Introduce(props: IntroduceProps) {
                 Phone
               </Box>
               <Box sx={{ fontSize: "14px", color: "#25324B" }}>
-                {introduction?.phoneNumber}
+                {props?.phoneNumber}
               </Box>
             </Box>
           </Stack>
@@ -110,7 +91,7 @@ export default function Introduce(props: IntroduceProps) {
                 Address
               </Box>
               <Box sx={{ fontSize: "14px", color: "#25324B" }}>
-                {introduction?.address}
+                {props?.address}
               </Box>
             </Box>
           </Stack>

@@ -5,30 +5,39 @@ import { JSX } from "react";
 import NormalStar from "./NormalStar";
 import { EventData } from "../jobs/ListEvent";
 
-interface CommentProps {
-    children: EventData
+interface Props {
+    id?: number
+    content?: string
+    rate?: number
+    writer?: Writer
+    createAt?: string
 }
 
-export default function Comment({children}: CommentProps) {
-    const {rank = 0} = children
-    function handleGoldenStar() {
-        let Component: JSX.Element[] = []
-        for (var i = 0; i < rank; i++) {
-            Component.push(<GoldenStar />)
-        }
-        return Component
-    }
-    var amountOfGoldenStar = handleGoldenStar()
+interface Writer {
+    id?: number
+    fullName?: string
+    imageUrl?: string
+}
 
-    function handleNormalStar() {
-        let Component: JSX.Element[] = []
-        for (var i = 0; i < 5-rank; i++) {
-            Component.push(<NormalStar />)
-            // return Component
-        }
-        return Component
-    }
-    var amountOfNormalStar = handleNormalStar()
+export default function Comment(props: Props) {
+    // function handleGoldenStar() {
+    //     let Component: JSX.Element[] = []
+    //     for (var i = 0; i < rank; i++) {
+    //         Component.push(<GoldenStar />)
+    //     }
+    //     return Component
+    // }
+    // var amountOfGoldenStar = handleGoldenStar()
+
+    // function handleNormalStar() {
+    //     let Component: JSX.Element[] = []
+    //     for (var i = 0; i < 5 - rank; i++) {
+    //         Component.push(<NormalStar />)
+    //         // return Component
+    //     }
+    //     return Component
+    // }
+    // var amountOfNormalStar = handleNormalStar()
     return (
         <>
             <Stack
@@ -46,19 +55,19 @@ export default function Comment({children}: CommentProps) {
                         backgroundColor: 'red'
                     }}></Box>
                     <Stack>
-                        <Box sx={{ fontSize: '14px', fontWeight: 500 }}>{children.user.email}</Box>
-                        <Box sx={{ fontSize: '8px', fontWeight: 500 }}>{children.createAt}</Box>
+                        <Box sx={{ fontSize: '14px', fontWeight: 500 }}>{props.writer?.fullName}</Box>
+                        <Box sx={{ fontSize: '8px', fontWeight: 500 }}>{props.createAt}</Box>
                     </Stack>
                 </Stack>
 
-                <Box sx={{ fontSize: '10px', paddingLeft: '60px' }}>{children.content}</Box>
+                <Box sx={{ fontSize: '10px', paddingLeft: '60px' }}>{props.content}</Box>
                 <Stack
                     flexDirection={'row'}
                     alignItems={'center'}
                     gap={'5px'}
                     marginLeft={'60px'}
                 >
-                    {
+                    {/* {
                         amountOfGoldenStar.map(
                             (item: any, index: number) => <Box key={index}>{item}</Box>
                         )
@@ -67,7 +76,7 @@ export default function Comment({children}: CommentProps) {
                         amountOfNormalStar.map(
                             (item: any, index: number) => <Box key={index}>{item}</Box>
                         )
-                    }
+                    } */}
                 </Stack>
             </Stack>
 
