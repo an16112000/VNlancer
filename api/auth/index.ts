@@ -2,7 +2,8 @@ import { axiosInstance } from "@/ultils/axiosInstance";
 
 interface AuthenticateRequestBody {
     tokenId?: string,
-    username?: string
+    username?: string,
+    imageUrl?: string
 }
 
 export interface AuthenticateResponseBody {
