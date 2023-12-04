@@ -1,9 +1,11 @@
 import { Box, Tab, Tabs } from "@mui/material";
 import { PageLayoutForAdmin } from "@/layout/PageLayoutForAdmin";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LevelManagementComponent from "@/components/page/admin/settings-for-admin/LevelManagementComponent";
 import CategoryManagementComponent from "@/components/page/admin/settings-for-admin/CategoryManagementComponent";
 import WorkingTypeManagementComponent from "@/components/page/admin/settings-for-admin/WorkingTypeManagementComponent";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 enum Content {
   LevelManagement,
@@ -13,6 +15,13 @@ enum Content {
 
 export default function SettingsForAdmin() {
   const [content, setContent] = useState<Content>(Content.LevelManagement);
+  const { data, status } = useSession()
+  const router = useRouter()
+  useEffect(() => {
+    console.log(data?.isAdmin);
+
+    if (!data?.isAdmin && status == 'authenticated') router.push("/")
+  })
 
   return (
     <PageLayoutForAdmin>

@@ -14,6 +14,7 @@ export default NextAuth({
   callbacks: {
     async session(params) {
       params.session.accessToken = params.token.accessToken as string
+      params.session.isAdmin = params.token.isAdmin as boolean
       return params.session;
     },
     async jwt(params) {
@@ -21,6 +22,8 @@ export default NextAuth({
         console.log(params.user.image);
         const response: AxiosResponse<AuthenticateResponseBody> = await authenticate({ tokenId: params.account?.id_token, username: params.token.email as string, imageUrl: params.user.image });
         params.token.accessToken = response.data.accessToken;
+        console.log("data", response.data);
+
         if (response.data.role == "ADMIN") {
           params.token.isAdmin = true;
         }
