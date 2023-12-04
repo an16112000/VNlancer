@@ -9,8 +9,6 @@ interface Prop {
     list: JobDetailData[];
 }
 
-
-
 export interface JobOwner {
     id: number,
     ownerName: string,
@@ -32,10 +30,6 @@ export default function NewJobs(prop: Prop) {
                             </Box>
                         </Stack>
                         <Stack gap={'6px'}>
-                            {/* <Stack flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'}>
-                                <Box sx={{ fontSize: '16px' }}><p style={{ fontWeight: 500, display: 'inline' }}>Time:</p> {job.postDate} - {job.dueDate}</Box>
-                                <Box></Box>
-                            </Stack> */}
                             <Stack flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'}>
                                 <Box><p style={{ fontWeight: 500, display: 'inline' }}>Budget:</p> {VND.format(job.budget)}</Box>
                                 <Box><p style={{ fontWeight: 500, display: 'inline' }}>Level:</p> {job.level.name}</Box>
@@ -50,7 +44,7 @@ export default function NewJobs(prop: Prop) {
                             border: '1px solid #ccc',
                             borderRadius: '8px'
                         }}>
-                            <Image unoptimized style={{ height: 'auto', width: '100%', backgroundSize: 'cover' }} width={1000} height={100} src={job.imageUrl || Avatar} alt="" />
+                            <img width='auto' height='100%' src={`http://${job.imageUrl}`} alt="Job Image" />
                         </Box>
                         <Box>
                             <Box sx={{ textOverflow: 'ellipsis', overflow: 'hidden', WebkitLineClamp: 4, WebkitBoxOrient: "vertical", display: '-webkit-box', padding: '6px 12px' }}>{job.information}</Box>
