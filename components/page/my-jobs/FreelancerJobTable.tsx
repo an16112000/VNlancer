@@ -115,11 +115,7 @@ function FreelancerJobTable(props: FreelancerJobTableProps) {
   const handleClose = () => setOpen(false);
 
   function handleClick(task: Task) {
-    if (props.isDuring == true) {
       router.push(`/freelancer/job/${task.id}`);
-    } else {
-      router.push(`/jobs/${task.id}`);
-    }
   }
   useEffect(() => {
     async function fetchData() {

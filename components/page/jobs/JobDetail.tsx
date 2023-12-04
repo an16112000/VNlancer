@@ -12,6 +12,8 @@ import {
   Stack,
 } from "@mui/material";
 import { useState } from "react";
+import { JobStatus } from "../dashboard/JobStatusLabel";
+import { ButtonContact } from "@/pages/inbox";
 
 // export interface JobDetailData {
 //   category: any;
@@ -39,14 +41,9 @@ interface Props {
   jobDetail: JobDetailData;
 }
 
-
-
 export default function JobDetail({ jobDetail }: Props) {
-  const [status, setStatus] = useState(jobDetail.status);
   console.log(jobDetail);
-  const handleChange = (event: SelectChangeEvent) => {
-    setStatus(event.target.value as string);
-  };
+
   return (
     <>
       <Stack
@@ -57,13 +54,16 @@ export default function JobDetail({ jobDetail }: Props) {
         }}
         gap={"15px"}
       >
-        <Box
-          sx={{
-            fontSize: "16px",
-          }}
-        >
-          Fix Time
-        </Box>
+        <Stack flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'}>
+          <Box
+            sx={{
+              fontSize: "16px",
+            }}
+          >
+            Fix Time
+          </Box>
+          <ButtonContact otherPersonEmail={jobDetail.owner.email} />
+        </Stack>
 
         <Stack>
           <Stack
@@ -72,25 +72,9 @@ export default function JobDetail({ jobDetail }: Props) {
             justifyContent={"space-between"}
           >
             <Box sx={{ fontSize: "20px", fontWeight: 500 }}>
-              {/* {jobDetail.name.toUpperCase()} */}
+              {jobDetail.name.toUpperCase()}
             </Box>
-            <Button>
-              <FormControl>
-                <InputLabel id="status-job">Status</InputLabel>
-                <Select
-                  onChange={handleChange}
-                  id="status-job"
-                  value={status}
-                  label="status"
-                  sx={{ textTransform: "none" }}
-                >
-                  <MenuItem value={"Open"}>Open</MenuItem>
-                  <MenuItem value={"Applied"}>Applied</MenuItem>
-                  <MenuItem value={"During"}>During</MenuItem>
-                  <MenuItem value={"Close"}>Close</MenuItem>
-                </Select>
-              </FormControl>
-            </Button>
+            <Button></Button>
           </Stack>
 
           <Stack flexDirection={"row"} alignItems={"center"} gap={"15px"}>
@@ -102,7 +86,7 @@ export default function JobDetail({ jobDetail }: Props) {
                 borderRadius: "8px",
               }}
             ></Box>
-            {/* <Box sx={{ fontSize: "16px" }}>{jobDetail.owner.fullName}</Box> */}
+            <Box sx={{ fontSize: "16px" }}>{jobDetail.owner.fullName}</Box>
           </Stack>
         </Stack>
 

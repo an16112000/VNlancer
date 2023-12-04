@@ -5,50 +5,77 @@ import ModalToPostJob from "./CreateJobModel"
 import ClientJobTable from "./ClientJobTable"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/router"
+import useJobApi from "@/api/jobs"
+import ClientTaskTable from "./ClientTaskTable"
 
 export default function FinishedJobComponent() {
     const [open, setOpen] = useState(false);
-    const { asPath } = useRouter()
-    const [isFreelancer, setIsFreelancer] = useState(true)
-
-    console.log(2)
+    const { asPath } = useRouter();
+    const [isFreelancer, setIsFreelancer] = useState(true);
+    const [listData, setListData] = useState([]);
+    const { getAllJob } = useJobApi();
+    useEffect(() => {
+      if (asPath.includes("/freelancer")) {
+        setIsFreelancer(true);
+      } else {
+        setIsFreelancer(false);
+      }
+    }, [asPath]);
 
     useEffect(() => {
-        if (asPath.includes("/freelancer")) {
-            setIsFreelancer(true)
-        }
-        else {
-            setIsFreelancer(false)
-        }
-    }, [asPath])
+      async function fetchData() {
+        const data = await getAllJob();
+        setListData(data);
+      }
+      fetchData();
+    }, []);
+    console.log(listData);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    console.log(2);
     return (
-        <>
-            {isFreelancer ?
-                <>
-                    <Stack paddingY='10px' flexDirection={'row'} justifyContent='space-between'>
-                        <Box sx={{ fontSize: '16px', fontWeight: '500' }}>Applications History</Box>
-                        <Stack gap={'10px'} flexDirection='row' alignItems='center'>
-                            <Btn>Search</Btn>
-                            <Btn>Filter</Btn>
-                        </Stack>
-                    </Stack>
-                    <FreelancerJobTable filter={["Done"]} isDuring={true} toStatus={''} />
-                </>
-                :
-                <>
-                    <Stack flexDirection='row' justifyContent='space-between' alignItems='center'>
-                        <Box sx={{ fontSize: '16px', fontWeight: '500' }}>My Applications</Box>
-                        <Stack gap='10px' flexDirection='row' alignItems='center'>
-                            <Btn onClick={handleOpen}>+ Post a job</Btn>
-                            <Btn>Filter</Btn>
-                        </Stack>
-                    </Stack>
-                    <ClientJobTable filter={["Done"]} />
-                    <ModalToPostJob isOpen={open} handleClose={handleClose} />
-                </>}
-            {/* <Stack paddingY='10px' flexDirection={'row'} justifyContent='space-between'>
+      <>
+        {isFreelancer ? (
+          <>
+            <Stack
+              paddingY="10px"
+              flexDirection={"row"}
+              justifyContent="space-between"
+            >
+              <Box sx={{ fontSize: "16px", fontWeight: "500" }}>
+                Applications History
+              </Box>
+              <Stack gap={"10px"} flexDirection="row" alignItems="center">
+                <Btn>Search</Btn>
+                <Btn>Filter</Btn>
+              </Stack>
+            </Stack>
+            <FreelancerJobTable
+              filter={["DONE"]}
+              isDuring={true}
+              toStatus={""}
+            />
+          </>
+        ) : (
+          <>
+            <Stack
+              flexDirection="row"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Box sx={{ fontSize: "16px", fontWeight: "500" }}>
+                My Applications
+              </Box>
+              <Stack gap="10px" flexDirection="row" alignItems="center">
+                <Btn onClick={handleOpen}>+ Post a job</Btn>
+                <Btn>Filter</Btn>
+              </Stack>
+            </Stack>
+            <ClientTaskTable filter={"DONE"} listJobs={listData} />
+            <ModalToPostJob isOpen={open} handleClose={handleClose} />
+          </>
+        )}
+        {/* <Stack paddingY='10px' flexDirection={'row'} justifyContent='space-between'>
                 <Box sx={{ fontSize: '16px', fontWeight: '500' }}>Applications History</Box>
                 <Stack gap={'10px'} flexDirection='row' alignItems='center'>
                     <Btn>Search</Btn>
@@ -56,18 +83,18 @@ export default function FinishedJobComponent() {
                 </Stack>
             </Stack>
             <FreelancerJobTable /> */}
-        </>
-        // ) : (
-        //     <>
-        //         <Stack flexDirection='row' justifyContent='space-between' alignItems='center'>
-        //             <Box sx={{ fontSize: '16px', fontWeight: '500' }}>My Applications</Box>
-        //             <Stack gap='10px' flexDirection='row' alignItems='center'>
-        //                 <Btn onClick={handleOpen}>+ Post a job</Btn>
-        //                 <Btn>Filter</Btn>
-        //             </Stack>
-        //         </Stack>
-        //         <ClientJobTable />
-        //         <ModalToPostJob isOpen={open} handleClose={handleClose} />
-        //     </>
-    )
+      </>
+      // ) : (
+      //     <>
+      //         <Stack flexDirection='row' justifyContent='space-between' alignItems='center'>
+      //             <Box sx={{ fontSize: '16px', fontWeight: '500' }}>My Applications</Box>
+      //             <Stack gap='10px' flexDirection='row' alignItems='center'>
+      //                 <Btn onClick={handleOpen}>+ Post a job</Btn>
+      //                 <Btn>Filter</Btn>
+      //             </Stack>
+      //         </Stack>
+      //         <ClientJobTable />
+      //         <ModalToPostJob isOpen={open} handleClose={handleClose} />
+      //     </>
+    );
 }

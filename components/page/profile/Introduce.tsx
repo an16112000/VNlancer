@@ -33,7 +33,7 @@ export default function Introduce(props: IntroduceProps) {
       setIntroduction(data);
     }
     fetchData();
-  }, [hookProfile]);
+  }, []);
   console.log(session);
   return (
     <Box

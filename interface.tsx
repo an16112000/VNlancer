@@ -56,7 +56,20 @@ export interface JobDetailData {
     fullName?: string;
     username?: string | null;
     imageUrl?: string | null;
+    email: string;
   };
+}
+
+export interface userInfoData {
+  id: number,
+  email: string,
+  address: string,
+  gender: string, dateOfBirth: string,
+  fullName: string,
+  phoneNumber: string,
+  imageUrl: string, 
+  active: boolean,
+  listReview: any[]
 }
 
 export interface Category {
