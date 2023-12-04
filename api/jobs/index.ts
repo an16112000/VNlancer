@@ -31,8 +31,12 @@ export default function useJobApi() {
         return data
     }
 
-    async function uploadImage(jobId: number, data: any) {
-        await axiosInstance.post(`/jobs/${jobId}/upload-image`, data)
+    async function uploadImage(jobId: number, data: FormData) {
+        await axiosInstance.post(`/jobs/${jobId}/upload-image`, data, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
     }
 
 

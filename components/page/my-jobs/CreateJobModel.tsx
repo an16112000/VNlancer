@@ -20,6 +20,7 @@ import {
   Tabs,
   TextField,
 } from "@mui/material";
+import axios from "axios";
 import { useSession } from "next-auth/react";
 import { SetStateAction, useEffect, useState } from "react";
 
@@ -140,10 +141,11 @@ function ModalToPostJob({
         console.log(exception);
       }
     } else if (content == Content.Image) {
-      // await uploadImage(jobId, {
-      //   image: image
-      // })
+      const form = document.querySelector("form");
+      const formData = new FormData(form ?? undefined);
+      await uploadImage(jobId, formData)
       refreshList();
+      setContent(Content.Information)
       handleClose();
     }
   }
@@ -274,8 +276,11 @@ function ModalToPostJob({
           </>
         ) : (
           <>
-            <Box sx={{ fontSize: "18px", fontWeight: 500 }}>Upload Image</Box>
-            <input type="file" onChange={changeImage} />
+            <form onSubmit={(event) => {
+              event.currentTarget
+            }}>
+              <input type="file" name="image" />
+            </form>
           </>
         )}
         <Btn onClick={handleSubmitForm}>Submit</Btn>

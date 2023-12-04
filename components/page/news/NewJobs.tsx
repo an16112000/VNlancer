@@ -44,7 +44,7 @@ export default function NewJobs(prop: Prop) {
                             border: '1px solid #ccc',
                             borderRadius: '8px'
                         }}>
-                            <img width='auto' height='100%' src={`http://${job.imageUrl}`} alt="Job Image" />
+                            <img width='auto' height='100%' src={job.imageUrl} alt="Job Image" />
                         </Box>
                         <Box>
                             <Box sx={{ textOverflow: 'ellipsis', overflow: 'hidden', WebkitLineClamp: 4, WebkitBoxOrient: "vertical", display: '-webkit-box', padding: '6px 12px' }}>{job.information}</Box>
