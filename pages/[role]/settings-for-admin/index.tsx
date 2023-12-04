@@ -18,7 +18,7 @@ export default function SettingsForAdmin() {
   const { data, status } = useSession()
   const router = useRouter()
   useEffect(() => {
-    console.log(data?.isAdmin);
+    if (status == 'unauthenticated') router.push("/")
 
     if (!data?.isAdmin && status == 'authenticated') router.push("/")
   })
