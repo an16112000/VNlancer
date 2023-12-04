@@ -4,6 +4,7 @@ import { listProfile } from "@/const";
 import { ProfessionalInfo } from "@/interface";
 import { Box, Stack, Tab, Tabs } from "@mui/material";
 import { useEffect, useState } from "react";
+import { JobStatus } from "../../dashboard/JobStatusLabel";
 
 const data = {
   id: 1,
@@ -44,8 +45,45 @@ const data = {
   status: "APPLIED",
 };
 
-export default function CVAnotherFreelancer() {
-  const { profile } = data;
+interface CVAnotherFreelancerProps {
+  listData: {
+    id: number;
+    user: {
+      id: number;
+      fullName: string;
+      gender: string;
+      dateOfBirth: string;
+      phoneNumber: string;
+      address: string;
+    };
+    profile: {
+      id: number;
+      workingType: {
+        id: number;
+        name: string;
+      };
+      category: {
+        id: number;
+        name: string;
+      };
+      level: {
+        id: number;
+        name: string;
+      };
+      skill: string;
+      workExperience: string;
+      aboutMe: string;
+    };
+    job: {
+      id: number;
+      name: string;
+    };
+    status: JobStatus;
+  };
+}
+
+export default function CVAnotherFreelancer({ listData }: CVAnotherFreelancerProps) {
+  const { profile } = listData;
 
   return (
     <Stack gap={"15px"}>

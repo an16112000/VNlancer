@@ -20,6 +20,7 @@ import JobStatusLabel, { JobStatus } from "../dashboard/JobStatusLabel";
 import ModalCV from "./ModalCV";
 import { useState } from "react";
 import ModalChangeJobStatus from "./[id]/modal-change-job-status";
+import ModalProfileFreelancer from "./[id]/modal-profile-freelancer";
 
 const headers = ["#", "Full Name", "Score", "Applied Date", "Action", "Status"];
 
@@ -111,6 +112,41 @@ interface ListApplicantProps {
   listApplicant: ListApplicant[];
 }
 
+interface listData {
+  id: number;
+  user: {
+    id: number;
+    fullName: string;
+    gender: string;
+    dateOfBirth: string;
+    phoneNumber: string;
+    address: string;
+  };
+  profile: {
+    id: number;
+    workingType: {
+      id: number;
+      name: string;
+    };
+    category: {
+      id: number;
+      name: string;
+    };
+    level: {
+      id: number;
+      name: string;
+    };
+    skill: string;
+    workExperience: string;
+    aboutMe: string;
+  };
+  job: {
+    id: number;
+    name: string;
+  };
+  status: JobStatus;
+}
+
 export default function ListApplicant({
   listApplicant,
   filter,
@@ -118,6 +154,49 @@ export default function ListApplicant({
   const router = useRouter();
   const [selectId, setSelectId] = useState<number>(0);
   console.log(listApplicant);
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const handleModalClose = () => setModalOpen(false);
+
+  const handlModalOpen = (item: any) => {
+    setModalOpen(true);
+    setProfile(item);
+  };
+  const [selectUserId, setSelectUserId] = useState(0);
+  const [profile, setProfile] = useState<listData>({
+    id: 1,
+    user: {
+      id: 1,
+      fullName: "An",
+      gender: "Male",
+      dateOfBirth: "2000-11-16 00:00:00.0",
+      phoneNumber: "123123123",
+      address: "212121212",
+    },
+    profile: {
+      id: 2,
+      workingType: {
+        id: 2,
+        name: "FT",
+      },
+      category: {
+        id: 1,
+        name: "FE",
+      },
+      level: {
+        id: 2,
+        name: "Fresher",
+      },
+      skill: "1212121",
+      workExperience: "12",
+      aboutMe: "12121212123qweqweq",
+    },
+    job: {
+      id: 1,
+      name: "Test 1",
+    },
+    status: JobStatus.applied,
+  });
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -127,7 +206,7 @@ export default function ListApplicant({
     setSelectId(item.id);
     handleOpen();
   }
-  
+
   return (
     <TableContainer
       component={Paper}
@@ -145,10 +224,10 @@ export default function ListApplicant({
           ))}
         </TableHead>
         <TableBody>
-          {listApplicant.map((item, index) =>  {
-            console.log(item.status, filter)
-            if(item.status != filter) {
-              return
+          {listApplicant.map((item, index) => {
+            console.log(item.status, filter);
+            if (item.status != filter) {
+              return;
             }
             return (
               <TableRow
@@ -178,7 +257,7 @@ export default function ListApplicant({
                 <TableCell sx={{ color: "text.third" }} align="center">
                   <Button
                     onClick={() => {
-                      router.push(`/client/user/${item.user.id}`);
+                      handlModalOpen(item);
                     }}
                     sx={{
                       backgroundColor: "#1876d3",
@@ -197,7 +276,9 @@ export default function ListApplicant({
                 </TableCell>
                 <TableCell sx={{ color: "text.third" }} align="center">
                   <Button
-                    onClick={() => item.status == 'APPLIED' && handleChangeStatus(item)}
+                    onClick={() =>
+                      item.status == "APPLIED" && handleChangeStatus(item)
+                    }
                     sx={{
                       ".MuiBox-root": {
                         padding: "4px 8px",
@@ -208,7 +289,8 @@ export default function ListApplicant({
                   </Button>
                 </TableCell>
               </TableRow>
-            );})}
+            );
+          })}
         </TableBody>
       </Table>
       <ModalChangeJobStatus
@@ -216,6 +298,12 @@ export default function ListApplicant({
         open={open}
         handleClose={handleClose}
         status="ACCEPTED"
+      />
+      <ModalProfileFreelancer
+        open={modalOpen}
+        handleClose={handleModalClose}
+        userId={selectUserId}
+        profile={profile}
       />
     </TableContainer>
   );

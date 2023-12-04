@@ -7,6 +7,8 @@ import { UserProfile } from "@/api/user";
 import ProfileAnotherFreelancer from "@/components/page/user/[id]/ProfileAnotherFreelancer";
 import ReviewComponent from "@/components/page/profile/ReviewComponent";
 import CVAnotherFreelancer from "@/components/page/user/[id]/CVAnotherFreelancer";
+import useApplicationApi from "@/api/application";
+import {useRouter} from 'next/router'
 
 enum Content {
   profile,
@@ -14,8 +16,12 @@ enum Content {
 }
 
 export default function watchCVFreelancer() {
+  const router = useRouter()
   const [content, setContent] = useState<Content>(Content.profile);
   const [userProfile, setUserProfile] = useState<UserProfile>();
+  const jobId = router.query.id
+  const hookApplication = useApplicationApi()
+
 
   return (
     <PageLayout>
