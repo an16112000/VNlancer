@@ -1,3 +1,4 @@
+import { JobDetailData } from "@/interface"
 import { axiosInstance } from "@/ultils/axiosInstance"
 import { AxiosResponse } from "axios"
 import { useSession } from "next-auth/react"
@@ -12,19 +13,17 @@ export default function useJobApi() {
         })
     }
 
-    async function getAllJob(): Promise<AxiosResponse<Job[]>> {
-        return await axiosInstance.get("/jobs", {
-            headers: {
-                Authorization: `Bearer ${data?.accessToken}`
-            }
-        })
+    async function getAllJob() {
+        const response = await axiosInstance.get("/jobs")
+        console.log(response)
+        const data = response.data.jobs
+        return data;
     }
-    async function getJobDetail(jobId: number): Promise<AxiosResponse<JobDetail>> {
-        return await axiosInstance.get(`/jobs?id=${jobId}`, {
-            headers: {
-                Authorization: `Bearer ${data?.accessToken}`
-            }
-        })
+    async function getJobDetail(jobId: any): Promise<AxiosResponse<JobDetailData | undefined>> {
+        const response = await axiosInstance.get(`/jobs/${jobId}`)
+        const data = response.data
+        console.log(data)
+        return data
     }
 
 

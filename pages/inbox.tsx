@@ -303,8 +303,12 @@ const ChatWindow = ({
   }, [selectedConversation]);
 
   return (
-    <Box sx={{ height: "80vh", borderLeft: "1px solid #ccc" }}>
-      <Box padding={"15px 15px"} sx={{ borderBottom: "1px solid #ccc" }}>
+    <Box sx={{ height: "80vh", borderLeft: "1px solid #ccc" }} flex={5}>
+      <Box
+        padding={"15px 15px"}
+        sx={{ borderBottom: "1px solid #ccc" }}
+        flex={1}
+      >
         <Stack flexDirection={"row"} gap={"10px"} sx={{ cursor: "pointer" }}>
           <Image
             unoptimized
@@ -321,7 +325,7 @@ const ChatWindow = ({
           <Stack>{loaiBoPhanDuoiEmail(otherPersonEmail || "")}</Stack>
         </Stack>
       </Box>
-      <Stack>
+      <Stack flex={1} maxHeight={"calc(80vh - 81px)"} overflow={'scroll'}>
         <Stack gap={"8px"} alignItems={"center"} padding={"10px 10px"}>
           <Image
             unoptimized
@@ -351,7 +355,7 @@ const ChatWindow = ({
             }}
           ></Box>
         </Stack>
-        <Stack gap={'8px'}>
+        <Stack gap={"8px"}>
           {messageList.map(({ sender, message, id }) => (
             <Stack
               gap={"8px"}
@@ -364,7 +368,7 @@ const ChatWindow = ({
               key={id}
             >
               {sender == otherPersonEmail ? (
-                <>
+                <Stack flexDirection={"row"} alignItems={"center"} gap={"8px"}>
                   <Image
                     unoptimized
                     src={session?.user.image || ""}
@@ -372,15 +376,15 @@ const ChatWindow = ({
                     height={100}
                     width={100}
                     style={{
-                      height: "20px",
-                      width: "20px",
+                      height: "30px",
+                      width: "30px",
                       borderRadius: "50%",
                     }}
                   />
                   {message}
-                </>
+                </Stack>
               ) : (
-                <>
+                <Stack flexDirection={"row"} alignItems={"center"} gap={"8px"}>
                   {message}
                   <Image
                     unoptimized
@@ -389,12 +393,12 @@ const ChatWindow = ({
                     height={100}
                     width={100}
                     style={{
-                      height: "20px",
-                      width: "20px",
+                      height: "30px",
+                      width: "30px",
                       borderRadius: "50%",
                     }}
                   />
-                </>
+                </Stack>
               )}
             </Stack>
           ))}
@@ -440,7 +444,7 @@ const InputMessage = ({
   };
 
   return (
-    <div style={{ display: "flex", gap: 20 }}>
+    <Box sx={{ display: "flex", gap: 20 }} flex={1}>
       <input
         value={message}
         onChange={(e) => setMessage(e.target.value)}
@@ -448,7 +452,7 @@ const InputMessage = ({
       />
 
       <button onClick={() => void handleSend()}>Send</button>
-    </div>
+    </Box>
   );
 };
 

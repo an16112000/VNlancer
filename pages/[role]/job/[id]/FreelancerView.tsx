@@ -3,9 +3,10 @@ import ListEvent, { EventData } from "@/components/page/jobs/ListEvent"
 import { useRouter } from "next/router"
 import { useState, useEffect } from "react"
 import useJobApi from "@/api/jobs"
-import JobDetail, { JobDetailData } from "@/components/page/jobs/JobDetail"
+import JobDetail from "@/components/page/jobs/JobDetail"
 import { Stack } from "@mui/material"
 import { dataJobExample } from "@/const"
+import { JobDetailData } from "@/interface"
 
 const listEvent: EventData[] = [
     {
@@ -50,21 +51,7 @@ const listEvent: EventData[] = [
     }
 ]
 
-const jobDetailData: JobDetailData = {
-    id: 1,
-    name: 'web',
-    budget: 21000,
-    information: 'create FE web',
-    categoryName: ['FE'],
-    typeOfEmployee: 'full time',
-    jobLevel: 'fresher',
-    postDate: '17/11',
-    dueDate: '20/11',
-    status: 'open',
-    client: {
-        name: 'An Doan',
-    }
-}
+
 
 export default function FreelancerView() {
     const { getJobDetail } = useJobApi()
@@ -80,7 +67,7 @@ export default function FreelancerView() {
 
             }
         })()
-    }, [getJobDetail, router.query.id])
+    }, [router.query.id])
     return (
         <Stack gap='10px'>
             <JobDetail jobDetail={dataJobExample}></JobDetail>

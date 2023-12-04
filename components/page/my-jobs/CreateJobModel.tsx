@@ -1,5 +1,5 @@
 import useCategoryApi from "@/api/category";
-import { useJobApi } from "@/api/get-all-jobs";
+import useJobApi from "@/api/jobs";
 import Btn from "@/components/button";
 import { listCategoryExample } from "@/const";
 import OptionsModal from "@/features/settings/options-modal";
@@ -60,13 +60,13 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
   //         }
   //     })()
   // }, [getAllCategory, status])
-  const [categoryId, setCategoryId] = useState<number>();
-  const [name, setName] = useState<string>();
-  const [budget, setBudget] = useState<number>();
-  const [information, setInformation] = useState<string>();
-  const [dueDate, setDueDate] = useState<string>();
-  const [jobLevel, setJobLevel] = useState<string>();
-  const [employeeType, setEmployeeType] = useState<string>();
+  const [categoryId, setCategoryId] = useState<number>(0);
+  const [name, setName] = useState<string>('');
+  const [budget, setBudget] = useState<number>(0);
+  const [information, setInformation] = useState<string>('');
+  const [dueDate, setDueDate] = useState<string>('');
+  const [jobLevel, setJobLevel] = useState<string>('');
+  const [employeeType, setEmployeeType] = useState<string>('');
 
   // handle Change Value Name Input
   function changeName(e: any) {
@@ -102,7 +102,7 @@ function ModalToPostJob({ isOpen, handleClose }: ModalToPostJobProps) {
         categoryId,
         typeOfEmployee: employeeType,
         jobLevel,
-        dueDate,
+        
       });
       handleClose();
     } catch (exception) {

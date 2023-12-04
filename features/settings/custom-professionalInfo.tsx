@@ -2,13 +2,25 @@ import { Box, Stack, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import OptionsModal from "./options-modal";
 import useProfileAPI from "@/api/profile";
+import axios from "axios";
 
 interface CustomProfessionalInfoProps {
-    profile: any
+    profile: any,
+    id: number
 }
 
-export default function CustomProfessionalInfo({ profile }: CustomProfessionalInfoProps) {
-    const [inputs, setInputs] = useState({...profile});
+export default function CustomProfessionalInfo({ profile, id }: CustomProfessionalInfoProps) {
+    const [inputs, setInputs] = useState({
+      id: id+1,
+      levelId: profile.level.id,
+      categoryId: profile.category.id,
+      workingTypeId: profile.workingType.id,
+      workExperience: profile.workExperience,
+      skill: profile.skill,
+      aboutMe: profile.aboutMe
+    });
+    const hookProfile = useProfileAPI();
+
     const handleChange = (event: any) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -16,12 +28,17 @@ export default function CustomProfessionalInfo({ profile }: CustomProfessionalIn
         setInputs((values: any) => ({ ...values, [name]: value }))
     }
 
-    function handleSubmit(e: any) {
+    async function updateProfessionalProfile(data: any) {
+      await hookProfile.updateProfessional(data)
+    } 
+
+    async function handleSubmit(e: any) {
         e.preventDefault()
         console.log(inputs)
+        await updateProfessionalProfile(inputs);
     }
 
-    
+    console.log(inputs)
     return (
       <>
         <form key={profile.id} name="myForm" onSubmit={handleSubmit}>

@@ -1,16 +1,22 @@
 import ButtonApply from "@/features/job-detail/ButtonApply";
 import { Box, Button, Stack } from "@mui/material";
-import { JobDetailData } from "../JobDetail";
 import PopUpApplly from "./pop-up-apply";
 import { useState } from "react";
-import { dataJobExample } from "@/const";
+// import { dataJob } from "@/const";
 import Image from "next/image";
 import { ButtonContact } from "@/pages/inbox";
+import { Avatar } from "@/img";
+import { JobDetailData } from "@/interface";
 
-export default function JobContent() {
+interface JobContentProps {
+  dataJob: JobDetailData
+}
+
+export default function JobContent({ dataJob }: JobContentProps) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  console.log(dataJob)
   return (
     <>
       <Stack
@@ -21,13 +27,15 @@ export default function JobContent() {
         }}
         gap={"15px"}
       >
-        <Stack flexDirection={"row"} justifyContent={'space-between'}>
+        <Stack flexDirection={"row"} justifyContent={"space-between"}>
           <Box
             sx={{
               fontSize: "16px",
             }}
           >
-            {dataJobExample.postDate} - {dataJobExample.dueDate}
+            {dataJob?.createAt || (
+              <span style={{ color: "red" }}>Cần fix thời gian tạo</span>
+            )}
           </Box>
           <ButtonContact otherPersonEmail={"andoan16112000@gmail.com"} />
         </Stack>
@@ -39,9 +47,9 @@ export default function JobContent() {
             justifyContent={"space-between"}
           >
             <Box sx={{ fontSize: "20px", fontWeight: 500 }}>
-              {dataJobExample.name.toUpperCase()}
+              {dataJob?.name && dataJob.name.toUpperCase()}
             </Box>
-            <Button>Open</Button>
+            <Button>{dataJob?.status}</Button>
           </Stack>
 
           <Stack flexDirection={"row"} alignItems={"center"} gap={"15px"}>
@@ -52,16 +60,19 @@ export default function JobContent() {
                 borderRadius: "8px",
               }}
             >
-              <Image
+              Chưa có image
+              {/* <Image
                 unoptimized
                 style={{ backgroundSize: "cover", borderRadius: "8px" }}
-                src={dataJobExample.client.avatarUrl}
-                alt={dataJobExample.client.avatarUrl}
+                src={dataJob.owner ? dataJob.owner?.imageUrl : Avatar}
+                alt={dataJob.owner.imageUrl as string}
                 height={100}
                 width={100}
-              />
+              /> */}
             </Box>
-            <Box sx={{ fontSize: "16px" }}>{dataJobExample.client.name}</Box>
+            <Box sx={{ fontSize: "16px" }}>
+              {dataJob?.owner && dataJob.owner.username}
+            </Box>
           </Stack>
         </Stack>
 
@@ -71,9 +82,9 @@ export default function JobContent() {
           justifyContent={"space-between"}
         >
           <Box sx={{ color: "#297958", fontSize: "16px" }}>
-            {dataJobExample.budget}$
+            {dataJob?.budget}$
           </Box>
-          <Box>{dataJobExample.typeOfEmployee}</Box>
+          <Box>{dataJob?.workingType && dataJob.workingType.name}</Box>
         </Stack>
 
         <Stack
@@ -83,11 +94,17 @@ export default function JobContent() {
           gap={"30px"}
         >
           <Button
+            disabled={dataJob?.status != "OPEN"}
+            onClick={handleOpen}
             sx={{
               flex: 1,
               backgroundColor: "#4B69B6",
               color: "#fff",
               borderRadius: "6px",
+              "&:hover": {
+                backgroundColor: "#4B69B6",
+                opacity: 0.7,
+              },
             }}
           >
             Applly Now
@@ -98,6 +115,10 @@ export default function JobContent() {
               backgroundColor: "#4B69B6",
               color: "#fff",
               borderRadius: "6px",
+              "&:hover": {
+                backgroundColor: "#4B69B6",
+                opacity: 0.7,
+              },
             }}
           >
             Save
@@ -106,13 +127,24 @@ export default function JobContent() {
                     <ButtonApply>Save</ButtonApply> */}
         </Stack>
 
-        <Stack>
-          <ul>
-            {dataJobExample.jobLevel ?? <li>{dataJobExample?.jobLevel}</li>}
-            {dataJobExample.categoryName.map((item) => (
+        <Stack gap={"10px"}>
+          <Box>
+            <label style={{ fontWeight: 500 }}>Level: </label>
+            {
+              <span style={{ fontStyle: "italic" }}>
+                {dataJob?.level && dataJob.level.name}
+              </span>
+            }
+          </Box>
+          {/* {dataJob.category.map((item) => (
               <li key={item}>{item}</li>
-            ))}
-          </ul>
+            ))} */}
+          <Box>
+            <label style={{ fontWeight: 500 }}>Category: </label>
+            <span style={{ fontStyle: "italic" }}>
+              {dataJob?.category && dataJob.category.name}
+            </span>
+          </Box>
         </Stack>
 
         <Box
@@ -129,10 +161,14 @@ export default function JobContent() {
             minHeight: "100px",
           }}
         >
-          {dataJobExample.information}
+          {dataJob?.information}
         </Box>
       </Stack>
-      <PopUpApplly isOpen={open} handleClose={handleClose}></PopUpApplly>
+      <PopUpApplly
+        dataJob={dataJob}
+        isOpen={open}
+        handleClose={handleClose}
+      ></PopUpApplly>
     </>
   );
 }

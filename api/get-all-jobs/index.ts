@@ -1,7 +1,7 @@
 import { axiosInstance, setHeader } from "@/ultils/axiosInstance";
 import { useSession } from "next-auth/react";
 
-export function useJobApi() {
+ function useJobApi() {
     const { status, data } = useSession()
     const getAllJob = async () => {
         if (status === "authenticated") {

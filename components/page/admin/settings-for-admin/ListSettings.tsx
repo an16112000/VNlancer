@@ -81,7 +81,7 @@ export default function ListSettings({ type, path }: ListSettingsProps) {
   async function fetchData() {
     const test1 = await hooks.getAll(`/${type}`, path);
     console.log(test1)
-    setList(test1 || []);
+    setList(test1);
   }
   
   return (

@@ -2,6 +2,7 @@ import useProfileAPI from "@/api/profile";
 import Btn from "@/components/button";
 import TextInput from "@/components/text-input";
 import { TestImage } from "@/img";
+import FormData from "form-data";
 import {
   Box,
   FormControl,
@@ -14,7 +15,14 @@ import {
 } from "@mui/material";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+
+interface defaultDataProps {
+  gender: string,
+  address: string,
+  dateOfBirth: string,
+  phoneNumber: string,
+}
 
 function ClientProfileContent() {
   const [sex, setSex] = useState("");
@@ -26,15 +34,24 @@ function ClientProfileContent() {
   const [inputs, setInputs] = useState({
     fullName: session?.user.name,
   });
+  const [defaultData, setDefaultData] = useState<defaultDataProps>();
 
-  var bodyFormData = new FormData();
 
   const hookProfile = useProfileAPI()
-  //   const [list, setList] = useState({
-  //     fullName:
-  //   });
-  console.log(session);
+  
+useEffect(
+  () => {
+    async function fetchData() {
+      const data = await hookProfile.getIntroduction()
+      setSex(data.gender)
+      setDefaultData(data)
+      setInputs(prev => ({...prev, ...data}))
+    }
+    fetchData()
+  }, []
+)
 
+  console.log(inputs)
   const handleChange = (event: SelectChangeEvent) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -51,10 +68,8 @@ function ClientProfileContent() {
 };
 
 async function handleSubmit() {
-      bodyFormData.append('form', JSON.stringify(inputs))
-      console.log(bodyFormData.get('form'))
     try {
-        await hookProfile.createIntroduction(bodyFormData);
+        await hookProfile.createIntroduction(inputs);
     }
     catch(Error) {
         alert('DM')
@@ -138,7 +153,7 @@ async function handleSubmit() {
               label="Sex"
               name="gender"
               onChange={handleChange}
-              defaultValue={sex}
+              defaultValue={"Female"}
             >
               <MenuItem value={"Male"}>Male</MenuItem>
               <MenuItem value={"Female"}>Female</MenuItem>
@@ -147,10 +162,15 @@ async function handleSubmit() {
         </Box>
         <Box flex={1}>
           <Box>Phone number: </Box>
-          <Input
-            sx={{ width: "100%" }}
+          <input
+            style={{
+              width: "100%",
+              height: "40px",
+              backgroundColor: "transparent",
+              borderBottom: "1px solid #777575",
+            }}
             name="phoneNumber"
-            defaultValue={phoneNumber}
+            defaultValue={defaultData?.phoneNumber}
             onChange={(e: any) => handleChange(e)}
           />
         </Box>
@@ -163,17 +183,27 @@ async function handleSubmit() {
       >
         <Box flex={1}>
           <Box>Date of Birth: </Box>
-          <Input
-            sx={{ width: "100%" }}
+          <input
+            style={{
+              width: "100%",
+              height: "40px",
+              backgroundColor: "transparent",
+              borderBottom: "1px solid #777575",
+            }}
             name="dateOfBirth"
-            defaultValue={dateOfBirth}
+            defaultValue={defaultData?.dateOfBirth}
             onChange={(e: any) => handleChange(e)}
           />
         </Box>
         <Box flex={1}>
           <Box>Password: </Box>
-          <Input
-            sx={{ width: "100%" }}
+          <input
+            style={{
+              width: "100%",
+              height: "40px",
+              backgroundColor: "transparent",
+              borderBottom: "1px solid #777575",
+            }}
             name="password"
             defaultValue={password}
             onChange={(e: any) => handleChange(e)}
@@ -182,10 +212,15 @@ async function handleSubmit() {
       </Stack>
       <Box flex={1}>
         <Box>Address: </Box>
-        <Input
-          sx={{ width: "100%" }}
+        <input
+          style={{
+            width: "100%",
+            height: "40px",
+            backgroundColor: "transparent",
+            borderBottom: "1px solid #777575",
+          }}
           name="address"
-          defaultValue={address}
+          defaultValue={defaultData?.address}
           onChange={(e: any) => handleChange(e)}
         />
       </Box>

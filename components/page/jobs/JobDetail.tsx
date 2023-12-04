@@ -1,4 +1,5 @@
 import ButtonApply from "@/features/job-detail/ButtonApply";
+import { JobDetailData } from "@/interface";
 import {
   Box,
   Button,
@@ -12,42 +13,33 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-export interface JobDetailData {
-  id: number;
-  name: string;
-  budget: number;
-  information: string;
-  categoryName: any[];
-  typeOfEmployee: string;
-  jobLevel: string;
-  postDate: string;
-  dueDate: string;
-  status: string;
-  client: {
-    name: string;
-    avatarUrl?: string;
-  };
-}
+// export interface JobDetailData {
+//   category: any;
+//   level: any;
+//   workingType: any;
+//   owner: any;
+//   createAt: any;
+//   id: number;
+//   name: string;
+//   budget: number;
+//   information: string;
+//   categoryName: any[];
+//   typeOfEmployee: string;
+//   jobLevel: string;
+//   postDate: string;
+//   dueDate: string;
+//   status: string;
+//   client: {
+//     name: string;
+//     avatarUrl?: string;
+//   };
+// }
 
 interface Props {
   jobDetail: JobDetailData;
 }
 
-const jobDetailData: JobDetailData = {
-  id: 1,
-  name: "Web",
-  budget: 21000,
-  information: "create FE web",
-  categoryName: ["Front-end"],
-  typeOfEmployee: "full time",
-  jobLevel: "Fresher",
-  postDate: "17/11",
-  dueDate: "20/11",
-  status: "open",
-  client: {
-    name: "An Doan",
-  },
-};
+
 
 export default function JobDetail({ jobDetail }: Props) {
   const [status, setStatus] = useState(jobDetail.status);
@@ -70,7 +62,7 @@ export default function JobDetail({ jobDetail }: Props) {
             fontSize: "16px",
           }}
         >
-          {jobDetailData.postDate} - {jobDetailData.dueDate}
+          Fix Time
         </Box>
 
         <Stack>
@@ -80,16 +72,22 @@ export default function JobDetail({ jobDetail }: Props) {
             justifyContent={"space-between"}
           >
             <Box sx={{ fontSize: "20px", fontWeight: 500 }}>
-              {jobDetailData.name.toUpperCase()}
+              {jobDetail.name.toUpperCase()}
             </Box>
             <Button>
               <FormControl>
                 <InputLabel id="status-job">Status</InputLabel>
-                <Select onChange={handleChange} id="status-job" value={status} label="status" sx={{textTransform: 'none'}}>
-                <MenuItem value={'Open'}>Open</MenuItem>
-                  <MenuItem value={'Applied'}>Applied</MenuItem>
-                  <MenuItem value={'During'}>During</MenuItem>
-                  <MenuItem value={'Close'}>Close</MenuItem>
+                <Select
+                  onChange={handleChange}
+                  id="status-job"
+                  value={status}
+                  label="status"
+                  sx={{ textTransform: "none" }}
+                >
+                  <MenuItem value={"Open"}>Open</MenuItem>
+                  <MenuItem value={"Applied"}>Applied</MenuItem>
+                  <MenuItem value={"During"}>During</MenuItem>
+                  <MenuItem value={"Close"}>Close</MenuItem>
                 </Select>
               </FormControl>
             </Button>
@@ -104,7 +102,7 @@ export default function JobDetail({ jobDetail }: Props) {
                 borderRadius: "8px",
               }}
             ></Box>
-            <Box sx={{ fontSize: "16px" }}>{jobDetailData.client.name}</Box>
+            <Box sx={{ fontSize: "16px" }}>{jobDetail.owner.fullName}</Box>
           </Stack>
         </Stack>
 
@@ -114,9 +112,9 @@ export default function JobDetail({ jobDetail }: Props) {
           justifyContent={"space-between"}
         >
           <Box sx={{ color: "#297958", fontSize: "16px" }}>
-            {jobDetailData.budget}$
+            {jobDetail.budget}$
           </Box>
-          <Box>{jobDetailData.typeOfEmployee}</Box>
+          <Box>{jobDetail.workingType.name}</Box>
         </Stack>
 
         {/* <Stack
@@ -131,10 +129,8 @@ export default function JobDetail({ jobDetail }: Props) {
 
         <Stack>
           <ul>
-            {jobDetailData.jobLevel ?? <li>{jobDetailData?.jobLevel}</li>}
-            {jobDetailData.categoryName.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
+            {jobDetail.level.name ?? <li>{jobDetail.level.name}</li>}
+            {jobDetail.category.name}
           </ul>
         </Stack>
 
@@ -152,7 +148,7 @@ export default function JobDetail({ jobDetail }: Props) {
             minHeight: "100px",
           }}
         >
-          {jobDetailData.information}
+          {jobDetail.information}
         </Box>
       </Stack>
     </>

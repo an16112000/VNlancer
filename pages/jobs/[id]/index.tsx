@@ -3,25 +3,45 @@ import { RootState } from "@/state/store";
 import { UserRole } from "@/state/user";
 import { Button } from "@mui/material";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import JobContent from "@/components/page/jobs/[id]";
+import useJobApi from "@/api/jobs";
+import { JobDetailData } from "@/interface";
+import { dataJobExample } from "@/const";
 
 interface Props {
-    id: number,
-    status: string
+  id: number;
+  status: string;
 }
+
+
 
 export default function JobDetail(props: Props) {
-    const router = useRouter()
-    return (
-        <PageLayout>
-            <div>
-                {/* job {router.query.id} */}
-                <JobContent />
-            </div>
-        </PageLayout>
-    )
+  const router = useRouter();
+  const hookJobs = useJobApi();
+  const [dataJob, setDataJob] = useState<JobDetailData | undefined | any>(dataJobExample)
+  const { id } = router.query;
+  console.log(id)
+  // useEffect(
+  //   () => {
+  //       async function fetchData() {
+  //           const data = await hookJobs.getJobDetail(id)
+  //           console.log(data)
+  //           setDataJob(data)
+  //       }
+  //       fetchData()
+  //   }, [id]
+  // )
+  console.log(dataJob)
+  return (
+    <PageLayout>
+      <div>
+        {/* job {router.query.id} */}
+        <JobContent dataJob={dataJob} />
+      </div>
+    </PageLayout>
+  );
 }
 
-JobDetail.requireLogin = true
+JobDetail.requireLogin = true;

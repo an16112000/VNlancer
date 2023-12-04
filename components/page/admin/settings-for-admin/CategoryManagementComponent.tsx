@@ -13,7 +13,7 @@ export default function CategoryManagementComponent() {
         setList(test1);
       }
       fetchData();
-    }, []);
+    }, [hooks]);
     return (
       <>
         <ListSettings type="categories" path={"categories"} />
